@@ -1,0 +1,376 @@
+main{
+    display: block;
+    height: 100%;
+    background-color: #f7f7f7;
+    width: calc(100% - 300px);
+}
+
+main .main-content {
+    padding: 30px;
+    width: 100%;
+    height: calc(100% - 90px);
+    overflow-y: auto;
+
+}
+
+.main-content::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.main-content::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+.main-content::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #6e8efb;
+}
+
+.main-content .panel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.panel-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+}
+
+.panel-50 {
+    width: 48%;
+}
+
+.panel-row button {
+    height: 160px;
+    width: 480px;
+    background: linear-gradient(135deg, #6e8efb, #a777e3);
+    font-size: 22px;
+    color: #fff;
+}
+
+.panel-row button svg{
+    margin-bottom: 10px;
+    font-size: 30px;
+
+
+}
+.panel-row button:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+
+}
+
+div#ajax-content {
+    width: 100%;
+    margin-top: 20px;
+    background: white;
+    box-shadow: 0 0 2rem rgba(0,0,0,0.1);
+}
+
+.dynamic-content {
+    padding: 20px;
+}
+
+.dynamic-content button {
+    background: linear-gradient(135deg, #6e8efb, blue);
+    color: white;
+}
+
+.dynamic-content button:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+    color: white;
+}
+
+.dynamic-content label {
+    font-size: 14px;
+    color: #72777a;
+}
+
+.table-striped {
+    padding: 0px;
+    width: 100%;
+    font-size: 12px;
+    margin: 0px;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-striped th {
+    align-items: center;
+    justify-content: center;   
+}
+
+.table-striped td {
+    align-items: center;
+    justify-content: center;   
+}
+
+.table-striped svg {
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;      
+}
+
+div.main-content-title {
+    padding: 5px 0;
+
+}
+
+div.main-content-title h2 {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 300;
+    color: #72777a;
+
+}
+
+div.dashboard-content {
+    padding: 10px 0;
+}
+
+div.dashboard-flex-parent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+div.dashboard-box {
+    width: 100%;
+    max-width: 320px;
+    padding-top: 15%;
+    position: relative;
+    margin: 0 10px;
+    padding-bottom: 20px;
+
+}
+
+.dashboard-box-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+div.dashboard-box:hover {
+    transition: 0.5s;
+    box-shadow: 0 0 1rem rgb(156, 156, 156, 0.4);
+    transform: scale(1.05);  
+}
+
+div.box-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+}
+
+div.box-icon svg {
+    font-size: 18px;
+}
+
+div.value {
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-size: 23px;
+    color: #111;
+    font-weight: 400;
+}
+
+div.type {
+    margin-top: 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #111;
+    font-weight: 400;
+}
+
+.box-prazos {
+    background-color: rgba(110, 142, 251, 0.1);
+    color: #6283f5;
+}
+
+.box-audiencias {
+    background-color: rgba(229, 115, 115, 0.1);
+    color: #ef5350;
+
+}
+
+.box-processos {
+    background-color: rgba(220, 231, 117, 0.4);
+    color: #afb42b;
+
+}
+
+.box-clientes {
+    background-color: rgba(255, 138, 101, 0.1);
+    color: #ff5722;
+
+}
+
+div.box-value-percentual {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 30px;
+}
+
+div.box-value-percentual svg {
+    margin-right: 10px;
+}
+
+.box-value-prazos{
+    color: #6283f5;
+
+}
+.box-value-audiencias{
+    color: #ef5350;
+
+}
+.box-value-processos{
+    color: #afb42b;
+
+}
+.box-value-clientes{
+    color: #ff5722;
+
+}
+
+@media screen and (max-width: 1600px) {
+    div.dashboard-box {
+        width: 100%;
+        max-width: 300px;
+        padding-top: 20%;
+        position: relative;
+        margin: 0 10px;
+        padding-bottom: 20px;
+        
+    }
+}
+    
+@media screen and (max-width: 1280px) {
+
+    div.dashboard-flex-parent {
+        flex-wrap: wrap;
+    }
+
+    div.dashboard-box {
+        padding: 0;
+        height: 240px;
+        margin: 20px;
+        padding-bottom: 20px;
+        }
+
+    div.box-icon {
+        
+        margin-top: 20px;
+    }
+
+    div.box-value-percentual {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    
+}
+
+@media screen and (max-width: 768px) {
+    main {
+       display: block;
+       height: 100%;
+       background-color: #f4f4f4;
+       width: calc(100%);
+       z-index: 1;
+       position: relative;
+    
+    }
+    main .main-content {
+        padding: 10px;
+    }
+    div .main-content-title h2 {
+        text-align: center;
+    }
+
+    .panel-row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 0px;
+    }
+    
+    .panel-50 {
+        width: 100%;
+    }
+    
+    .panel-row button {
+        height: 160px;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        font-size: 22px;
+        color: #fff;
+        width: 100%;
+    }
+    .panel-row button:hover {
+        transform: unset;
+    }
+    table {
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+    }
+
+    table th {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    table td {
+        font-size: 10px;
+        font-weight: 300;
+    }
+    .dynamic-content {
+        padding: 0;
+
+    }
+
+    .dynamic-content form {
+        padding: 20px;
+    }
+    .dynamic-content form button {
+        width: 100%;
+    }
+
+
+
+
+}
