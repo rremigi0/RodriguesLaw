@@ -101,15 +101,12 @@
                                 <td>{{Peticao}}</td>
                                 <td>{{#formatDate Publicacao}}{{/formatDate}}</td>
                                 <td>{{#formatDate Prazo}}{{/formatDate}}</td>
-                                <td onclick="window.location='/admin/prazos/edit/{{_id}}'">   
-                                    <i class="fas fa-edit"></i>
-                                </td>
-                                <td onclick="window.location='/admin/prazos/deletar/{{_id}}'">   
-                                    <i class="fas fa-trash-alt"></i>
-                                </td>
-
-                    </tbody>
+                                <td onclick="window.location='/admin/prazos/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/admin/prazos/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
                         {{/each}}
+                    </tbody>
+                        
                     </table>
                     </form>
                 </div>
