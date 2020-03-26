@@ -4,6 +4,7 @@ const mongoose = require ("mongoose")
 require ("../models/Prazo")
 const Prazo = mongoose.model("prazos")
 const {eAdmin} = require("../helpers/eAdmin")
+const {eAdmin2} = require("../helpers/eAdmin2")
 
 // Rota Principal:
 
@@ -120,7 +121,7 @@ router.get('/financeiro', eAdmin, (req, res) => {
 
                             new Prazo(novoPrazo).save().then(() => {
                                 req.flash("success_msg", "Prazo criado com sucesso!")
-                                res.redirect("/admin/viewprazos")
+                                res.redirect("/admin/prazos/view")
                             }).catch((err) => {
                                 req.flash("error_msg", "Houve um erro ao cadastrar o Prazo, tente novamente!")
                                 res.redirect("/admin")
@@ -128,6 +129,52 @@ router.get('/financeiro', eAdmin, (req, res) => {
                         }
 
                     })
+router.get("/prazos/edit/:id", eAdmin, (req, res) => {
+    Prazo.findOne({_id:req.params.id}).then((prazo) => {
+        res.render("admin/editprazos", {prazo: prazo})
+    }).catch((err) => {
+        req.flash("error_msg", "Este prazo não está cadastrado")
+        res.redirect("/admin/prazos/")
+    })
+    
+})
+
+router.post("/prazos/edit", (req, res) => {
+
+    Prazo.findOne({_id: req.body.id}).then((prazo) => {
+
+        prazo.Processo = req.body.processo
+        prazo.Autor = req.body.autor
+        prazo.Reu = req.body.reu
+        prazo.Procedimento = req.body.procedimento
+        prazo.Peticao = req.body.peticao
+        prazo.Publicacao = req.body.publicacao
+        prazo.Prazo = req.body.prazo
+
+        prazo.save().then(() => {
+            req.flash("success_msg", "Categoria editada com sucesso!")
+            res.redirect("/admin/prazos")
+        }).catch((err) => {
+            req.flash("error_msg", "Houve um erro ao salva a edição do prazo")
+            res.redirect("/admin/prazos")
+        })
+
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao editar o prazo")
+        res.redirect("/admin/prazos")
+    })
+})
+
+
+router.get("/prazos/deletar/:id", eAdmin2, (req, res) => {
+    Prazo.remove({_id: req.params.id}).then(() => {
+        req.flash("success_msg", "Prazo deletado com sucesso")
+        res.redirect("/admin/prazos")
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro interno")
+        res.redirect("/admin/prazos")
+    })
+})
 
 
 module.exports = router

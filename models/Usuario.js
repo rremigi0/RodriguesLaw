@@ -6,6 +6,16 @@ const Usuario = new Schema ({
         type: String,
         require: true
     },
+    CPF: {
+        type: String,
+        require: true
+    },
+
+    genero: {
+        type: String,
+        require: true
+    },
+
     email: {
         type: String,
         require: true

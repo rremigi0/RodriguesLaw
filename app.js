@@ -13,6 +13,7 @@ const moment = require('moment')
 const usuarios = require("./routes/usuario")
 const passport = require("passport")
 require("./config/auth")(passport)
+const db = require("./config/db")
 
 
 //Configurações
@@ -50,7 +51,7 @@ require("./config/auth")(passport)
     
     // Mongoose
         mongoose.Promise = global.Promise;
-        mongoose.connect("mongodb+srv://rodrigueslaw:140591@rodrigueslaw-akour.mongodb.net/test?retryWrites=true&w=majority").then(() => {
+        mongoose.connect(db.mongoURI).then(() => {
             console.log("Conectado ao mongo")
         }).catch((err) => {
             console.log("erro ao se conectar: "+err)
