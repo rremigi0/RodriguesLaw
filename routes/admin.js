@@ -139,7 +139,7 @@ router.get("/prazos/edit/:id", eAdmin, (req, res) => {
     
 })
 
-router.post("/prazos/edit", (req, res) => {
+router.post("/prazos/edit", eAdmin, (req, res) => {
 
     Prazo.findOne({_id: req.body.id}).then((prazo) => {
 
@@ -152,7 +152,7 @@ router.post("/prazos/edit", (req, res) => {
         prazo.Prazo = req.body.prazo
 
         prazo.save().then(() => {
-            req.flash("success_msg", "Categoria editada com sucesso!")
+            req.flash("success_msg", "Prazo editado com sucesso!")
             res.redirect("/admin/prazos")
         }).catch((err) => {
             req.flash("error_msg", "Houve um erro ao salva a edição do prazo")
