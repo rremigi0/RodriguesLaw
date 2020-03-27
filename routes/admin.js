@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 })
 
 router.get("/prazos/view", eAdmin, (req, res) => {
-    Prazo.find().then((prazos) => {
+    Prazo.find().sort({Prazo:1}).then((prazos) => {
         res.render("admin/viewprazos", {prazos: prazos})    
     }).catch((err) => {
         req.flash("error_msg", "houve um erro ao listar os prazos")
