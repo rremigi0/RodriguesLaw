@@ -46,7 +46,17 @@ const db = require("./config/db")
     
     // Handlebars
 
-        app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+        app.engine('handlebars', handlebars({
+            defaultLayout: 'main',
+            helpers: {
+                formatDate: (date) => {
+                    return moment(date).format('DD/MM/YYYY')
+                },
+                formatTime: (date) => {
+                    return moment(date).format('HH:mm')
+                }
+            }
+        }))
         app.set('view engine', 'handlebars');
     
     // Mongoose
@@ -60,17 +70,7 @@ const db = require("./config/db")
     // Public
 
         app.use(express.static(path.join(__dirname, "public")))
-
-    //Configura a função formatDate
-        app.engine('handlebars', handlebars({
-            defaultLayout: 'main', //Defina em sua view ou no meu caso no layout main.js
-            helpers: {
-                formatDate: (date) => {
-                    return moment(date).format('DD/MM/YYYY')
-                }
-            }
-        }))
-
+    
 //Rotas
 
     app.use('/admin', admin)

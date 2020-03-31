@@ -12,7 +12,7 @@
    <div class="flex-dashboard">
        <sidebar id="sidebar">
            <div class="sidebar-title">
-            <img src="../public/Images/Cor Azul.png" alt="">
+            <img src="/Images/Cor Azul.png" alt="">
             <h2>Rodrigues Advocacia</h2>
            </div>
            <div class="menu">
@@ -64,7 +64,8 @@
                    <h2>Gerenciar Processos</h2>
                </div>
                <div class="panel-row">
-                   <a href="/admin/processos/add"><button class="panel panel-50" a-view="cadastrarProcessos" onclick="fetchContent(this)" a-folder="Processos">
+                   
+                   <a href="/admin/processos/add"><button class="panel panel-50" a-view="cadastrarProcessos" onclick="fetchContent(this)" a-folder="processos">
                     <i class="fas fa-plus"></i>
                     Cadastrar Processos
                     </button></a>
@@ -73,14 +74,54 @@
                     Consultar Processos
                     </button></a>
                </div>
-               <div class="content" id="ajax-content">
-               </div>
-           </div>
+               <div class="dynamic-content">
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Processo</th>
+                                <th scope="col">Procedimento</th>
+                                <th scope="col">Categoria</th>
+                                <th scope="col">Tutela</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Audiência</th>
+                                <th scope="col">Horário</th>
+                                <th scope="col">Atuação</th>
+                                <th scope="col">Distribuição</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each processos}}
+
+                            <tr>    
+                                <td>{{Processo}}</td>
+                                <td>{{Procedimento}}</td>
+                                <td>{{Categoria}}</td>
+                                <td>{{Tutela}}</td>
+                                <td>{{Autor}}</td>
+                                <td>{{#formatDate Audiencia}}{{/formatDate}}</td>
+                                <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
+                                <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
+                                <td>{{#formatDate Distribuicao}}{{/formatDate}}</td>
+                                <td onclick="window.location='/admin/processos/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/admin/processos/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                        
+                    </table>
+                    </form>
+                </div>
        </main>
    </div>
+                
+
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
 </body>
 </html>
+
+
+
