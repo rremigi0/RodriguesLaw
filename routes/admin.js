@@ -153,6 +153,66 @@ router.get('/processos', eAdmin, (req, res) => {
                     })
                 })
 
+                // Editar Processos
+
+                router.get("/processos/edit/:id", eAdmin, (req, res) => {
+                    Processo.findOne({_id:req.params.id}).then((processo) => {
+                        res.render("admin/editprocessos", {processo: processo})
+                    }).catch((err) => {
+                        req.flash("error_msg", "Este processo não está cadastrado")
+                        res.redirect("/admin/processos/")
+                    })
+                    
+                })
+
+                router.post("/processos/edit", eAdmin, (req, res) => {
+
+                    Processo.findOne({_id: req.body.id}).then((processo) => {
+
+                        processo.Processo = req.body.processo
+                        processo.Procedimento = req.body.procedimento
+                        processo.Categoria = req.body.categoria
+                        processo.Tutela = req.body.tutela
+                        processo.Classe = req.body.classe
+                        processo.Assunto = req.body.assunto
+                        processo.Autor = req.body.autor
+                        processo.Reu = req.body.reu
+                        processo.Secao = req.body.secao
+                        processo.Vara = req.body.vara
+                        processo.Comarca = req.body.comarca
+                        processo.UF = req.body.uf
+                        processo.Audiencia = req.body.audiencia
+                        processo.Atuacao = req.body.atuacao
+                        processo.Distribuicao = req.body.distribuicao
+
+                        processo.save().then(() => {
+                            req.flash("success_msg", "Processo editado com sucesso!")
+                            res.redirect("/admin/processos")
+                        }).catch((err) => {
+                            req.flash("error_msg", "Houve um erro ao salva a edição do processo")
+                            res.redirect("/admin/processos")
+                        })
+
+                    }).catch((err) => {
+                        req.flash("error_msg", "Houve um erro ao editar o processo")
+                        res.redirect("/admin/processos")
+                    })
+                })
+
+                // Deletar Processos
+
+                router.get("/processos/deletar/:id", eAdmin2, (req, res) => {
+                    Processo.remove({_id: req.params.id}).then(() => {
+                        req.flash("success_msg", "Processo deletado com sucesso")
+                        res.redirect("/admin/processos")
+                    }).catch((err) => {
+                        req.flash("error_msg", "Houve um erro interno")
+                        res.redirect("/admin/processos")
+                    })
+                })
+
+
+
 //Rota Audiências:
 
 router.get('/audiencias', eAdmin, (req, res) => {
@@ -169,10 +229,7 @@ router.get('/financeiro', eAdmin, (req, res) => {
 
 router.get('/prazos', eAdmin, (req, res) => {
     res.render("admin/prazos")
-})
-                   
-
-
+})                  
 
     // Rota Adicionar Novo Prazo:
 
@@ -252,53 +309,56 @@ router.get('/prazos', eAdmin, (req, res) => {
                             res.redirect("/admin")
                         })
                     })
+                
+                // Editar Prazos
 
-router.get("/prazos/edit/:id", eAdmin, (req, res) => {
-    Prazo.findOne({_id:req.params.id}).then((prazo) => {
-        res.render("admin/editprazos", {prazo: prazo})
-    }).catch((err) => {
-        req.flash("error_msg", "Este prazo não está cadastrado")
-        res.redirect("/admin/prazos/")
-    })
-    
-})
+                    router.get("/prazos/edit/:id", eAdmin, (req, res) => {
+                        Prazo.findOne({_id:req.params.id}).then((prazo) => {
+                            res.render("admin/editprazos", {prazo: prazo})
+                        }).catch((err) => {
+                            req.flash("error_msg", "Este prazo não está cadastrado")
+                            res.redirect("/admin/prazos/")
+                        })
+                        
+                    })
 
-router.post("/prazos/edit", eAdmin, (req, res) => {
+                    router.post("/prazos/edit", eAdmin, (req, res) => {
 
-    Prazo.findOne({_id: req.body.id}).then((prazo) => {
+                        Prazo.findOne({_id: req.body.id}).then((prazo) => {
 
-        prazo.Processo = req.body.processo
-        prazo.Autor = req.body.autor
-        prazo.Reu = req.body.reu
-        prazo.Procedimento = req.body.procedimento
-        prazo.Peticao = req.body.peticao
-        prazo.Publicacao = req.body.publicacao
-        prazo.Prazo = req.body.prazo
+                            prazo.Processo = req.body.processo
+                            prazo.Autor = req.body.autor
+                            prazo.Reu = req.body.reu
+                            prazo.Procedimento = req.body.procedimento
+                            prazo.Peticao = req.body.peticao
+                            prazo.Publicacao = req.body.publicacao
+                            prazo.Prazo = req.body.prazo
 
-        prazo.save().then(() => {
-            req.flash("success_msg", "Prazo editado com sucesso!")
-            res.redirect("/admin/prazos")
-        }).catch((err) => {
-            req.flash("error_msg", "Houve um erro ao salva a edição do prazo")
-            res.redirect("/admin/prazos")
-        })
+                            prazo.save().then(() => {
+                                req.flash("success_msg", "Prazo editado com sucesso!")
+                                res.redirect("/admin/prazos")
+                            }).catch((err) => {
+                                req.flash("error_msg", "Houve um erro ao salva a edição do prazo")
+                                res.redirect("/admin/prazos")
+                            })
 
-    }).catch((err) => {
-        req.flash("error_msg", "Houve um erro ao editar o prazo")
-        res.redirect("/admin/prazos")
-    })
-})
+                        }).catch((err) => {
+                            req.flash("error_msg", "Houve um erro ao editar o prazo")
+                            res.redirect("/admin/prazos")
+                        })
+                    })
 
+                    // Deletar Prazos
 
-router.get("/prazos/deletar/:id", eAdmin2, (req, res) => {
-    Prazo.remove({_id: req.params.id}).then(() => {
-        req.flash("success_msg", "Prazo deletado com sucesso")
-        res.redirect("/admin/prazos")
-    }).catch((err) => {
-        req.flash("error_msg", "Houve um erro interno")
-        res.redirect("/admin/prazos")
-    })
-})
+                    router.get("/prazos/deletar/:id", eAdmin2, (req, res) => {
+                        Prazo.remove({_id: req.params.id}).then(() => {
+                            req.flash("success_msg", "Prazo deletado com sucesso")
+                            res.redirect("/admin/prazos")
+                        }).catch((err) => {
+                            req.flash("error_msg", "Houve um erro interno")
+                            res.redirect("/admin/prazos")
+                        })
+                    })
 
 
 module.exports = router

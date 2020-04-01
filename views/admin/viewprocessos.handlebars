@@ -80,25 +80,23 @@
                             <thead>
                             <tr>
                                 <th scope="col">Processo</th>
-                                <th scope="col">Procedimento</th>
-                                <th scope="col">Categoria</th>
-                                <th scope="col">Tutela</th>
                                 <th scope="col">Autor</th>
+                                <th scope="col">Réu</th>
                                 <th scope="col">Audiência</th>
                                 <th scope="col">Horário</th>
                                 <th scope="col">Atuação</th>
                                 <th scope="col">Distribuição</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Excluir</th>
                             </tr>
                         </thead>
                     <tbody>
                        {{#each processos}}
 
-                            <tr>    
+                            <tr>  
                                 <td>{{Processo}}</td>
-                                <td>{{Procedimento}}</td>
-                                <td>{{Categoria}}</td>
-                                <td>{{Tutela}}</td>
                                 <td>{{Autor}}</td>
+                                <td>{{Reu}}</td>
                                 <td>{{#formatDate Audiencia}}{{/formatDate}}</td>
                                 <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
                                 <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
