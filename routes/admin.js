@@ -238,7 +238,7 @@ router.get('/financeiro', eAdmin, (req, res) => {
 
 // Rota Configurações:
 
-router.get('/configuracoes', eAdmin2, (req, res) => {
+router.get('/configuracoes', eAdmin, (req, res) => {
     res.render("admin/configuracoes")
 })
 
