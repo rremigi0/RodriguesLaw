@@ -64,16 +64,11 @@
                    <h2>Gerenciar Audiência</h2>
                </div>
                <div class="panel-row">
-                   <button class="panel panel-50" a-view="cadastrarAudiencias" onclick="fetchContent(this)" a-folder="audiencias">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Audiências
-                    </button>
-                   <button class="panel panel-50" a-view="vizualizarAudiencias" onclick="fetchContent(this)" a-folder="audiencias">
+                   <a href="/admin/audiencias/view"><button class="panel panel-50" a-view="visualizarAudiencias" onclick="fetchContent(this)" a-folder="audiencias">
                     <i class="fas fa-table"></i>
                     Consultar Audiências
-                    </button>
-               </div>
-               <div class="content" id="ajax-content">
+                    </button></a>
+               </div>               
                </div>
            </div>
        </main>
