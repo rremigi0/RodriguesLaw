@@ -65,17 +65,17 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Processos</h2>
+                   <h2>Gerenciar Audiências</h2>
                </div>
                <div class="panel-row">
                    
                    <a href="/admin/prazos/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-plus"></i>
-                    Cadastrar Processos
+                    Cadastrar Audiências
                     </button></a>
                    <a href="/admin/prazos/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-table"></i>
-                    Consultar Processos
+                    Consultar Audiências
                     </button></a>
                </div>
                <div class="dynamic-content">
@@ -84,71 +84,17 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/admin/processos/edit" method="POST">
+                  <form action="/admin/processos/editaudiencia" method="POST">
                       <input type="hidden" name="id" value="{{processo._id}}">
                     <div class="form-group">
                       <label for="processo">Processo</label>
                       <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{processo.Processo}}">
                     </div>
                     <div class="form-group">
-                      <label for="procedimento">Procedimento</label>
-                      <input type="text" class="form-control" id="procedimento" aria-describedby="emailHelp" name="procedimento" value="{{processo.Procedimento}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="categoria">Categoria</label>
-                      <input type="text" class="form-control" id="categoria" aria-describedby="emailHelp" name="categoria" value="{{processo.Categoria}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="tutela">Tutela</label>
-                      <input type="text" class="form-control" id="tutela" aria-describedby="emailHelp" name="tutela" value="{{processo.Tutela}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="classe">Classe</label>
-                      <input type="text" class="form-control" id="classe" aria-describedby="emailHelp" name="classe" value="{{processo.Classe}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="assunto">Assunto</label>
-                      <input type="text" class="form-control" id="assunto" aria-describedby="emailHelp" name="assunto" value="{{processo.Assunto}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="autor">Autor</label>
-                        <input type="text" class="form-control" id="autor" name="autor" value="{{processo.Autor}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="reu">Réu</label>
-                        <input type="text" class="form-control" id="reu" name="reu" value="{{processo.Reu}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="secao">Seção</label>
-                        <input type="text" class="form-control" id="secao" name="secao" value="{{processo.Secao}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="vara">Vara</label>
-                        <input type="text" class="form-control" id="vara" name="vara" value="{{processo.Vara}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="comarca">Comarca</label>
-                      <input type="text" class="form-control" id="comarca" aria-describedby="emailHelp" name="comarca" value="{{processo.Comarca}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="uf">UF</label>
-                      <input type="text" class="form-control" id="uf" aria-describedby="emailHelp" name="uf" value="{{processo.UF}}">
-                    </div>
-                    <div class="form-group">
                         <label for="audiencia">Audiencia</label>
                         <input type="datetime-local" class="form-control" id="audiencia" name="audiencia" value="{{processo.Audiencia}}">
                     </div>
-                    <div class="form-group">
-                        <label for="atuacao">Atuacao</label>
-                        <input type="date" class="form-control" id="atuacao" name="atuacao" value="{{processo.Atuacao}}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="distribuicao">Distribuição</label>
-                        <input type="date" class="form-control" id="distribuicao" name="distribuicao" value="{{processo.Distribuicao}}">
-                    </div>
                     <button type="submit" class="btn">Salvar</button>
-                     
                   </form>
             </div>
        </main>

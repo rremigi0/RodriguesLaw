@@ -219,7 +219,7 @@ router.get('/audiencias', eAdmin, (req, res) => {
     res.render("admin/audiencias")
 })
 
-                    // Visualizar as Audiências
+                    // Visualizar as Audiências:
 
                     router.get("/audiencias/view", eAdmin, (req, res) => {
                         Processo.find({Audiencia:{$ne:null}}).sort({Audiencia:1}).then((processos) => {
@@ -227,6 +227,38 @@ router.get('/audiencias', eAdmin, (req, res) => {
                         }).catch((err) => {
                             req.flash("error_msg", "houve um erro ao listar as audiencias")
                             res.redirect("/admin")
+                        })
+                    })
+
+                    // Editar as Audiências:
+
+                    router.get("/processos/editaudiencia/:id", eAdmin, (req, res) => {
+                        Processo.findOne({_id:req.params.id}).then((processo) => {
+                            res.render("admin/editaudiencias", {processo: processo})
+                        }).catch((err) => {
+                            req.flash("error_msg", "Este processo não está cadastrado")
+                            res.redirect("/admin/audiencias/")
+                        })
+                        
+                    })
+
+                    router.post("/processos/editaudiencia", eAdmin, (req, res) => {
+
+                        Processo.findOne({_id: req.body.id}).then((processo) => {
+    
+                            processo.Processo = req.body.processo
+                            processo.Audiencia = req.body.audiencia
+    
+                            processo.save().then(() => {
+                                req.flash("success_msg", "Audiência atualizada com sucesso!")
+                                res.redirect("/admin/audiencias")
+                            }).catch((err) => {
+                                req.flash("error_msg", "Houve um erro ao salvar a edição da audiência")
+                                res.redirect("/admin/audiencias")
+                            })
+                        }).catch((err) => {
+                            req.flash("error_msg", "Houve um erro ao editar a audiência")
+                            res.redirect("/admin/audiencias")
                         })
                     })
 
