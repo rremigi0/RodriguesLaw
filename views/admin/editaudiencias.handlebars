@@ -30,21 +30,21 @@
                     <i class="fas fa-users"></i>
                     <a href="/admin/clientes">  Clientes</a>
                 </li>
-                <li>
-                    <i class="fas fa-layer-group"></i>
-                    <a href="/processo/main">  Processos</a>
-                </li>
                 <li class="selected">
+                    <i class="fas fa-layer-group"></i>
+                    <a href="/admin/processos">  Processos</a>
+                </li>
+                <li>
                     <i class="far fa-calendar-alt"></i>
                     <a href="/admin/audiencias">  Audiências</a>
                 </li>
                 <li>
                     <i class="far fa-newspaper"></i>
-                    <a href="/prazo/main">  Prazos</a>
+                    <a href="/admin/prazos">  Prazos</a>
                 </li>
                 <li>
                     <i class="fas fa-money-check-alt"></i>
-                    <a href="/financeiro/main">  Financeiro</a>
+                    <a href="/admin/financeiro">  Financeiro</a>
                 </li>
                 <li>
                     <i class="fas fa-cog"></i>
@@ -63,49 +63,40 @@
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
                <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
-            <div class="panel-row">
-                <a href="/admin/audiencias/view"><button class="panel panel-50" a-view="visualizarAudiencias" onclick="fetchContent(this)" a-folder="audiencias">
-                <i class="fas fa-table"></i>
-                Consultar Audiências
-                </button></a>
-            </div>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Audiência</h2>
+                   <h2>Gerenciar Audiências</h2>
+               </div>
+               <div class="panel-row">
+                   
+                   <a href="/admin/prazos/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                    <i class="fas fa-plus"></i>
+                    Cadastrar Audiências
+                    </button></a>
+                   <a href="/admin/prazos/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                    <i class="fas fa-table"></i>
+                    Consultar Audiências
+                    </button></a>
                </div>
                <div class="dynamic-content">
-
-                   <table class="table table-striped">                  
-                            <thead>
-                            <tr>
-                                <th scope="col">Processo</th>
-                                <th scope="col">Autor</th>
-                                <th scope="col">Réu</th>
-                                <th scope="col">Audiência</th>
-                                <th scope="col">Horário</th>
-                                <th scope="col">Editar</th>
-                            </tr>
-                        </thead>
-                    <tbody>
-                       {{#each processos}}
-
-                            <tr>  
-                                <td>{{Processo}}</td>
-                                <td>{{Autor}}</td>
-                                <td>{{Reu}}</td>
-                                <td>{{#formatDate Audiencia}}{{/formatDate}}</td>
-                                <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
-                                <td onclick="window.location='/admin/processos/editaudiencia/{{_id}}'"><i class="fas fa-edit"></i></td>
-                            </tr>
+                   <div class="card-body"></div>
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
                         {{/each}}
-                    </tbody>
-                        
-                    </table>
-                    </form>
-                </div>
-               
-               </div>
-           </div>
+                  <form action="/admin/processos/editaudiencia" method="POST">
+                      <input type="hidden" name="id" value="{{processo._id}}">
+                    <div class="form-group">
+                      <label for="processo">Processo</label>
+                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{processo.Processo}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="audiencia">Audiencia</label>
+                        <input type="datetime-local" class="form-control" id="audiencia" name="audiencia" value="{{processo.Audiencia}}">
+                    </div>
+                    <button type="submit" class="btn">Salvar</button>
+                  </form>
+            </div>
        </main>
    </div>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -114,3 +105,4 @@
     <script src="/js/menu.js"></script>
 </body>
 </html>
+
