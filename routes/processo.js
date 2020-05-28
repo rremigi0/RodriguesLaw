@@ -12,7 +12,7 @@ router.get('/main', eAdmin, (req, res) => {res.render("Processos/main")})
 
 // Rota Adicionar Novo Prazo:
 
-router.get('/add', eAdmin, (req, res) => {res.render("processos/addprocessos")})
+router.get('/add', eAdmin, (req, res) => {res.render("Processos/addprocessos")})
 
 // Visualizar os Processos
 
@@ -28,7 +28,7 @@ res.redirect("/processo/main")})})
 
 // Editar Processos
 
-router.get("/edit/:id", eAdmin, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("processos/editprocessos", {processo: processo})}).catch((err) => {
+router.get("/edit/:id", eAdmin, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("Processos/editprocessos", {processo: processo})}).catch((err) => {
 req.flash("error_msg", "Este processo não está cadastrado")
 res.redirect("/processo/main/")})})
 router.post("/edit", eAdmin, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
@@ -72,7 +72,7 @@ if(!req.body.comarca || typeof req.body.comarca == undefined || req.body.comarca
 if(!req.body.uf || typeof req.body.uf == undefined || req.body.uf == null) {erros.push({texto: "UF Inválido"})}
 if(!req.body.atuacao || typeof req.body.atuacao == undefined || req.body.atuacao == null) {erros.push({texto: "Atuação Inválida"})}
 if(!req.body.distribuicao || typeof req.body.distribuicao == undefined || req.body.distribuicao == null) {erros.push({texto: "Distribuição Inválida"})}
-if(erros.length > 0) {res.render("processos/addprocessos", {erros: erros})}else {
+if(erros.length > 0) {res.render("Processos/addprocessos", {erros: erros})}else {
     
     const novoProcesso = {
     Processo: req.body.processo,
