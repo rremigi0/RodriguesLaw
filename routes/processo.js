@@ -8,7 +8,7 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 
 //Rota de Processos:
 
-router.get('/main', eAdmin, (req, res) => {res.render("processos/main")})
+router.get("/main", eAdmin, (req, res) => {res.render("processos/main")})
 
 // Rota Adicionar Novo Prazo:
 
