@@ -30,21 +30,21 @@
                     <i class="fas fa-users"></i>
                     <a href="/admin/clientes">  Clientes</a>
                 </li>
-                <li>
+                <li class="selected">
                     <i class="fas fa-layer-group"></i>
-                    <a href="/admin/processos">  Processos</a>
+                    <a href="/processo/main">  Processos</a>
                 </li>
                 <li>
                     <i class="far fa-calendar-alt"></i>
                     <a href="/admin/audiencias">  Audiências</a>
                 </li>
-                <li class="selected">
+                <li>
                     <i class="far fa-newspaper"></i>
-                    <a href="/admin/prazos">  Prazos</a>
+                    <a href="/prazo/main">  Prazos</a>
                 </li>
                 <li>
                     <i class="fas fa-money-check-alt"></i>
-                    <a href="/admin/financeiro">  Financeiro</a>
+                    <a href="/financeiro/main">  Financeiro</a>
                 </li>
                 <li>
                     <i class="fas fa-cog"></i>
@@ -65,17 +65,17 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Prazos</h2>
+                   <h2>Gerenciar Processos</h2>
                </div>
                <div class="panel-row">
                    
-                   <a href="/admin/prazos/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                   <a href="/processo/add"><button class="panel panel-50" a-view="cadastrarProcessos" onclick="fetchContent(this)" a-folder="processos">
                     <i class="fas fa-plus"></i>
-                    Cadastrar Prazos
+                    Cadastrar Processos
                     </button></a>
-                   <a href="/admin/prazos/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                   <a href="/processo/view"><button class="panel panel-50" a-view="visualizarProcessos" onclick="fetchContent(this)" a-folder="processos">
                     <i class="fas fa-table"></i>
-                    Consultar Prazos
+                    Consultar Processos
                     </button></a>
                </div>
                <div class="dynamic-content">
@@ -86,27 +86,27 @@
                                 <th scope="col">Processo</th>
                                 <th scope="col">Autor</th>
                                 <th scope="col">Réu</th>
-                                <th scope="col">Procedimento</th>
-                                <th scope="col">Petição</th>
-                                <th scope="col">Publicação</th>
-                                <th scope="col">Prazo</th>
+                                <th scope="col">Audiência</th>
+                                <th scope="col">Horário</th>
+                                <th scope="col">Atuação</th>
+                                <th scope="col">Distribuição</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Excluir</th>
                             </tr>
                         </thead>
                     <tbody>
-                       {{#each prazos}}
+                       {{#each processos}}
 
-                            <tr>    
+                            <tr>  
                                 <td>{{Processo}}</td>
                                 <td>{{Autor}}</td>
                                 <td>{{Reu}}</td>
-                                <td>{{Procedimento}}</td>
-                                <td>{{Peticao}}</td>
-                                <td>{{#formatDate Publicacao}}{{/formatDate}}</td>
-                                <td>{{#formatDate Prazo}}{{/formatDate}}</td>
-                                <td onclick="window.location='/admin/prazos/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
-                                <td onclick="window.location='/admin/prazos/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                                <td>{{#formatDate Audiencia}}{{/formatDate}}</td>
+                                <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
+                                <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
+                                <td>{{#formatDate Distribuicao}}{{/formatDate}}</td>
+                                <td onclick="window.location='/processo/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/processo/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
                             </tr>
                         {{/each}}
                     </tbody>

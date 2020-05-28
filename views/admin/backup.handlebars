@@ -26,7 +26,7 @@
                     <i class="fas fa-user-tie"></i>
                     <a href="/admin/perfil">  Perfil</a>
                 </li>
-                <li class="selected">
+                <li>
                     <i class="fas fa-users"></i>
                     <a href="/admin/clientes">  Clientes</a>
                 </li>
@@ -46,7 +46,7 @@
                     <i class="fas fa-money-check-alt"></i>
                     <a href="/financeiro/main">  Financeiro</a>
                 </li>
-                <li>
+                <li class="selected">
                     <i class="fas fa-cog"></i>
                     <a href="/admin/Configuracoes">  Configurações</a>
                 </li>
@@ -65,20 +65,78 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Clientes</h2>
+                   <h2>Configurações</h2>
                </div>
                <div class="panel-row">
-                   <button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Clientes
-                    </button>
-                   <button class="panel panel-50" a-view="vizualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
-                    <i class="fas fa-table"></i>
-                    Consultar Clientes
-                    </button>
+                   
+                <button id="myButton">Download</button>
+
+                <script>
+
+                    const objectToCsv = function(data) {
+                            const csvRows = [];
+
+                        //get the headers
+
+                        const headers = Object.keys(data[0]);
+                        csvRows.push(headers.join(','));
+
+                        //loop over the rows
+
+                        for (const row of data) {
+                            const values = headers.map(header => {
+                                const escaped = (''+row[header]).replace(/"/g, '\\"');
+                                return `"${escaped}"`;
+
+                            });
+                            csvRows.push(values.join(','));
+                        }
+
+                        return csvRows.join('\n');
+
+                    };
+
+                    const download = function(data) {
+                        const blob = new Blob([data], { type: 'text/csv'});
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.setAttribute('hidden', '');
+                        a.setAttribute('href', url);
+                        a.setAttribute('download', 'download.csv');
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+
+
+                    };
+
+                    const getReport = async function () {
+                        const jsonUrl = 'https://next.json-generator.com/api/json/get/EyTURYQo_'
+                        const res = await fetch(jsonUrl);
+                        const json = await res.json();
+                        const data = json.map(row => ({
+                            
+                            age: row.age,
+                            email: row.email,
+                            firstName: row.name.first,
+                            lastName: row.name.last
+
+                        }));
+                        
+                        const csvData = objectToCsv(data);
+                        download(csvData);
+                        };
+                        
+                        //main app
+                        (function() {
+                            //button click
+                            const button = document.getElementById('myButton');
+                            button.addEventListener('click',getReport);
+                        })();
+
+                    </script>
                </div>
-               <div class="content" id="ajax-content">
-               </div>
+
            </div>
        </main>
    </div>
@@ -86,5 +144,9 @@
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
+  
+    </script>
+
+
 </body>
 </html>

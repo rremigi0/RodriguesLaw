@@ -26,7 +26,7 @@
                     <i class="fas fa-user-tie"></i>
                     <a href="/admin/perfil">  Perfil</a>
                 </li>
-                <li class="selected">
+                <li>
                     <i class="fas fa-users"></i>
                     <a href="/admin/clientes">  Clientes</a>
                 </li>
@@ -38,7 +38,7 @@
                     <i class="far fa-calendar-alt"></i>
                     <a href="/admin/audiencias">  Audiências</a>
                 </li>
-                <li>
+                <li class="selected">
                     <i class="far fa-newspaper"></i>
                     <a href="/prazo/main">  Prazos</a>
                 </li>
@@ -65,26 +65,64 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Clientes</h2>
+                   <h2>Gerenciar Prazos</h2>
                </div>
                <div class="panel-row">
-                   <button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                   <a href="/financeiro/add"><button class="panel panel-50" a-view="cadastrarFinanceiro" onclick="fetchContent(this)" a-folder="Financeiro">
                     <i class="fas fa-plus"></i>
-                    Cadastrar Clientes
-                    </button>
-                   <button class="panel panel-50" a-view="vizualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                    Cadastrar Honorários
+                    </button></a>
+                   <a href="/financeiro/view"><button class="panel panel-50" a-view="visualizarFinanceiro" onclick="fetchContent(this)" a-folder="Financeiro">
                     <i class="fas fa-table"></i>
-                    Consultar Clientes
-                    </button>
+                    Consultar Honorários
+                    </button></a>
                </div>
-               <div class="content" id="ajax-content">
-               </div>
-           </div>
+               <div class="dynamic-content">
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Processo</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Réu</th>
+                                <th scope="col">Competência</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Vencimento</th>
+                                <th scope="col">Honorários</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each financeiro}}
+
+                            <tr>    
+                                <td>{{Processo}}</td>
+                                <td>{{Autor}}</td>
+                                <td>{{Reu}}</td>
+                                <td>{{Competencia}}</td>
+                                <td>{{Tipo}}</td>
+                                <td>{{#formatDate DataPagamento}}{{/formatDate}}</td>
+                                <td>{{Honorarios}}</td>
+                                <td onclick="window.location='/financeiro/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/financeiro/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                        
+                    </table>
+                    </form>
+                </div>
        </main>
    </div>
+                
+
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
 </body>
 </html>
+
+
+

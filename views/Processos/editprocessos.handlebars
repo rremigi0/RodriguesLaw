@@ -32,7 +32,7 @@
                 </li>
                 <li class="selected">
                     <i class="fas fa-layer-group"></i>
-                    <a href="/admin/processos">  Processos</a>
+                    <a href="/processo/main">  Processos</a>
                 </li>
                 <li>
                     <i class="far fa-calendar-alt"></i>
@@ -40,11 +40,11 @@
                 </li>
                 <li>
                     <i class="far fa-newspaper"></i>
-                    <a href="/admin/prazos">  Prazos</a>
+                    <a href="/prazo/main">  Prazos</a>
                 </li>
                 <li>
                     <i class="fas fa-money-check-alt"></i>
-                    <a href="/admin/financeiro">  Financeiro</a>
+                    <a href="/financeiro/main">  Financeiro</a>
                 </li>
                 <li>
                     <i class="fas fa-cog"></i>
@@ -69,11 +69,11 @@
                </div>
                <div class="panel-row">
                    
-                   <a href="/admin/processos/add"><button class="panel panel-50" a-view="cadastrarProcessos" onclick="fetchContent(this)" a-folder="Processos">
+                   <a href="/processo/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-plus"></i>
                     Cadastrar Processos
                     </button></a>
-                   <a href="/admin/processos/view"><button class="panel panel-50" a-view="visualizarProcessos" onclick="fetchContent(this)" a-folder="processos">
+                   <a href="/processo/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-table"></i>
                     Consultar Processos
                     </button></a>
@@ -84,69 +84,71 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/admin/processos/add/addProcessos" method="POST">
+                  <form action="/processo/edit" method="POST">
+                      <input type="hidden" name="id" value="{{processo._id}}">
                     <div class="form-group">
                       <label for="processo">Processo</label>
-                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo">
+                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{processo.Processo}}">
                     </div>
                     <div class="form-group">
                       <label for="procedimento">Procedimento</label>
-                      <input type="text" class="form-control" id="procedimento" aria-describedby="emailHelp" name="procedimento">
+                      <input type="text" class="form-control" id="procedimento" aria-describedby="emailHelp" name="procedimento" value="{{processo.Procedimento}}">
                     </div>
                     <div class="form-group">
                       <label for="categoria">Categoria</label>
-                      <input type="text" class="form-control" id="categoria" aria-describedby="emailHelp" name="categoria">
+                      <input type="text" class="form-control" id="categoria" aria-describedby="emailHelp" name="categoria" value="{{processo.Categoria}}">
                     </div>
                     <div class="form-group">
                       <label for="tutela">Tutela</label>
-                      <input type="text" class="form-control" id="tutela" aria-describedby="emailHelp" name="tutela">
+                      <input type="text" class="form-control" id="tutela" aria-describedby="emailHelp" name="tutela" value="{{processo.Tutela}}">
                     </div>
                     <div class="form-group">
                       <label for="classe">Classe</label>
-                      <input type="text" class="form-control" id="classe" aria-describedby="emailHelp" name="classe">
+                      <input type="text" class="form-control" id="classe" aria-describedby="emailHelp" name="classe" value="{{processo.Classe}}">
                     </div>
                     <div class="form-group">
                       <label for="assunto">Assunto</label>
-                      <input type="text" class="form-control" id="assunto" aria-describedby="emailHelp" name="assunto">
+                      <input type="text" class="form-control" id="assunto" aria-describedby="emailHelp" name="assunto" value="{{processo.Assunto}}">
                     </div>
                     <div class="form-group">
                         <label for="autor">Autor</label>
-                        <input type="text" class="form-control" id="autor" name="autor">
+                        <input type="text" class="form-control" id="autor" name="autor" value="{{processo.Autor}}">
                     </div>
                     <div class="form-group">
                         <label for="reu">Réu</label>
-                        <input type="text" class="form-control" id="reu" name="reu">
+                        <input type="text" class="form-control" id="reu" name="reu" value="{{processo.Reu}}">
                     </div>
                     <div class="form-group">
                         <label for="secao">Seção</label>
-                        <input type="text" class="form-control" id="secao" name="secao">
+                        <input type="text" class="form-control" id="secao" name="secao" value="{{processo.Secao}}">
                     </div>
                     <div class="form-group">
                         <label for="vara">Vara</label>
-                        <input type="text" class="form-control" id="vara" name="vara">
+                        <input type="text" class="form-control" id="vara" name="vara" value="{{processo.Vara}}">
                     </div>
                     <div class="form-group">
                       <label for="comarca">Comarca</label>
-                      <input type="text" class="form-control" id="comarca" aria-describedby="emailHelp" name="comarca">
+                      <input type="text" class="form-control" id="comarca" aria-describedby="emailHelp" name="comarca" value="{{processo.Comarca}}">
                     </div>
                     <div class="form-group">
                       <label for="uf">UF</label>
-                      <input type="text" class="form-control" id="uf" aria-describedby="emailHelp" name="uf">
+                      <input type="text" class="form-control" id="uf" aria-describedby="emailHelp" name="uf" value="{{processo.UF}}">
                     </div>
                     <div class="form-group">
                         <label for="audiencia">Audiencia</label>
-                        <input type="datetime-local" class="form-control" id="audiencia" name="audiencia">
+                        <input type="datetime-local" class="form-control" id="audiencia" name="audiencia" value="{{processo.Audiencia}}">
                     </div>
                     <div class="form-group">
                         <label for="atuacao">Atuacao</label>
-                        <input type="date" class="form-control" id="atuacao" name="atuacao">
+                        <input type="date" class="form-control" id="atuacao" name="atuacao" value="{{processo.Atuacao}}">
                     </div>
 
                     <div class="form-group">
                         <label for="distribuicao">Distribuição</label>
-                        <input type="date" class="form-control" id="distribuicao" name="distribuicao">
+                        <input type="date" class="form-control" id="distribuicao" name="distribuicao" value="{{processo.Distribuicao}}">
                     </div>
-                    <button type="submit" class="btn">Cadastrar</button>
+                    <button type="submit" class="btn">Salvar</button>
+                     
                   </form>
             </div>
        </main>

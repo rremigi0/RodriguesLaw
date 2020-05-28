@@ -38,7 +38,7 @@
                     <i class="far fa-calendar-alt"></i>
                     <a href="/admin/audiencias">  Audiências</a>
                 </li>
-                <li>
+                <li class="selected">
                     <i class="far fa-newspaper"></i>
                     <a href="/prazo/main">  Prazos</a>
                 </li>
@@ -46,7 +46,7 @@
                     <i class="fas fa-money-check-alt"></i>
                     <a href="/financeiro/main">  Financeiro</a>
                 </li>
-                <li class="selected">
+                <li>
                     <i class="fas fa-cog"></i>
                     <a href="/admin/Configuracoes">  Configurações</a>
                 </li>
@@ -65,30 +65,65 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Configurações</h2>
+                   <h2>Gerenciar Prazos</h2>
                </div>
                <div class="panel-row">
                    
-                   <a href="/admin/backup"><button class="panel panel-50" a-view="Gerar Backup" onclick="fetchContent(this)" a-folder="configuracoes">
+                   <a href="/prazo/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-plus"></i>
-                    Backup
+                    Cadastrar Prazos
                     </button></a>
-                   <a href="/admin/configuracoes/usuarios"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                   <a href="/prazo/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-table"></i>
-                    Usuarios
+                    Consultar Prazos
                     </button></a>
                </div>
-
-           </div>
+               <div class="dynamic-content">
+                   <div class="card-body"></div>
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+                  <form action="/prazo/edit" method="POST">
+                      <input type="hidden" name="id" value="{{prazo._id}}">
+                    <div class="form-group">
+                      <label for="processo">Processo</label>
+                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{prazo.Processo}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="autor">Autor</label>
+                        <input type="text" class="form-control" id="autor" name="autor" value="{{prazo.Autor}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="reu">Réu</label>
+                        <input type="text" class="form-control" id="reu" name="reu" value="{{prazo.Reu}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="procedimento">Procedimento</label>
+                        <input type="text" class="form-control" id="procedimento" name="procedimento" value="{{prazo.Procedimento}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="peticao">Petição Processual</label>
+                        <input type="text" class="form-control" id="peticao" name="peticao" value="{{prazo.Peticao}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="publicacao">Publicação</label>
+                        <input type="date" class="form-control" id="publicacao" name="publicacao" value="{{prazo.Publicacao}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="prazo">Prazo</label>
+                        <input type="date" class="form-control" id="prazo" name="prazo" value="{{prazo.Prazo}}">
+                    </div>
+                    <button type="submit" class="btn">Salvar</button>
+                     
+                  </form>
+            </div>
        </main>
    </div>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
-  
-    </script>
-
-
 </body>
 </html>
+
