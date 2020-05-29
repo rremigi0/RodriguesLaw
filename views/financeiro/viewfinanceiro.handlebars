@@ -38,11 +38,11 @@
                     <i class="far fa-calendar-alt"></i>
                     <a href="/admin/audiencias">  Audiências</a>
                 </li>
-                <li class="selected">
+                <li>
                     <i class="far fa-newspaper"></i>
                     <a href="/prazo/main">  Prazos</a>
                 </li>
-                <li>
+                <li   class="selected">
                     <i class="fas fa-money-check-alt"></i>
                     <a href="/financeiro/main">  Financeiro</a>
                 </li>
@@ -89,6 +89,7 @@
                                 <th scope="col">Tipo</th>
                                 <th scope="col">Vencimento</th>
                                 <th scope="col">Honorários</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Excluir</th>
                             </tr>
@@ -102,8 +103,9 @@
                                 <td>{{Reu}}</td>
                                 <td>{{Competencia}}</td>
                                 <td>{{Tipo}}</td>
-                                <td>{{#formatDate DataPagamento}}{{/formatDate}}</td>
+                                <td>{{#formatDate Vencimento}}{{/formatDate}}</td>
                                 <td>{{Honorarios}}</td>
+                                <td>{{Status}}</td>
                                 <td onclick="window.location='/financeiro/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
                                 <td onclick="window.location='/financeiro/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
                             </tr>
