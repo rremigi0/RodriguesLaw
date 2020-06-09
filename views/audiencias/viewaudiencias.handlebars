@@ -36,7 +36,7 @@
                 </li>
                 <li class="selected">
                     <i class="far fa-calendar-alt"></i>
-                    <a href="/admin/audiencias">  Audiências</a>
+                    <a href="/audiencia/main">  Audiências</a>
                 </li>
                 <li>
                     <i class="far fa-newspaper"></i>
@@ -64,7 +64,7 @@
                <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
             <div class="panel-row">
-                <a href="/admin/audiencias/view"><button class="panel panel-50" a-view="visualizarAudiencias" onclick="fetchContent(this)" a-folder="audiencias">
+                <a href="/audiencia/view"><button class="panel panel-50" a-view="visualizarAudiencias" onclick="fetchContent(this)" a-folder="audiencias">
                 <i class="fas fa-table"></i>
                 Consultar Audiências
                 </button></a>
@@ -95,7 +95,7 @@
                                 <td>{{Reu}}</td>
                                 <td>{{#formatDate Audiencia}}{{/formatDate}}</td>
                                 <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
-                                <td onclick="window.location='/admin/processos/editaudiencia/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/audiencia/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
                             </tr>
                         {{/each}}
                     </tbody>
