@@ -15,6 +15,7 @@ const processo = require("./routes/processo")
 const prazo = require("./routes/prazos")
 const financeiro = require("./routes/financeiro")
 const audiencia = require("./routes/audiencia")
+const clientes = require("./routes/clientes")
 const passport = require("passport")
 require("./config/auth")(passport)
 const db = require("./config/db")
@@ -83,6 +84,7 @@ const db = require("./config/db")
     app.use("/prazo", prazo)
     app.use("/financeiro", financeiro)
     app.use("/audiencia", audiencia)
+    app.use("/clientes", clientes)
 
 // Outros
 

@@ -28,7 +28,7 @@
                 </li>
                 <li class="selected">
                     <i class="fas fa-users"></i>
-                    <a href="/admin/clientes">  Clientes</a>
+                    <a href="/clientes/main">  Clientes</a>
                 </li>
                 <li>
                     <i class="fas fa-layer-group"></i>
@@ -68,18 +68,45 @@
                    <h2>Gerenciar Clientes</h2>
                </div>
                <div class="panel-row">
-                   <button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                   
+                   <a href="/clientes/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="Clientes">
                     <i class="fas fa-plus"></i>
                     Cadastrar Clientes
-                    </button>
-                   <button class="panel panel-50" a-view="vizualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                    </button></a>
+                   <a href="/clientes/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-table"></i>
                     Consultar Clientes
-                    </button>
+                    </button></a>
                </div>
-               <div class="content" id="ajax-content">
-               </div>
-           </div>
+               <div class="dynamic-content">
+                   <div class="card-body"></div>
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+                  <form action="/clientes/add/addClientes" method="POST">
+                    <div class="form-group">
+                      <label for="nome">Nome</label>
+                      <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome">
+                    </div>
+                    <div class="form-group">
+                      <label for="cpf_cnpj">CPF/CNPJ</label>
+                      <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj">
+                    </div>
+                    <div class="form-group">
+                      <label for="nascimento">Nascimento</label>
+                      <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento">
+                    </div>
+                    <div class="form-group">
+                      <label for="sexo">Sexo</label>
+                      <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo">
+                    </div>
+                    <div class="form-group">
+                      <label for="celular">Celular</label>
+                      <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular">
+                    </div>
+                    <button type="submit" class="btn">Cadastrar</button>
+                  </form>
        </main>
    </div>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -88,3 +115,4 @@
     <script src="/js/menu.js"></script>
 </body>
 </html>
+
