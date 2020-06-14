@@ -28,7 +28,7 @@
                 </li>
                 <li class="selected">
                     <i class="fas fa-users"></i>
-                    <a href="/clientes/main">  Clientes</a>
+                    <a href="/cliente/main">  Clientes</a>
                 </li>
                 <li>
                     <i class="fas fa-layer-group"></i>
@@ -69,11 +69,11 @@
                </div>
                <div class="panel-row">
                    
-                   <a href="/clientes/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                   <a href="/cliente/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-plus"></i>
                     Cadastrar Clientes
                     </button></a>
-                   <a href="/clientes/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                   <a href="/cliente/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-table"></i>
                     Consultar Clientes
                     </button></a>
@@ -83,6 +83,7 @@
                    <table class="table table-striped">                  
                             <thead>
                             <tr>
+                                <th scope="col">Código</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">Sexo</th>
                                 <th scope="col">CPF/CNPJ</th>
@@ -96,13 +97,14 @@
                        {{#each clientes}}
 
                             <tr>  
+                                <td>{{Codigo}}</td>
                                 <td>{{Nome}}</td>
                                 <td>{{Sexo}}</td>
                                 <td>{{Cpf_Cnpj}}</td>
                                 <td>{{Nascimento}}</td>
                                 <td>{{Celular}}</td>
-                                <td onclick="window.location='/clientes/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
-                                <td onclick="window.location='/clientes/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                                <td onclick="window.location='/cliente/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/cliente/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
                             </tr>
                         {{/each}}
                     </tbody>

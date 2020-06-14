@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 
 const Cliente = new Schema ({
 
+    Codigo: {
+        type: String,
+        required: true,
+        unique: true
+    },
+
     Nome: {
         type: String,
         required: true
@@ -29,6 +35,8 @@ const Cliente = new Schema ({
         type: String,
         required: true
     }
+
+    
 
 })
 

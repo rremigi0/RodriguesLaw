@@ -76,11 +76,13 @@ const Processo = new Schema ({
     Distribuicao: {
         type: Date,
         required: true
-    }
+    },
 
-
-
-    
+    Cliente: {
+        type: Schema.Types.ObjectId,
+        ref: "clientes",
+        required: true
+    }    
 
 })
 

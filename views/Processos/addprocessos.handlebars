@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <i class="fas fa-users"></i>
-                    <a href="/admin/clientes">  Clientes</a>
+                    <a href="/cliente/main">  Clientes</a>
                 </li>
                 <li class="selected">
                     <i class="fas fa-layer-group"></i>
@@ -145,6 +145,17 @@
                     <div class="form-group">
                         <label for="distribuicao">Distribuição</label>
                         <input type="date" class="form-control" id="distribuicao" name="distribuicao">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="cliente">Cliente</label>
+                      <select name="cliente" class="custom-select">
+                          {{#each clientes}}
+                            <option value="{{_id}}">{{Nome}}</option>
+                          {{else}}
+                            <option value="">Nenhum Cliente Registrado</option>
+                          {{/each}}
+                      </select>
                     </div>
                     <button type="submit" class="btn">Cadastrar</button>
                   </form>

@@ -2,6 +2,8 @@ const express = require ("express")
 const router = express.Router()
 const mongoose = require ("mongoose")
 require ("../models/Processo")
+require ("../models/Cliente")
+const Cliente = mongoose.model("clientes")
 const Processo = mongoose.model("processos")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
@@ -12,7 +14,14 @@ router.get('/main', eAdmin, (req, res) => {res.render("Processos/main")})
 
 // Rota Adicionar Novo Prazo:
 
-router.get('/add', eAdmin, (req, res) => {res.render("Processos/addprocessos")})
+router.get('/add', eAdmin, (req, res) => {
+    Cliente.find().then((clientes) => {
+        res.render("Processos/addprocessos", {clientes: clientes})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar o formulário")
+        res.redirect("/processo/main")
+    })
+})   
 
 // Visualizar os Processos
 
@@ -48,6 +57,7 @@ router.post("/edit", eAdmin, (req, res) => {Processo.findOne({_id: req.body.id})
     processo.Audiencia = req.body.audiencia
     processo.Atuacao = req.body.atuacao
     processo.Distribuicao = req.body.distribuicao
+    processo.Cliente = req.body.cliente
 
 processo.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
 res.redirect("/processo/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
@@ -89,12 +99,13 @@ if(erros.length > 0) {res.render("Processos/addprocessos", {erros: erros})}else 
     UF: req.body.uf,
     Audiencia: req.body.audiencia,
     Atuacao: req.body.atuacao,
-    Distribuicao: req.body.distribuicao,}                   
+    Distribuicao: req.body.distribuicao,
+    Cliente: req.body.cliente}                   
 
 new Processo(novoProcesso).save().then(() => {req.flash("success_msg", "Processo criado com sucesso!")
 res.redirect("/processo/view")}).catch((err) => {
 req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
-res.redirect("/processo/addprocessos")})}})
+res.redirect("/processo/add")})}})
 
 
 

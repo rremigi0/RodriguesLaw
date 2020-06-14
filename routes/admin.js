@@ -22,12 +22,16 @@ router.get("/dashboard", eAdmin, (req, res) => {res.render("admin/dashboard")})
 
 router.get('/perfil', eAdmin, (req, res) => {res.render("admin/perfil")})
 
-//Rota Clientes:
+//Rota Cadastro:
 
-router.get('/clientes', eAdmin, (req, res) => {res.render("admin/clientes")})
+router.get('/cadastro', eAdmin, (req, res) => {res.render("admin/cadastro")})
 
 // Rota Configurações:
 
 router.get('/configuracoes', eAdmin, (req, res) => {res.render("admin/configuracoes")})
+
+// Rota Backup:
+
+router.get('/backup', eAdmin, (req, res) => {res.render("admin/backup")})
 
 module.exports = router

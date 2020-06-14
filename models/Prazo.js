@@ -4,9 +4,11 @@ const Schema = mongoose.Schema;
 const Prazo = new Schema ({
 
     Processo: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: "processos",
         required: true
     },
+
     Autor: {
         type: String,
         required: true

@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require ("mongoose")
 require ("../models/Prazo")
 const Prazo = mongoose.model("prazos")
+const Processo = mongoose.model("processos")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 
@@ -12,7 +13,14 @@ router.get('/main', eAdmin, (req, res) => {res.render("prazos/main")})
 
 // Rota Adicionar Novo Prazo:
 
-router.get('/add', eAdmin, (req, res) => {res.render("prazos/addprazos")})
+router.get('/add', eAdmin, (req, res) => {
+    Processo.find().then((processo) => {
+        res.render("prazos/addprazos", {processo: processo})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar o formulário")
+        res.redirect("/prazos/main")
+    })
+})
 
 // Visualizar os Prazos
 

@@ -28,7 +28,7 @@
                 </li>
                 <li>
                     <i class="fas fa-users"></i>
-                    <a href="/admin/clientes">  Clientes</a>
+                    <a href="/cliente/main">  Clientes</a>
                 </li>
                 <li>
                     <i class="fas fa-layer-group"></i>
@@ -87,7 +87,13 @@
                   <form action="/prazo/add/addPrazos" method="POST">
                     <div class="form-group">
                       <label for="processo">Processo</label>
-                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo">
+                      <select name="processo" class="custom-select">
+                          {{#each processo}}
+                            <option value="{{_id}}">{{Processo}}</option>
+                          {{else}}
+                            <option value="">Nenhum Processo Registrado</option>
+                          {{/each}}
+                      </select>
                     </div>
                     <div class="form-group">
                         <label for="autor">Autor</label>

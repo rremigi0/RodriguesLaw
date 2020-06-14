@@ -28,7 +28,7 @@
                 </li>
                 <li class="selected">
                     <i class="fas fa-users"></i>
-                    <a href="/clientes/main">  Clientes</a>
+                    <a href="/cliente/main">  Clientes</a>
                 </li>
                 <li>
                     <i class="fas fa-layer-group"></i>
@@ -69,11 +69,11 @@
                </div>
                <div class="panel-row">
                    
-                   <a href="/clientes/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="Clientes">
+                   <a href="/cliente/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="Clientes">
                     <i class="fas fa-plus"></i>
                     Cadastrar Clientes
                     </button></a>
-                   <a href="/clientes/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                   <a href="/cliente/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-table"></i>
                     Consultar Clientes
                     </button></a>
@@ -84,28 +84,22 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/clientes/add/addClientes" method="POST">
+                  <form action="/cliente/add/addClientes" method="POST">
                     <div class="form-group">
+                      <label for="codigo">Código</label>
+                      <input type="number" class="form-control" id="codigo" aria-describedby="emailHelp" name="codigo">
                       <label for="nome">Nome</label>
                       <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome">
-                    </div>
-                    <div class="form-group">
                       <label for="cpf_cnpj">CPF/CNPJ</label>
                       <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj">
-                    </div>
-                    <div class="form-group">
                       <label for="nascimento">Nascimento</label>
                       <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento">
-                    </div>
-                    <div class="form-group">
                       <label for="sexo">Sexo</label>
                       <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo">
-                    </div>
-                    <div class="form-group">
                       <label for="celular">Celular</label>
-                      <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular">
+                      <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular"><br>
+                      <button type="submit" class="btn">Cadastrar</button>
                     </div>
-                    <button type="submit" class="btn">Cadastrar</button>
                   </form>
        </main>
    </div>
