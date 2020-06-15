@@ -13,14 +13,7 @@ router.get('/main', eAdmin, (req, res) => {res.render("prazos/main")})
 
 // Rota Adicionar Novo Prazo:
 
-router.get('/add', eAdmin, (req, res) => {
-    Processo.find().then((processo) => {
-        res.render("prazos/addprazos", {processo: processo})
-    }).catch((err) => {
-        req.flash("error_msg", "Houve um erro ao carregar o formulário")
-        res.redirect("/prazos/main")
-    })
-})
+router.get('/add', eAdmin, (req, res) => { res.render("prazos/addprazos")})
 
 // Visualizar os Prazos
 
