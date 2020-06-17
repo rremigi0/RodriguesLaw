@@ -1,6 +1,7 @@
 .nav_tabs{
     position: relative;
     width: 100%;
+    font-size: 14px;
 }
 
 .nav_tabs ul{

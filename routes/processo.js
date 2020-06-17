@@ -35,6 +35,12 @@ router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'A
     res.render("Processos/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/main")})})
 
+// Visualizar os Processos Pendentes:
+
+router.get("/view_pendentes", eAdmin, (req, res) => {Processo.find().sort({Atuacao:1}).then((processos) => {
+    res.render("Processos/view_pendentes", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/main")})})
+
 // Deletar Processos
 
 router.get("/deletar/:id", eAdmin2, (req, res) => {Processo.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
