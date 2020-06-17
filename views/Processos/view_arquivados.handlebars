@@ -9,7 +9,7 @@
     <title>Sistema Jurídico</title>
 </head>
 <body>
-   <div class="flex-dashboard">
+ <div class="flex-dashboard">
        <sidebar id="sidebar">
            <div class="sidebar-title">
             <img src="/Images/Cor Azul.png" alt="">
@@ -67,17 +67,60 @@
                <div class="main-content-title">
                    <h2>Gerenciar Processos</h2>
                </div>
-               <div class="panel-row">
-                   <a href="/processo/add"><button class="panel panel-50" a-view="cadastrarProcessos" onclick="fetchContent(this)" a-folder="Processos">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Processos
-                    </button></a>
-                   <a href="/processo/view_ativos"><button class="panel panel-50" a-view="visualizarProcessos" onclick="fetchContent(this)" a-folder="processos">
-                    <i class="fas fa-table"></i>
-                    Consultar Processos
-                    </button></a>
-               </div>
-           </div>
+                <div class="panel-row">
+                    <nav class ="nav_tabs">
+                        <ul>
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="ativos" >
+                                <label onclick="window.location='/processo/view_ativos/'" for ="ativos">Ativos</label>
+
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="arquivados" checked>
+                                <label onclick="window.location='/processo/view_arquivados/'" for ="arquivados">Arquivados</label>
+                                
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+               <div class="dynamic-content">
+                    <table class="table table-striped">                  
+                        <thead>
+                            <tr>
+                                <th scope="col">Processo</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Réu</th>
+                                <th scope="col">Audiência</th>
+                                <th scope="col">Horário</th>
+                                <th scope="col">Atuação</th>
+                                <th scope="col">Distribuição</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                    {{#each processos}}
+
+                            <tr>  
+                                <td>{{Processo}}</td>
+                                <td>{{Autor}}</td>
+                                <td>{{Reu}}</td>
+                                <td>{{#formatDate Audiencia}}{{/formatDate}}</td>
+                                <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
+                                <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
+                                <td>{{#formatDate Distribuicao}}{{/formatDate}}</td>
+                                <td>{{Status}}</td>
+                                <td onclick="window.location='/processo/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/processo/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
+                    {{/each}}
+                    </tbody>
+                        
+                    </table>
+
+                </div>
        </main>
    </div>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>

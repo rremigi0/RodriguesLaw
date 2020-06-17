@@ -3,6 +3,12 @@ const Schema = mongoose.Schema;
 
 const Processo = new Schema ({
 
+    Cliente: {
+        type: Schema.Types.ObjectId,
+        ref: "clientes",
+        default: null
+    }, 
+
     Processo: {
         type: String,
         required: true
@@ -78,11 +84,10 @@ const Processo = new Schema ({
         required: true
     },
 
-    Cliente: {
-        type: Schema.Types.ObjectId,
-        ref: "clientes",
+    Status: {
+        type: String,
         required: true
-    }    
+    } 
 
 })
 

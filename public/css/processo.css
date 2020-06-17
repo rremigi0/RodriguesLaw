@@ -1,0 +1,50 @@
+.nav_tabs{
+    position: relative;
+    width: 100%;
+}
+
+.nav_tabs ul{
+    list-style: none;
+}
+
+.nav_tabs ul li{
+    float: left;
+    
+}
+
+.nav_tabs label{
+    width: 150px;
+    padding: 25px;
+    background-color: #363b48;
+    display: block;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.rd_tabs:checked ~ label{
+    background-color: #e54e43;
+}
+
+.rd_tabs{
+    display: none;
+}
+
+.content-tabs{
+    background-color: #fff;
+    display: none;
+    position: absolute;
+    height: 320px;
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+}
+
+.rd_tabs:checked ~ .content-tabs{
+    display: block;
+}
+
+.process-tabs{
+    padding: 0px;
+    width: 100%;
+}

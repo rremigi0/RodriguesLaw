@@ -23,46 +23,38 @@ router.get('/add', eAdmin, (req, res) => {
     })
 })   
 
-// Visualizar os Processos
+// Visualizar os Processos Ativos:
 
-router.get("/view", eAdmin, (req, res) => {Processo.find().sort({Atuacao:1}).then((processos) => {
-res.render("Processos/viewprocessos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
-res.redirect("/processo/main")})})
+router.get("/view_ativos", eAdmin, (req, res) => {Processo.find( { Status:'Ativo' } ).sort({Atuacao:1}).then((processos) => {
+    res.render("Processos/view_ativos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/main")})})
+
+// Visualizar os Processos Arquivados:
+
+router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'Arquivado' } ).sort({Atuacao:1}).then((processos) => {
+    res.render("Processos/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/main")})})
 
 // Deletar Processos
 
 router.get("/deletar/:id", eAdmin2, (req, res) => {Processo.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
-res.redirect("/processo/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/processo/main")})})        
 
 // Editar Processos
 
-router.get("/edit/:id", eAdmin, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("Processos/editprocessos", {processo: processo})}).catch((err) => {
-req.flash("error_msg", "Este processo não está cadastrado")
-res.redirect("/processo/main/")})})
-router.post("/edit", eAdmin, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
-
-    processo.Processo = req.body.processo
-    processo.Procedimento = req.body.procedimento
-    processo.Categoria = req.body.categoria
-    processo.Tutela = req.body.tutela
-    processo.Classe = req.body.classe
-    processo.Assunto = req.body.assunto
-    processo.Autor = req.body.autor
-    processo.Reu = req.body.reu
-    processo.Secao = req.body.secao
-    processo.Vara = req.body.vara
-    processo.Comarca = req.body.comarca
-    processo.UF = req.body.uf
-    processo.Audiencia = req.body.audiencia
-    processo.Atuacao = req.body.atuacao
-    processo.Distribuicao = req.body.distribuicao
-    processo.Cliente = req.body.cliente
-
-processo.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
-res.redirect("/processo/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
-res.redirect("/processo/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
-res.redirect("/processo/main")})})
+router.get("/edit/:id", eAdmin2, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("Processos/editprocessos", {processo: processo})}).catch((err) => {
+    req.flash("error_msg", "Este processo não está cadastrado")
+    res.redirect("/Processos/view_ativos/")})})
+    router.post("/edit", eAdmin2, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
+    
+        processo.Processo = req.body.processo
+        processo.Status = req.body.status
+    
+    processo.save().then(() => {req.flash("success_msg", "Status editado com sucesso!")
+    res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
+    res.redirect("/processo/view_ativos")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
+    res.redirect("/processo/view_ativos")})})
 
 // Rota para Cadastrar novo Processo no Banco de Dados:
         
@@ -85,6 +77,7 @@ if(!req.body.distribuicao || typeof req.body.distribuicao == undefined || req.bo
 if(erros.length > 0) {res.render("Processos/addprocessos", {erros: erros})}else {
     
     const novoProcesso = {
+    Cliente: req.body.cliente,
     Processo: req.body.processo,
     Procedimento: req.body.procedimento,
     Categoria: req.body.categoria,
@@ -100,14 +93,11 @@ if(erros.length > 0) {res.render("Processos/addprocessos", {erros: erros})}else 
     Audiencia: req.body.audiencia,
     Atuacao: req.body.atuacao,
     Distribuicao: req.body.distribuicao,
-    Cliente: req.body.cliente}                   
+    Status: req.body.status}                   
 
 new Processo(novoProcesso).save().then(() => {req.flash("success_msg", "Processo criado com sucesso!")
-res.redirect("/processo/view")}).catch((err) => {
+res.redirect("/processo/view_ativos")}).catch((err) => {
 req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
 res.redirect("/processo/add")})}})
-
-
-
 
 module.exports = router
