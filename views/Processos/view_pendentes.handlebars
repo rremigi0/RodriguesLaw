@@ -71,7 +71,7 @@
                     <nav class ="nav_tabs">
                         <ul>
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="ativos" checked>
+                                <input type="radio" name="tabs" class="rd_tabs" id="ativos" >
                                 <label onclick="window.location='/processo/view_ativos/'" for ="ativos">Ativos</label>
 
                             </li>
@@ -83,7 +83,7 @@
                             </li>
 
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="pendentes">
+                                <input type="radio" name="tabs" class="rd_tabs" id="pendentes" checked>
                                 <label onclick="window.location='/processo/view_pendentes/'" for ="pendentes">Pendentes</label>
                                 
                             </li>
@@ -101,7 +101,7 @@
                                 <th scope="col">Horário</th>
                                 <th scope="col">Atuação</th>
                                 <th scope="col">Distribuição</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Cliente</th>
                                 <th scope="col">Editar</th>
                                 <th scope="col">Excluir</th>
                             </tr>
@@ -117,7 +117,7 @@
                                 <td>{{#formatTime Audiencia}}{{/formatTime}}</td>
                                 <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
                                 <td>{{#formatDate Distribuicao}}{{/formatDate}}</td>
-                                <td>{{Status}}</td>
+                                <td>{{Cliente}}</td>
                                 <td onclick="window.location='/processo/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
                                 <td onclick="window.location='/processo/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
                             </tr>

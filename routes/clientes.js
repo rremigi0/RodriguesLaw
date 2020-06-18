@@ -8,7 +8,14 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 
 //Rota de Clientes:
 
-router.get('/main', eAdmin, (req, res) => {res.render("Clientes/main")})
+router.get('/main', eAdmin, (req, res) => {
+    Cliente.find().then((clientes) => {
+        res.render("Clientes/main", {clientes: clientes})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar os clientes")
+        res.redirect("/cliente/main")
+    })
+})   
 
 // Rota Adicionar Novo Cliente:
 
