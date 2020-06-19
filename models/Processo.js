@@ -6,7 +6,7 @@ const Processo = new Schema ({
     Cliente: {
         type: Schema.Types.ObjectId,
         ref: "clientes",
-        default: null
+        required: true
     }, 
 
     Processo: {
