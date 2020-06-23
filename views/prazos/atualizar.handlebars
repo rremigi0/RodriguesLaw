@@ -69,76 +69,44 @@
                </div>
                <div class="panel-row">
                    
-                    <nav class ="nav_tabs">
-                        <ul>
-                            <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="pendentes" checked>
-                                <label onclick="window.location='/prazo/view_pendentes/'" for ="pendentes">Prazos Pendentes</label>
-
-                            </li>
-
-                            <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="validacao">
-                                <label onclick="window.location='/prazo/view_validacao/'" for ="controle">Aguardando Validação</label>
-                            </li>
-
-                            <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="erros">
-                                <label onclick="window.location='/prazo/view_erros/'" for ="erros">Retornado com Erros</label>
-                            </li>
-
-                            <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="protocolado">
-                                <label onclick="window.location='/prazo/view_protocolado/'" for ="protocolados">Prazos Protocolados</label>
-                            </li>
-                        </ul>
-                    </nav>
-
+                   <a href="/prazo/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                    <i class="fas fa-plus"></i>
+                    Cadastrar Prazos
+                    </button></a>
+                   <a href="/prazo/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
+                    <i class="fas fa-table"></i>
+                    Consultar Prazos
+                    </button></a>
                </div>
                <div class="dynamic-content">
-
-                   <table class="table table-striped">                  
-                            <thead>
-                            <tr>
-                                <th scope="col">Processo</th>
-                                <th scope="col">Autor</th>
-                                <th scope="col">Réu</th>
-                                <th scope="col">Petição</th>
-                                <th scope="col">Prazo</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Concluir</th>
-                                <th scope="col">Excluir</th>
-                            </tr>
-                        </thead>
-                    <tbody>
-                       {{#each prazos}}
-
-                            <tr>    
-                                <td>{{Processo}}</td>
-                                <td>{{Autor}}</td>
-                                <td>{{Reu}}</td>
-                                <td>{{Peticao}}</td>
-                                <td>{{#formatDate Prazo}}{{/formatDate}}</td>
-                                <td onclick="window.location='/prazo/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
-                                <td onclick="window.location='/prazo/atualizar/{{_id}}'"><i class="fas fa-sync-alt"></i></td>
-                                <td onclick="window.location='/prazo/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
-                            </tr>
+                   <div class="card-body"></div>
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
                         {{/each}}
-                    </tbody>
-                        
-                    </table>
-                    </form>
-                </div>
+                  <form action="/prazo/atualizar" method="POST">
+                      <input type="hidden" name="id" value="{{prazo._id}}">
+                    <div class="form-group">
+                      <label for="processo">Processo</label>
+                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{prazo.Processo}}">
+                    </div>
+                        <label for="status">Status</label>
+                            <select class="form-control" type="text" id="status" name="status" value="{{prazo.Status}}">
+                                <option>Pendente</option>
+                                <option>Validacao</option>
+                                <option>Error</option>
+                                <option>Protocolado</option>
+                            </select><br>
+                    <button type="submit" class="btn">Salvar</button>
+                     
+                  </form>
+            </div>
        </main>
    </div>
-                
-
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
 </body>
 </html>
-
-
 

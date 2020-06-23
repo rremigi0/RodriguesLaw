@@ -36,6 +36,11 @@ const Prazo = new Schema ({
     Prazo: {
         type: Date,
         required: true
+    },
+
+    Status: {
+        type: String,
+        required: true
     }
 
 })

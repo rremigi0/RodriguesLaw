@@ -21,6 +21,30 @@ router.get("/view", eAdmin, (req, res) => {Prazo.find().sort({Prazo:1}).then((pr
 }).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
 res.redirect("/main")})})
 
+// Visualizar os Prazos (Pendentes)
+
+router.get("/view_pendentes", eAdmin, (req, res) => {Prazo.find( { Status:'Pendente' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_pendentes", {prazos: prazos})    
+}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+res.redirect("/main")})})
+
+// Visualizar os Prazos (Pendentes de Validação)
+
+router.get("/view_validacao", eAdmin, (req, res) => {Prazo.find( { Status:'Validacao' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_validacao", {prazos: prazos})    
+}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+res.redirect("/main")})})
+
+// Visualizar os Prazos (Retornado com Erros)
+
+router.get("/view_erros", eAdmin, (req, res) => {Prazo.find( { Status:'Error' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_erros", {prazos: prazos})    
+}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+res.redirect("/main")})})
+
+// Visualizar os Prazos (Protocolados)
+
+router.get("/view_protocolado", eAdmin, (req, res) => {Prazo.find( { Status:'Protocolado' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_protocolado", {prazos: prazos})    
+}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+res.redirect("/main")})})
+
 // Deletar Prazos
 
 router.get("/deletar/:id", eAdmin2, (req, res) => {Prazo.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Prazo deletado com sucesso")
@@ -47,7 +71,8 @@ if(erros.length > 0) {res.render("prazos/addprazos", {erros: erros})}else {
     Procedimento: req.body.procedimento,
     Peticao: req.body.peticao,
     Publicacao: req.body.publicacao,
-    Prazo: req.body.prazo}                   
+    Prazo: req.body.prazo,
+    Status: req.body.status}                   
 
     new Prazo(novoPrazo).save().then(() => {
     req.flash("success_msg", "Prazo criado com sucesso!")
@@ -70,10 +95,26 @@ router.post("/edit", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).th
     prazo.Peticao = req.body.peticao
     prazo.Publicacao = req.body.publicacao
     prazo.Prazo = req.body.prazo
+    prazo.Status = req.body.status
 
 prazo.save().then(() => {req.flash("success_msg", "Prazo editado com sucesso!")
 res.redirect("/prazo/main")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
 res.redirect("/prazo/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
 res.redirect("/prazo/main")})})
+
+// Atualizar Status:
+
+router.get("/atualizar/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("prazos/atualizar", {prazo: prazo})}).catch((err) => {
+    req.flash("error_msg", "Este prazo não está cadastrado")
+    res.redirect("prazo/view_pendentes")})})
+    router.post("/atualizar", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).then((prazo) => {
+    
+        prazo.Processo = req.body.processo
+        prazo.Status = req.body.status
+    
+    prazo.save().then(() => {req.flash("success_msg", "Prazo editado com sucesso!")
+    res.redirect("/prazo/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
+    res.redirect("/prazo/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
+    res.redirect("/prazo/main")})})
 
 module.exports = router
