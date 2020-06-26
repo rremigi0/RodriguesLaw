@@ -4,6 +4,8 @@ const mongoose = require ("mongoose")
 require ("../models/Prazo")
 require ("../models/Processo")
 require ("../models/Financeiro")
+require ("../models/Cliente")
+const Cliente = mongoose.model("clientes")
 const Processo = mongoose.model("processos")
 const Prazo = mongoose.model("prazos")
 const Financeiro = mongoose.model("financeiro")
@@ -24,8 +26,14 @@ router.get('/perfil', eAdmin, (req, res) => {res.render("admin/perfil")})
 
 //Rota Cadastro:
 
-router.get('/cadastro', eAdmin, (req, res) => {res.render("admin/cadastro")})
-
+router.get('/cadastro', eAdmin, (req, res) => {
+    Cliente.find().then((clientes) => {
+        res.render("cadastros/main", {clientes: clientes})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar o formulário")
+        res.redirect("/cadastro/main")
+    })
+})  
 // Rota Configurações:
 
 router.get('/configuracoes', eAdmin, (req, res) => {res.render("admin/configuracoes")})

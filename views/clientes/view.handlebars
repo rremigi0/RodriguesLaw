@@ -27,8 +27,8 @@
                     <a href="/admin/perfil">  Perfil</a>
                 </li>
                 <li class="selected">
-                    <i class="fas fa-users"></i>
-                    <a href="/cliente/main">  Cadastro</a>
+                    <i class="fas fa-plus"></i>
+                    <a href="/admin/cadastro">  Cadastro</a>
                 </li>
                 <li>
                     <i class="fas fa-layer-group"></i>
@@ -69,57 +69,59 @@
                </div>
                <div class="panel-row">
                    
-                   <a href="/clientes/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="Clientes">
+                   <a href="/cliente/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-plus"></i>
                     Cadastrar Clientes
                     </button></a>
-                   <a href="/clientes/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="Clientes">
+                   <a href="/cliente/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-table"></i>
                     Consultar Clientes
                     </button></a>
                </div>
                <div class="dynamic-content">
-                   <div class="card-body"></div>
-                        {{#each erros}}
-                            <div class="alert alert-danger">{{texto}}</div>
-                        {{else}}
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Sexo</th>
+                                <th scope="col">CPF/CNPJ</th>
+                                <th scope="col">Nascimento</th>
+                                <th scope="col">Celular</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each clientes}}
+
+                            <tr>  
+                                <td>{{Codigo}}</td>
+                                <td>{{Nome}}</td>
+                                <td>{{Sexo}}</td>
+                                <td>{{Cpf_Cnpj}}</td>
+                                <td>{{Nascimento}}</td>
+                                <td>{{Celular}}</td>
+                                <td onclick="window.location='/cliente/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/cliente/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                            </tr>
                         {{/each}}
-                  <form action="/cliente/edit" method="POST">
-                      <input type="hidden" name="id" value="{{cliente._id}}">
-                    <div class="form-group">
-                      <label for="codigo">Código</label>
-                      <input type="number" class="form-control" id="codigo" aria-describedby="emailHelp" name="codigo" value="{{cliente.Codigo}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="nome">Nome</label>
-                      <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome" value="{{cliente.Nome}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="cpf_cnpj">CPF/CNPJ</label>
-                      <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj" value="{{cliente.Cpf_Cnpj}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="nascimento">Nascimento</label>
-                      <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento" value="{{cliente.Nascimento}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="sexo">Sexo</label>
-                      <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo" value="{{cliente.Sexo}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="celular">Celular</label>
-                      <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular" value="{{cliente.Celular}}">
-                    </div>
-                    <button type="submit" class="btn">Salvar</button>
-                     
-                  </form>
-            </div>
+                    </tbody>
+                        
+                    </table>
+                    </form>
+                </div>
        </main>
    </div>
+                
+
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
 </body>
 </html>
+
+
 

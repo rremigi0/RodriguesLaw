@@ -26,7 +26,7 @@
                     <i class="fas fa-user-tie"></i>
                     <a href="/admin/perfil">  Perfil</a>
                 </li>
-                <li>
+                <li class="selected">
                     <i class="fas fa-plus"></i>
                     <a href="/admin/cadastro">  Cadastro</a>
                 </li>
@@ -42,13 +42,13 @@
                     <i class="far fa-newspaper"></i>
                     <a href="/prazo/main">  Prazos</a>
                 </li>
-                <li  class="selected">
+                <li>
                     <i class="fas fa-money-check-alt"></i>
                     <a href="/financeiro/main">  Financeiro</a>
                 </li>
                 <li>
                     <i class="fas fa-cog"></i>
-                    <a href="/admin/csonfiguracoes">  Configurações</a>
+                    <a href="/admin/Configuracoes">  Configurações</a>
                 </li>
                 <li class="sidebar_logout">
                     <i class="fas fa-sign-out-alt"></i>
@@ -65,17 +65,17 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Honorários</h2>
+                   <h2>Gerenciar Clientes</h2>
                </div>
                <div class="panel-row">
                    
-                   <a href="/financeiro/add"><button class="panel panel-50" a-view="cadastrarHonorarios" onclick="fetchContent(this)" a-folder="honorarios">
+                   <a href="/clientes/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="Clientes">
                     <i class="fas fa-plus"></i>
-                    Cadastrar Honorários
+                    Cadastrar Clientes
                     </button></a>
-                   <a href="/financeiro/view"><button class="panel panel-50" a-view="visualizarHonorarios" onclick="fetchContent(this)" a-folder="honorários">
+                   <a href="/clientes/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="Clientes">
                     <i class="fas fa-table"></i>
-                    Consultar Honorários
+                    Consultar Clientes
                     </button></a>
                </div>
                <div class="dynamic-content">
@@ -84,40 +84,34 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/financeiro/add/addFinanceiro" method="POST">
+                  <form action="/cliente/edit" method="POST">
+                      <input type="hidden" name="id" value="{{cliente._id}}">
                     <div class="form-group">
-                      <label for="processo">Processo</label>
-                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo">
+                      <label for="codigo">Código</label>
+                      <input type="number" class="form-control" id="codigo" aria-describedby="emailHelp" name="codigo" value="{{cliente.Codigo}}">
                     </div>
                     <div class="form-group">
-                        <label for="autor">Autor</label>
-                        <input type="text" class="form-control" id="autor" name="autor">
+                      <label for="nome">Nome</label>
+                      <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome" value="{{cliente.Nome}}">
                     </div>
                     <div class="form-group">
-                        <label for="reu">Réu</label>
-                        <input type="text" class="form-control" id="reu" name="reu">
+                      <label for="cpf_cnpj">CPF/CNPJ</label>
+                      <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj" value="{{cliente.Cpf_Cnpj}}">
                     </div>
                     <div class="form-group">
-                        <label for="competencia">Competencia</label>
-                        <input type="text" class="form-control" id="competencia" name="competencia">
+                      <label for="nascimento">Nascimento</label>
+                      <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento" value="{{cliente.Nascimento}}">
                     </div>
                     <div class="form-group">
-                        <label for="tipo">Tipo</label>
-                        <input type="text" class="form-control" id="tipo" name="tipo">
+                      <label for="sexo">Sexo</label>
+                      <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo" value="{{cliente.Sexo}}">
                     </div>
                     <div class="form-group">
-                        <label for="vencimento">Vencimento</label>
-                        <input type="date" class="form-control" id="vencimento" name="vencimento">
+                      <label for="celular">Celular</label>
+                      <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular" value="{{cliente.Celular}}">
                     </div>
-                    <div class="form-group">
-                        <label for="honorarios">Honorario</label>
-                        <input type="text" class="form-control" id="honorarios" name="honorarios">
-                    </div>
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <input type="text" class="form-control" id="status" name="status">
-                    </div>
-                    <button type="submit" class="btn">Cadastrar</button>
+                    <button type="submit" class="btn">Salvar</button>
+                     
                   </form>
             </div>
        </main>

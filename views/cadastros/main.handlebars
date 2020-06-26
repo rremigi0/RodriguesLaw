@@ -33,8 +33,8 @@
                     <a href="/admin/perfil">  Perfil</a>
                 </li>
                 <li class="selected">
-                    <i class="fas fa-users"></i>
-                    <a href="/cliente/main">  Cadastro</a>
+                    <i class="fas fa-plus"></i>
+                    <a href="/admin/cadastro">  Cadastro</a>
                 </li>
                 <li>
                     <i class="fas fa-layer-group"></i>
@@ -71,25 +71,57 @@
                <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
 
-<!-- Menu Dropdown de Cadastro -->
+<!-- Menu Dropdown Principal -->
 
                <div class="panel-dropdown">
                    <nav class="menu-dropdown">
                        <ul>
-                           <li><a href="#">Cadastrar</a>
+                           <li><a href="#">Clientes</a>
                                 <ul>
-                                    <li><a href="/cliente/add" data-toggle="modal" data-target="#clienteModal">Clientes</a></li>
-                                    <li><a href="/processo/add"data-toggle="modal" data-target="#processoModal">Processos</a></li>
-                                    <li><a href="#">Audiências</a></li>
-                                    <li><a href="#">Usuários</a></li>
+                                    <li><a href="/cliente/add" data-toggle="modal" data-target="#clienteModal"> Novo </a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
                                 </ul>
                            </li>
-                           <li><a href="#">Consultar</a>
+                           <li><a href="#">Processos</a>
                                 <ul>
-                                    <li><a href="/cliente/view">Clientes</a></li>
-                                    <li><a href="/processo/view_ativos">Processos</a></li>
-                                    <li><a href="#">Audiências</a></li>
-                                    <li><a href="#">Usuários</a></li>
+                                    <li><a href="/processo/add"data-toggle="modal" data-target="#processoModal"> Novo</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                </ul>
+                           </li>
+                           <li><a href="#">Prazos</a>
+                                <ul>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                </ul>
+                           </li>
+                           <li><a href="#">Audiências</a>
+                                <ul>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                </ul>
+                           </li>
+                            <li><a href="#">Financeiro</a>
+                                <ul>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                </ul>
+                           </li>
+                            <li><a href="#">Tribunais</a>
+                                <ul>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
+                                    <li><a href="#">--</a></li>
                                 </ul>
                            </li>                           
                        </ul>
@@ -100,7 +132,7 @@
        </main>
    </div>
 
-<!-- Menu Dropdown de Cadastro de Clientes -->
+<!-- Menu Dropdown de Cadastro de Clientes (Modal Novo Cliente) -->
 
     <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -129,7 +161,7 @@
                             <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo">
                             <label for="celular">Celular</label>
                             <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular"><br>
-                            <button type="submit" class="btn">Cadastrar</button>
+                            <button type="submit" class="btn">Salvar</button>
                             </div>
                         </form>
                     </div>
@@ -138,7 +170,7 @@
         </div>
     </div>
 
-<!-- Menu Dropdown de Cadastro de Processos -->
+<!-- Menu Dropdown de Cadastro de Processos (Modal Novo Processo) -->
 
     <div class="modal fade" id="processoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -183,7 +215,7 @@
                                         <option>Ativo</option>
                                         <option>Arquivado</option>
                                     </select><br>
-                            <button type="submit" class="btn">Cadastrar</button>
+                            <button type="submit" class="btn">Salvar</button>
                             </div>
                         </form>
                     </div>

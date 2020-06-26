@@ -10,7 +10,7 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 
 router.get('/main', eAdmin, (req, res) => {
     Cliente.find().then((clientes) => {
-        res.render("Clientes/main", {clientes: clientes})
+        res.render("cadastros/main", {clientes: clientes})
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao carregar os clientes")
         res.redirect("/cliente/main")
@@ -24,7 +24,7 @@ router.get('/add', eAdmin, (req, res) => {res.render("Clientes/addclientes")})
 // Visualizar os Clientes
 
 router.get("/view", eAdmin, (req, res) => {Cliente.find().sort({Codigo:1}).then((clientes) => {
-res.render("Clientes/viewclientes", {clientes: clientes})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os clientes")
+res.render("clientes/view", {clientes: clientes})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os clientes")
 res.redirect("/cliente/main")})})
 
 // Deletar Clientes
@@ -57,7 +57,7 @@ if(erros.length > 0) {res.render("Clientes/addclientes", {erros: erros})}else {
 
 // Editar Clientes
 
-router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("Clientes/editclientes", {cliente: cliente})}).catch((err) => {
+router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("clientes/edit", {cliente: cliente})}).catch((err) => {
     req.flash("error_msg", "Este cliente não está cadastrado")
     res.redirect("/cliente/main/")})})
     router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
