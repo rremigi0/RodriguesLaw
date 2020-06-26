@@ -26,7 +26,7 @@
                     <i class="fas fa-user-tie"></i>
                     <a href="/admin/perfil">  Perfil</a>
                 </li>
-                <li class="selected">
+                <li>
                     <i class="fas fa-plus"></i>
                     <a href="/admin/cadastro">  Cadastro</a>
                 </li>
@@ -42,7 +42,7 @@
                     <i class="far fa-calendar-alt"></i>
                     <a href="/audiencia/main">  Audiências</a>
                 </li>
-                <li>
+                <li class="selected">
                     <i class="far fa-newspaper"></i>
                     <a href="/prazo/main">  Prazos</a>
                 </li>
@@ -52,7 +52,7 @@
                 </li>
                 <li>
                     <i class="fas fa-cog"></i>
-                    <a href="/admin/Configuracoes">  Configurações</a>
+                    <a href="/admin/configuracoes">  Configurações</a>
                 </li>
                 <li class="sidebar_logout">
                     <i class="fas fa-sign-out-alt"></i>
@@ -69,29 +69,30 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Clientes</h2>
+                   <h2>Gerenciar Prazos</h2>
                </div>
                <div class="panel-row">
                    
-                   <a href="/cliente/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
+                   <a href="/cliente/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
                     <i class="fas fa-plus"></i>
-                    Cadastrar Clientes
+                    Cadastrar Prazos
                     </button></a>
                    <a href="/cliente/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
                     <i class="fas fa-table"></i>
                     Consultar Clientes
                     </button></a>
                </div>
+
+           </div>
        </main>
    </div>
-                
-
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
     <script src="/js/ajax.js"></script>
     <script src="/js/menu.js"></script>
+  
+    </script>
+
+
 </body>
 </html>
-
-
-
