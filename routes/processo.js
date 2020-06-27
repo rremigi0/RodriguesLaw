@@ -69,8 +69,8 @@ res.redirect("/processo/main")})})
 
 // Deletar Triagem
 
-router.get("/deletar/:id", eAdmin2, (req, res) => {Triagem.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
-res.redirect("/processo/triagem/view_alta")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+router.get("/deletartriagem/:id", eAdmin2, (req, res) => {Triagem.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
+res.redirect("/processo/view_alta")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/processo/triagem")})})
 
 // Editar Processos
