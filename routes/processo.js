@@ -81,9 +81,10 @@ router.get("/edit/:id", eAdmin2, (req, res) => {Processo.findOne({_id:req.params
     router.post("/edit", eAdmin2, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
     
         processo.Processo = req.body.processo
+        processo.Audiencia = req.body.audiencia
         processo.Status = req.body.status
     
-    processo.save().then(() => {req.flash("success_msg", "Status editado com sucesso!")
+    processo.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
     res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
     res.redirect("/processo/view_ativos")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
     res.redirect("/processo/view_ativos")})})
