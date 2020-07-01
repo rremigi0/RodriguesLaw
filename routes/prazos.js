@@ -17,7 +17,7 @@ router.get('/add', eAdmin, (req, res) => { res.render("prazos/addprazos")})
 
 // Visualizar os Prazos
 
-router.get("/view", eAdmin, (req, res) => {Prazo.find().sort({Prazo:1}).then((prazos) => {res.render("prazos/viewprazos", {prazos: prazos})    
+router.get("/view", eAdmin, (req, res) => {Prazo.find().sort({Prazo:1}).then((prazos) => {res.render("prazos/view_pendentes", {prazos: prazos})    
 }).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
 res.redirect("/main")})})
 
