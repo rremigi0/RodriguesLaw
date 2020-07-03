@@ -12,7 +12,14 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 
 //Rota de Processos:
 
-router.get('/main', eAdmin, (req, res) => {res.render("processos/main")})
+router.get('/main', eAdmin, (req, res) => {
+    Cliente.find().then((clientes) => {
+        res.render("processos/main", {clientes: clientes})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar o formulário")
+        res.redirect("/processo/main")
+    })
+})   
 
 //Rota de Triagem:
 
@@ -25,7 +32,7 @@ router.get('/addtriagem', eAdmin, (req, res) => {
         res.render("processos/triagem/add", {clientes: clientes})
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
-        res.redirect("/processo/main")
+        res.redirect("/processos/main")
     })
 })   
 
