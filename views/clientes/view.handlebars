@@ -18,45 +18,17 @@
            <div class="menu">
             <ul>
                 <li>
-                    <i class="fas fa-home"></i>
-                    <a href="/admin/dashboard">  Dashboard</a>
+                    <i class="fa fa-reply"></i>
+                    <a href="/admin/home">  Retornar</a>
             
                 </li>
                 <li>
-                    <i class="fas fa-user-tie"></i>
-                    <a href="/admin/perfil">  Perfil</a>
+                    <i class="fas fa-plus"></i>
+                    <a href="/cliente/add" data-toggle="modal" data-target="#clienteModal">  Novo</a>
                 </li>
                 <li class="selected">
-                    <i class="fas fa-plus"></i>
-                    <a href="/admin/cadastro">  Cadastro</a>
-                </li>
-                <li>
-                    <i class="fas fa-users"></i>
-                    <a href="/cliente/main">  Clientes</a>
-                </li>
-                <li>
-                    <i class="fas fa-layer-group"></i>
-                    <a href="/processo/main">  Processos</a>
-                </li>
-                <li>
-                    <i class="far fa-calendar-alt"></i>
-                    <a href="/audiencia/main">  Audiências</a>
-                </li>
-                <li>
-                    <i class="far fa-newspaper"></i>
-                    <a href="/prazo/main">  Prazos</a>
-                </li>
-                <li>
-                    <i class="fas fa-money-check-alt"></i>
-                    <a href="/financeiro/main">  Financeiro</a>
-                </li>
-                <li>
-                    <i class="fas fa-cog"></i>
-                    <a href="/admin/Configuracoes">  Configurações</a>
-                </li>
-                <li class="sidebar_logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <a href="/usuarios/logout">  Logout</a>
+                    <i class="fa fa-search"></i>
+                    <a href="/cliente/view">  Consultar</a>
                 </li>
             </ul>
 
@@ -70,17 +42,6 @@
            <div class="main-content">
                <div class="main-content-title">
                    <h2>Gerenciar Clientes</h2>
-               </div>
-               <div class="panel-row">
-                   
-                   <a href="/cliente/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="clientes">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Clientes
-                    </button></a>
-                   <a href="/cliente/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="clientes">
-                    <i class="fas fa-table"></i>
-                    Consultar Clientes
-                    </button></a>
                </div>
                <div class="dynamic-content">
 
@@ -113,6 +74,44 @@
                     </form>
                 </div>
        </main>
+
+<!-- Cadastro de Clientes (Modal Novo Cliente) -->
+
+    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+                        <form action="/cliente/add/addClientes" method="POST">
+                            <div class="form-group">
+                            <label for="codigo">Código</label>
+                            <input type="number" class="form-control" id="codigo" aria-describedby="emailHelp" name="codigo">
+                            <label for="nome">Nome</label>
+                            <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome">
+                            <label for="cpf_cnpj">CPF/CNPJ</label>
+                            <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj">
+                            <label for="nascimento">Nascimento</label>
+                            <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento">
+                            <label for="sexo">Sexo</label>
+                            <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo">
+                            <label for="celular">Celular</label>
+                            <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular"><br>
+                            <button type="submit" class="btn">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
    </div>
                 
 

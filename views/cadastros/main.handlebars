@@ -80,14 +80,6 @@
                <div class="panel-dropdown">
                    <nav class="menu-dropdown">
                        <ul>
-                           <li><a href="#">Clientes</a>
-                                <ul>
-                                    <li><a href="/cliente/add" data-toggle="modal" data-target="#clienteModal"> Novo </a></li>
-                                    <li><a href="#">--</a></li>
-                                    <li><a href="#">--</a></li>
-                                    <li><a href="#">--</a></li>
-                                </ul>
-                           </li>
                            <li><a href="#">Processos</a>
                                 <ul>
                                     <li><a href="/processo/add"data-toggle="modal" data-target="#processoModal"> Novo</a></li>
@@ -135,44 +127,6 @@
            </div>
        </main>
    </div>
-
-<!-- Menu Dropdown de Cadastro de Clientes (Modal Novo Cliente) -->
-
-    <div class="modal fade" id="clienteModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="dynamic-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Cadastrar Cliente</h5>
-                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
-                    </div>        
-                   <div class="card-body">
-                        {{#each erros}}
-                            <div class="alert alert-danger">{{texto}}</div>
-                        {{else}}
-                        {{/each}}
-                        <form action="/cliente/add/addClientes" method="POST">
-                            <div class="form-group">
-                            <label for="codigo">Código</label>
-                            <input type="number" class="form-control" id="codigo" aria-describedby="emailHelp" name="codigo">
-                            <label for="nome">Nome</label>
-                            <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome">
-                            <label for="cpf_cnpj">CPF/CNPJ</label>
-                            <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj">
-                            <label for="nascimento">Nascimento</label>
-                            <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento">
-                            <label for="sexo">Sexo</label>
-                            <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo">
-                            <label for="celular">Celular</label>
-                            <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular"><br>
-                            <button type="submit" class="btn">Salvar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <!-- Menu Dropdown de Cadastro de Processos (Modal Novo Processo) -->
 

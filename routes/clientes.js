@@ -6,10 +6,6 @@ const Cliente = mongoose.model("clientes")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 
-//Rota de Clientes:
-
-router.get('/main', eAdmin, (req, res) => {res.render("clientes/main")}) 
-
 // Rota Adicionar Novo Cliente:
 
 router.get('/add', eAdmin, (req, res) => {res.render("Clientes/addclientes")})
