@@ -12,9 +12,13 @@ const Financeiro = mongoose.model("financeiro")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 
-// Rota Principal:
+// Rota de Login:
 
 router.get('/', (req, res) => {res.render("usuarios/login")})
+
+// Rota Principal:
+
+router.get('/home', (req, res) => {res.render("admin/home")})
 
 //Rota Dashboard:
 
