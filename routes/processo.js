@@ -23,7 +23,14 @@ router.get('/main', eAdmin, (req, res) => {
 
 //Rota de Triagem:
 
-router.get('/triagem', eAdmin, (req, res) => {res.render("processos/triagem/main")})
+router.get('/triagem', eAdmin, (req, res) => {
+    Cliente.find().then((clientes) => {
+        res.render("processos/triagem/main", {clientes: clientes})
+    }).catch((err) => {
+        req.flash("error_msg", "Houve um erro ao carregar o formulário")
+        res.redirect("/processo/main")
+    })
+})   
 
 // Rota Adicionar Triagem Inicial:
 
@@ -32,7 +39,7 @@ router.get('/addtriagem', eAdmin, (req, res) => {
         res.render("processos/triagem/add", {clientes: clientes})
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
-        res.redirect("/processos/main")
+        res.redirect("/processo/main")
     })
 })   
 
