@@ -14,13 +14,13 @@ router.get('/add', eAdmin, (req, res) => {res.render("Clientes/addclientes")})
 
 router.get("/view", eAdmin, (req, res) => {Cliente.find().sort({Codigo:1}).then((clientes) => {
 res.render("clientes/view", {clientes: clientes})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os clientes")
-res.redirect("/cliente/main")})})
+res.redirect("/cliente/view")})})
 
 // Deletar Clientes
 
 router.get("/deletar/:id", eAdmin2, (req, res) => {Cliente.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Cliente deletado com sucesso")
 res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
-res.redirect("/cliente/main")})})        
+res.redirect("/cliente/view")})})        
 
 // Rota para Cadastrar novo Cliente no Banco de Dados:
         
@@ -48,7 +48,7 @@ if(erros.length > 0) {res.render("Clientes/addclientes", {erros: erros})}else {
 
 router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("clientes/edit", {cliente: cliente})}).catch((err) => {
     req.flash("error_msg", "Este cliente não está cadastrado")
-    res.redirect("/cliente/main/")})})
+    res.redirect("/cliente/view/")})})
     router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
     
         cliente.Codigo = req.body.codigo
@@ -59,8 +59,8 @@ router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.i
         cliente.Celular = req.body.celular    
     
     cliente.save().then(() => {req.flash("success_msg", "Cliente editado com sucesso!")
-    res.redirect("/cliente/main")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do cliente")
-    res.redirect("/cliente/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o cliente")
-    res.redirect("/cliente/main")})})
+    res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do cliente")
+    res.redirect("/cliente/view")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o cliente")
+    res.redirect("/cliente/view")})})
 
 module.exports = router
