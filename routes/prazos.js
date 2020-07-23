@@ -48,8 +48,8 @@ res.redirect("/main")})})
 // Deletar Prazos
 
 router.get("/deletar/:id", eAdmin2, (req, res) => {Prazo.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Prazo deletado com sucesso")
-res.redirect("/prazo/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
-res.redirect("/prazo/view")})})
+res.redirect("/prazo/view_pendentes")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+res.redirect("/prazo/view_pendentes")})})
 
 //Rota para Cadastrar novo Prazo no Banco de Dados:
 
@@ -76,7 +76,7 @@ if(erros.length > 0) {res.render("prazos/addprazos", {erros: erros})}else {
 
     new Prazo(novoPrazo).save().then(() => {
     req.flash("success_msg", "Prazo criado com sucesso!")
-    res.redirect("/prazo/view")}).catch((err) => {
+    res.redirect("/prazo/view_pendentes")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar o Prazo, tente novamente!")
     res.redirect("prazo/main")})}})
 
@@ -85,7 +85,7 @@ if(erros.length > 0) {res.render("prazos/addprazos", {erros: erros})}else {
 
 router.get("/edit/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("prazos/editprazos", {prazo: prazo})}).catch((err) => {
 req.flash("error_msg", "Este prazo não está cadastrado")
-res.redirect("prazo/main")})})
+res.redirect("prazo/view_pendentes")})})
 router.post("/edit", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).then((prazo) => {
 
     prazo.Processo = req.body.processo
@@ -98,23 +98,23 @@ router.post("/edit", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).th
     prazo.Status = req.body.status
 
 prazo.save().then(() => {req.flash("success_msg", "Prazo editado com sucesso!")
-res.redirect("/prazo/main")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
-res.redirect("/prazo/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
-res.redirect("/prazo/main")})})
+res.redirect("/prazo/view_pendentes")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
+res.redirect("/prazo/view_pendentes")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
+res.redirect("/prazo/view_pendentes")})})
 
 // Atualizar Status:
 
 router.get("/atualizar/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("prazos/atualizar", {prazo: prazo})}).catch((err) => {
     req.flash("error_msg", "Este prazo não está cadastrado")
-    res.redirect("prazo/view_pendentes")})})
+    res.redirect("/prazo/view_pendentes")})})
     router.post("/atualizar", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).then((prazo) => {
     
         prazo.Processo = req.body.processo
         prazo.Status = req.body.status
     
     prazo.save().then(() => {req.flash("success_msg", "Prazo editado com sucesso!")
-    res.redirect("/prazo/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
-    res.redirect("/prazo/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
-    res.redirect("/prazo/main")})})
+    res.redirect("/prazo/view_pendentes")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
+    res.redirect("/prazo/view_pendentes")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
+    res.redirect("/prazo/view_pendentes")})})
 
 module.exports = router

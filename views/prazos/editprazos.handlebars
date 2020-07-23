@@ -71,17 +71,6 @@
                <div class="main-content-title">
                    <h2>Gerenciar Prazos</h2>
                </div>
-               <div class="panel-row">
-                   
-                   <a href="/prazo/add"><button class="panel panel-50" a-view="cadastrarPrazos" onclick="fetchContent(this)" a-folder="prazos">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Prazos
-                    </button></a>
-                   <a href="/prazo/view"><button class="panel panel-50" a-view="visualizarPrazos" onclick="fetchContent(this)" a-folder="prazos">
-                    <i class="fas fa-table"></i>
-                    Consultar Prazos
-                    </button></a>
-               </div>
                <div class="dynamic-content">
                    <div class="card-body"></div>
                         {{#each erros}}
@@ -121,7 +110,7 @@
                         <label for="status">Status</label>
                             <select class="form-control" type="text" id="status" name="status" value="{{prazo.Status}}">
                                 <option>Pendente</option>
-                            </select>
+                            </select><br>
                     <button type="submit" class="btn">Salvar</button>
                      
                   </form>
