@@ -20,7 +20,6 @@ const passport = require("passport")
 require("./config/auth")(passport)
 const db = require("./config/db")
 
-
 //Configurações
 
     //Sessão

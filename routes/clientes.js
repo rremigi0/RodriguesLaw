@@ -6,14 +6,10 @@ const Cliente = mongoose.model("clientes")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 
-// Rota Adicionar Novo Cliente:
-
-router.get('/add', eAdmin, (req, res) => {res.render("Clientes/addclientes")})
-
 // Visualizar os Clientes
 
 router.get("/view", eAdmin, (req, res) => {Cliente.find().sort({Codigo:1}).then((clientes) => {
-res.render("clientes/view", {clientes: clientes})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os clientes")
+res.render("admin/clientes/view", {clientes: clientes})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os clientes")
 res.redirect("/cliente/view")})})
 
 // Deletar Clientes
@@ -27,15 +23,34 @@ res.redirect("/cliente/view")})})
 router.post("/add/addClientes", eAdmin, (req, res) => {var erros = []
 if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){erros.push({texto: "Nome do Cliente Inválido"})}
 if(req.body.nome.length < 8) {erros.push({texto: "Digite o nome completo do cliente"})}
-if(erros.length > 0) {res.render("Clientes/addclientes", {erros: erros})}else {
+if(erros.length > 0) {res.render("admin/clientes/view", {erros: erros})}else {
 
     const novoCliente = {
     Codigo: req.body.codigo,
     Nome: req.body.nome,
-    Sexo: req.body.sexo,
-    Cpf_Cnpj: req.body.cpf_cnpj,
     Nascimento: req.body.nascimento,
-    Celular: req.body.celular
+    Sexo: req.body.sexo,
+    Estado: req.body.estado,
+    Nacionalidade: req.body.nacionalidade,
+    Cpf_Cnpj: req.body.cpf_cnpj,
+    Identidade: req.body.identidade,
+    Expedicao: req.body.expedicao,
+    PIS: req.body.pis,
+    UF_ID: req.body.uf_id,
+    Emissao_ID: req.body.emissao_id,
+    CTPS: req.body.ctps,
+    Serie_CTPS: req.body.serie_ctps,
+    UF_CTPS: req.body.uf_ctps,
+    Emissao_CTPS: req.body.emissao_ctps,
+    Tipo: req.body.tipo,
+    Endereco: req.body.endereco,
+    Numero: req.body.numero,
+    Bairro: req.body.bairro,
+    Cidade: req.body.cidade,
+    UF: req.body.uf,
+    Celular: req.body.celular,
+    Email: req.body.email
+    
 }                 
 
     new Cliente(novoCliente).save().then(() => {
@@ -46,7 +61,7 @@ if(erros.length > 0) {res.render("Clientes/addclientes", {erros: erros})}else {
 
 // Editar Clientes
 
-router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("clientes/edit", {cliente: cliente})}).catch((err) => {
+router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("admin/clientes/edit", {cliente: cliente})}).catch((err) => {
     req.flash("error_msg", "Este cliente não está cadastrado")
     res.redirect("/cliente/view/")})})
     router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
@@ -56,7 +71,8 @@ router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.i
         cliente.Cpf_Cnpj = req.body.cpf_cnpj
         cliente.Nascimento = req.body.nascimento
         cliente.Sexo = req.body.sexo        
-        cliente.Celular = req.body.celular    
+        cliente.Celular = req.body.celular
+        cliente.Estado = req.body.estado    
     
     cliente.save().then(() => {req.flash("success_msg", "Cliente editado com sucesso!")
     res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do cliente")
