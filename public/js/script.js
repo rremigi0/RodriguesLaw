@@ -1,18 +1,91 @@
-$(function(){
-	$("#tabela input").keyup(function(){		
+const data = Array.from({ length: 100})
+.map((_, i) => `Item ${(i + 1)}`)
 
-		var index = $(this).parent().index();
-		var nth = "#tabela td:nth-child("+(index+1).toString()+")";
-		var valor = $(this).val().toUpperCase();
-		$("#tabela tbody tr").show();
-		$(nth).each(function(){
-			if($(this).text().toUpperCase().indexOf(valor) < 0){
-				$(this).parent().hide();
-			}
-		});
-	});
+const data = populateList()
 
-	$("#tabela input").blur(function(){
-		$(this).val("");
-	});	
-});
+// ========================
+
+let perPage = 5
+const state = {
+    page: 1,
+    perPage,
+    totalPage: Math.ceil(data.length / perPage)
+}
+
+const html = {
+    get(element) {
+        return document.querySelector(element)
+    }
+}
+
+const controls = {
+    next() {
+        state.page++
+        const lastPage = state.page > state.totalPage
+        if(lastPage) {
+            state.page--
+        }
+    },
+    prev() {
+        state.page--
+        if(state.page < 1) {
+            state.page++
+        }
+    },
+    goTo(page) {
+
+        if (page < 1) {
+            page = 1
+        }
+
+        state.page = page
+
+        if (page > state.totalPage) {
+            state.page = state.totalPage
+        },
+
+        createListeners() {
+            html.get('.first').addEventListener('click', () => {
+                controls.goTo(1)
+                update()
+            })
+
+
+            html.get('.last').addEventListener('click', () => {
+                controls.goTo(state.totalPage)
+                update()
+            })
+
+            html.get('.next').addEventListener('click', () => {
+                controls.next()
+                update()
+            })
+
+            html.get('.prev').addEventListener('click', () => {
+                controls.prev()
+                update()
+            })
+    }
+}
+
+const list = {
+    create(item) {},
+    update() {
+        
+        html.get('list').innerHTML = ""
+
+    }
+}
+
+function update() {
+    console.log(state.page)
+
+}
+
+function init () {
+    list.update()
+    controls.createListeners()
+}
+
+
+

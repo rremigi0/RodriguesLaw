@@ -113,12 +113,16 @@ div#ajax-content {
 
 .table-striped th {
     align-items: center;
-    justify-content: center;   
+    justify-content: center;
+    text-align: center;
+       
 }
 
 .table-striped td {
     align-items: center;
-    justify-content: center;   
+    justify-content: center;
+    text-align: center;
+    
 }
 
 .table-striped svg {
@@ -126,6 +130,65 @@ div#ajax-content {
     font-size: 14px;
     margin-left: 10px;      
 }
+
+th.table-search {
+    background-color: #F7F7F7;
+    border-top-color:  #F7F7F7 !important;
+    border-left-color:  #F7F7F7 !important;
+    border-right-color:  #F7F7F7 !important;
+
+}
+
+th.table-search1 {
+    background-color: #F7F7F7 !important;
+    border-top-color:  #F7F7F7 !important;
+    border-left-color:  #F7F7F7 !important;
+    border-right-color:  #F7F7F7 !important;
+    margin: 19px !important;
+    padding: 19px !important;
+
+}
+
+#paginate .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+#paginate .pagination div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14x;
+    background: #f7f7f7;
+    color: #72777a;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#paginate .pagination div:not(.numbers),
+#paginate .pagination div.numbers div{
+    width: 40px;
+    height: 40px;
+}
+
+#paginate .pagination div:not(.numbers):hover,
+#paginate .pagination div.numbers div:hover,
+#paginate .pagination div.numbers div.active {
+    
+}
+
+#paginate .pagination div:hover {
+    transition: 0.5s;
+    box-shadow: 0 0 1rem rgb(156, 156, 156, 0.4);
+    transform: scale(1.05);
+    background-color: #08012c;
+    color: rgb(236, 233, 13);  
+}
+
+
+
 
 div.main-content-title {
     padding: 5px 0;

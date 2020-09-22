@@ -61,10 +61,10 @@ if(erros.length > 0) {res.render("admin/clientes/view", {erros: erros})}else {
 
 // Editar Clientes
 
-router.get("/edit/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("admin/clientes/edit", {cliente: cliente})}).catch((err) => {
+router.get("/detail/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("admin/clientes/detail", {cliente: cliente})}).catch((err) => {
     req.flash("error_msg", "Este cliente não está cadastrado")
     res.redirect("/cliente/view/")})})
-    router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
+    router.post("/detail", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
     
         cliente.Codigo = req.body.codigo
         cliente.Nome = req.body.nome
