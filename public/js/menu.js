@@ -1,9 +1,9 @@
-let iconMenu = document.getElementById('iconMenu');
-let sidebar = document.getElementById('sidebar');
-let mainContent = document.getElementById('mainContent');
+var iconMenu = document.getElementById('iconMenu');
+var sidebar = document.getElementById('sidebar');
+var mainContent = document.getElementById('mainContent');
 sidebar.style.left = '-300px';
 
-let w = window.innerWidth;
+var w = window.innerWidth;
 
 window.addEventListener("resize", () => {
     w = window.innerWidth;

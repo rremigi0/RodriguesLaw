@@ -15,6 +15,12 @@ $(function(){
 	$("#tabela input").blur(function(){
 		$(this).val("");
 	});
+
+	
+
+	
+
+
 	
 	
 });

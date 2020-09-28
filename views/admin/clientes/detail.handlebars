@@ -19,44 +19,16 @@
             <ul>
                 <li>
                     <i class="fas fa-home"></i>
-                    <a href="/admin/dashboard">  Dashboard</a>
+                    <a href="/admin/home">  Home</a>
             
                 </li>
                 <li>
-                    <i class="fas fa-user-tie"></i>
-                    <a href="/admin/perfil">  Perfil</a>
+                    <i class="fa fa-reply"></i>
+                    <a href="/cliente/view">  Retornar</a>
                 </li>
                 <li class="selected">
-                    <i class="fas fa-plus"></i>
-                    <a href="/admin/cadastro">  Cadastro</a>
-                </li>
-                <li>
-                    <i class="fas fa-users"></i>
-                    <a href="/cliente/main">  Clientes</a>
-                </li>
-                <li>
-                    <i class="fas fa-layer-group"></i>
-                    <a href="/processo/main">  Processos</a>
-                </li>
-                <li>
-                    <i class="far fa-calendar-alt"></i>
-                    <a href="/audiencia/main">  Audiências</a>
-                </li>
-                <li>
-                    <i class="far fa-newspaper"></i>
-                    <a href="/prazo/main">  Prazos</a>
-                </li>
-                <li>
-                    <i class="fas fa-money-check-alt"></i>
-                    <a href="/financeiro/main">  Financeiro</a>
-                </li>
-                <li>
-                    <i class="fas fa-cog"></i>
-                    <a href="/admin/Configuracoes">  Configurações</a>
-                </li>
-                <li class="sidebar_logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <a href="/usuarios/logout">  Logout</a>
+                    <i class="fa fa-plus"></i>
+                    <a href="/cliente/detail">  Detalhes</a>
                 </li>
             </ul>
 
@@ -69,61 +41,229 @@
            </header>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Clientes</h2>
+                   <h2>DADOS CADASTRAIS:</h2>
                </div>
-               <div class="panel-row">
-                   
-                   <a href="/clientes/add"><button class="panel panel-50" a-view="cadastrarClientes" onclick="fetchContent(this)" a-folder="Clientes">
-                    <i class="fas fa-plus"></i>
-                    Cadastrar Clientes
-                    </button></a>
-                   <a href="/clientes/view"><button class="panel panel-50" a-view="visualizarClientes" onclick="fetchContent(this)" a-folder="Clientes">
-                    <i class="fas fa-table"></i>
-                    Consultar Clientes
-                    </button></a>
-               </div>
-               <div class="dynamic-content">
-                   <div class="card-body"></div>
+               <div class="dynamic-content-edit">
+                   <div class="card-body">
                         {{#each erros}}
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/cliente/edit" method="POST">
+
+ 
+
+<!-- Menu de Navegação de Cadastro de Clientes -->
+                 <form action="/cliente/edit" method="POST">
                       <input type="hidden" name="id" value="{{cliente._id}}">
-                    <div class="form-group">
-                      <label for="codigo">Código</label>
-                      <input type="number" class="form-control" id="codigo" aria-describedby="emailHelp" name="codigo" value="{{cliente.Codigo}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="nome">Nome</label>
-                      <input type="text" class="form-control" id="nome" aria-describedby="emailHelp" name="nome" value="{{cliente.Nome}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="cpf_cnpj">CPF/CNPJ</label>
-                      <input type="text" class="form-control" id="cpf_cnpj" aria-describedby="emailHelp" name="cpf_cnpj" value="{{cliente.Cpf_Cnpj}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="nascimento">Nascimento</label>
-                      <input type="text" class="form-control" id="nascimento" aria-describedby="emailHelp" name="nascimento" value="{{cliente.Nascimento}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="sexo">Sexo</label>
-                      <input type="text" class="form-control" id="sexo" aria-describedby="emailHelp" name="sexo" value="{{cliente.Sexo}}">
-                    </div>
-                    <div class="form-group">
-                      <label for="celular">Celular</label>
-                      <input type="text" class="form-control" id="celular" aria-describedby="emailHelp" name="celular" value="{{cliente.Celular}}">
-                    </div>
-                    <button type="submit" class="btn">Salvar</button>
-                     
-                  </form>
+                            <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral" role="tab" aria-controls="nav-geral" aria-selected="true">Geral</a>
+                                <a class="nav-item nav-link" id="nav-documentos-tab" data-toggle="tab" href="#nav-documentos" role="tab" aria-controls="nav-documentos" aria-selected="false">Documentos</a>
+                                <a class="nav-item nav-link" id="nav-endereco-tab" data-toggle="tab" href="#nav-endereco" role="tab" aria-controls="nav-endereco" aria-selected="false">Endereço</a>
+                                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contato</a>
+                            </div>
+                            </nav>
+
+<!-- Aba Navegação Geral do Cadastro de Clientes -->
+
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab">
+                                <div class="card-body">
+
+                                  <div class="form-row">
+                                      <div class="col-md-3 mb-3">
+                                        <label for="codigo">Código*</label>
+                                        <input type="number" class="form-control" id="codigo" name="codigo" value="{{cliente.Codigo}}">
+                                      </div>
+
+                                      <div class="col-md-9 mb-9">
+                                        <label for="nome">Nome</label>
+                                        <input type="text" class="form-control" id="nome" name="nome" value="{{cliente.Nome}}">
+                                      </div>
+                                  </div>
+
+                                  <div class="form-row">
+                                      <div class="col-md-3 mb-3">
+                                          <label for="nascimento">Nascimento</label>
+                                          <input type="text" class="form-control" id="nascimento"  name="nascimento" value="{{cliente.Nascimento}}">
+                                      </div>
+                                      <div class="col-md-3 mb-3">
+                                        <label for="sexo">Sexo</label>
+                                        <input type="text" class="form-control" id="sexo"  name="sexo" value="{{cliente.Sexo}}">
+                                      </div>
+                                      <div class="col-md-3 mb-3">
+                                        <label for="estado">Estado Civil</label>
+                                        <input type="text" class="form-control" id="estado"  name="estado" value="{{cliente.Estado}}">
+                                      </div>
+                                      <div class="col-md-3 mb-3">
+                                        <label for="nacionalidade">Nacionalidade</label>
+                                        <input type="text" class="form-control" id="nacionalidade" name="nacionalidade" value="{{cliente.Nacionalidade}}">
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+<!-- Aba Navegação Documentos do Cadastro de Clientes -->
+
+                                <div class="tab-pane fade" id="nav-documentos" role="tabpanel" aria-labelledby="nav-documentos-tab">
+                                    <div class="card-body">
+
+                                        <div class="form row">
+                                            <div class="col-md-6 mb-6">
+                                                <label for="cpf_cnpj">CPF/CNPJ*</label>
+                                                <input type="text" class="form-control" id="cpf_cnpj" name="cpf_cnpj" value="{{cliente.Cpf_Cnpj}}">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="identidade">Cédula de Identidade</label>
+                                                <input type="text" class="form-control" id="identidade" name="identidade" value="{{cliente.Identidade}}">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="expedicao">Órgão de Expedição</label>
+                                                <input type="text" class="form-control" id="expedicao" name="expedicao" value="{{cliente.Expedicao}}">
+                                            </div>
+                                        </div>
+                                        <div class="form row">
+                                            <div class="col-md-6 mb-6">
+                                                <label for="pis">PIS/PASEP</label>
+                                                <input type="text" class="form-control" id="pis" name="pis" value="{{cliente.PIS}}">
+                                            </div>
+                                            <div class="col-md-2 mb-2">
+                                                <label for="uf_id">UF</label>
+                                                <input type="text" class="form-control" id="uf_id" name="uf_id" value="{{cliente.UF_ID}}">
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label for="emissao_id">Emissão</label>
+                                                <input type="text" class="form-control" id="emissao_id" name="emissao_id" value="{{cliente.Emissao_ID}}">
+                                            </div>
+
+                                        </div>
+                                        <div class="form row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="ctps">Carteira de Trabalho</label>
+                                                <input type="text" class="form-control" id="ctps" name="ctps" value="{{cliente.CTPS}}">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="serie_ctps">Série</label>
+                                                <input type="text" class="form-control" id="serie_ctps" name="serie_ctps" value="{{cliente.Serie_CTPS}}">
+                                            </div>
+                                            <div class="col-md-2 mb-2">
+                                                <label for="uf_ctps">UF</label>
+                                                <input type="text" class="form-control" id="uf_ctps" name="uf_ctps" value="{{cliente.UF_CTPS}}">
+                                            </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label for="emissao_ctps">Emissão</label>
+                                                <input type="text" class="form-control" id="emissao_ctps" name="emissao_ctps" value="{{cliente.Emissao_CTPS}}">
+                                            </div>
+
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+
+<!-- Aba Navegação Endereço do Cadastro de Clientes -->
+
+                                <div class="tab-pane fade" id="nav-endereco" role="tabpanel" aria-labelledby="nav-endereco-tab">
+                                    <div class="card-body">
+                                        <div class="form row">
+                                            <div class="col-md-2 mb-2">
+                                                <label for="tipo">Tipo</label>
+                                                <input type="text" class="form-control" id="tipo" name="tipo" value="{{cliente.Tipo}}">
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label for="endereco">Endereço</label>
+                                                <input type="text" class="form-control" id="endereco" name="endereco" value="{{cliente.Endereco}}">
+                                            </div>
+                                            <div class="col-md-2 mb-2">
+                                                <label for="numero">Número</label>
+                                                <input type="text" class="form-control" id="numero" name="numero" value="{{cliente.Numero}}">
+                                            </div>
+                                            <div class="col-md-2 mb-2">
+                                                <label for="uf">UF</label>
+                                                <input type="text" class="form-control" id="uf" name="uf" value="{{cliente.UF}}">
+                                            </div>
+                                        </div>
+                                        <div class="form row">
+                                            <div class="col-md-4 mb-4">
+                                                <label for="complemento">Complemento</label>
+                                                <input type="text" class="form-control" id="complemento" name="complemento" value="{{cliente.Complemento}}">
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label for="bairro">Bairro</label>
+                                                <input type="text" class="form-control" id="bairro" name="bairro" value="{{cliente.Bairro}}">
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label for="cidade">Cidade</label>
+                                                <input type="text" class="form-control" id="municipio" name="municipio" value="{{cliente.Municipio}}">
+                                            </div>
+                                        </div>
+                                        <div class="form row">
+                                            <div class="col-md-4 mb-4">
+                                                <label for="cep">CEP</label>
+                                                <input type="text" class="form-control" id="cep" name="cep" value="{{cliente.CEP}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+<!-- Aba Navegação Endereço do Cadastro de Clientes -->
+
+                                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                                    <div class="card-body">
+
+                                        <div class="form row">
+                                            
+                                            <div class="col-md-6 mb-6">
+                                                <label for="celualar">Celular</label>
+                                                <input type="text" class="form-control" id="celular" name="celular" value="{{cliente.Celular}}">
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label for="email">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email" value="{{cliente.Email}}"><br>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12" style="text-align: right;">
+                                            <button type="submit" class="btn btn-success">Atualizar</button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>  
+                        </form>
+                   </div>
+            </div>
+        </div>
+        <div class="main-content-title">
+            <br>
+            <h2>Histórico de Pedidos:</h2>
+        </div>
+            <div class="dynamic-content-edit">
+                <div class="card-body">
+                    {{#each erros}}
+                        <div class="alert alert-danger">{{texto}}</div>
+                    {{else}}
+                    {{/each}}
+                </div>
+            </div>
+        <div class="main-content-title">
+            <br>
+            <h2>Detalhes dos Processos</h2>
+        </div>
+            <div class="dynamic-content-edit">
+                <div class="card-body">
+                    {{#each erros}}
+                        <div class="alert alert-danger">{{texto}}</div>
+                    {{else}}
+                    {{/each}}
+                </div>
             </div>
        </main>
+
    </div>
+    <script src="/js/menu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
-    <script src="/js/ajax.js"></script>
-    <script src="/js/menu.js"></script>
+    <script type="text/javascript" src="/js/filter.js"></script>   
 </body>
 </html>
 

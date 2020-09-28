@@ -66,7 +66,6 @@
                             </thead>
                             <tbody>
                                 {{#each clientes}}
-
                                 <tr >  
                                     <td>{{Codigo}}</td>
                                     <td>{{Nome}}</td>
@@ -76,18 +75,25 @@
                                    <!-- <td onclick="window.location='/cliente/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td> -->
                                 </tr>
                                 {{/each}}
-                            </tbody>   
+                            </tbody>
+                                 
                         </table>
-                
-                        <!-- <div class="pagination">
-                            <div class="first">&#171;</div>
-                            <div class="prev">&lt;</div>
-                            <div class="numbers">
-                                <div>1</div>  
+                        
+                        <!--<section id="paginate">
+                            <div class="list">
+                                <div class="item">Item 1</div>
                             </div>
-                            <div class="next">&gt;</div>
-                            <div class="last">&#187;</div>
-                        </div> -->
+                            <div class="pagination">
+                                <div class="first">&#171;</div>
+                                <div class="prev">&lt;</div>
+                                <div class="numbers">
+                                    <div>1</div>
+                                </div>
+                                <div class="next">&gt;</div>
+                                <div class="last">&#187;</div>
+                            </div>
+                        </section>-->
+
                 </div>
             </div>
        </main>
@@ -252,18 +258,6 @@
                                                 <label for="numero">Número</label>
                                                 <input type="text" class="form-control" id="numero" placeholder="Número" name="numero">
                                             </div>
-                                        </div>
-
-                                        <div class="form row">
-                                            
-                                            <div class="col-md-4 mb-4">
-                                                <label for="bairro">Bairro</label>
-                                                <input type="text" class="form-control" placeholder="Digite o Bairro" id="bairro" name="bairro">
-                                            </div>
-                                            <div class="col-md-6 mb-6">
-                                                <label for="cidade">Cidade</label>
-                                                <input type="text" class="form-control" id="cidade" placeholder="Digite a Cidade" name="ciade">
-                                            </div>
                                             <div class="col-md-2 mb-2">
                                                 <label for="uf">UF</label>
                                                 <input type="text" class="form-control" id="uf" placeholder="UF" name="uf">
@@ -271,8 +265,25 @@
                                         </div>
 
                                         <div class="form row">
+
+                                            <div class="col-md-4 mb-4">
+                                                <label for="complemento">Complemento</label>
+                                                <input type="text" class="form-control" id="complemento" placeholder="Digite o Complemento" name="complemento">
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label for="bairro">Bairro</label>
+                                                <input type="text" class="form-control" placeholder="Digite o Bairro" id="bairro" name="bairro">
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <label for="cidade">Cidade</label>
+                                                <input type="text" class="form-control" id="municipio" placeholder="Digite a Cidade" name="municipio">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form row">
                                             
-                                            <div class="col-md-2 mb-2">
+                                            <div class="col-md-4 mb-4">
                                                 <label for="cep">CEP</label>
                                                 <input type="text" class="form-control" id="cep" placeholder="CEP" name="cep"><br>
                                             </div>
@@ -310,7 +321,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/plugins/fontawesome/js/all.min.js"></script>
-    <script type="text/javascript" src="/js/filter.js"></script>	    
+    <script type="text/javascript" src="/js/filter.js"></script> 
+    <script type="text/javascript" src="/js/hbs.js"></script>       
 </body>
 </html>
 

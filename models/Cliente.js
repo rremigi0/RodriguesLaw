@@ -29,9 +29,11 @@ const Cliente = new Schema ({
     Tipo: { type: String, default: null },
     Endereco: { type: String, default: null },
     Numero: { type: String, default: null },
+    Complemento: { type: String, default: null },
     Bairro: { type: String, default: null },
     Municipio: { type: String, default: null },
     UF: { type: String, default: null },
+    CEP: { type: String, default: null },
 
 // Contatos:
 

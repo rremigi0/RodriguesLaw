@@ -91,6 +91,16 @@ div#ajax-content {
     color: white;
 }
 
+.dynamic-content-edit {
+    padding: 0px;
+    background-color:  #eceef3;
+}
+.dynamic-content-edit button:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+    color: white;
+}
+
 .dynamic-content button:hover {
     transform: scale(1.05);
     transition: 0.2s;
