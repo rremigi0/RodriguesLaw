@@ -1,0 +1,14 @@
+/* Button Padrão Azul*/
+
+.dynamic-content button {background: linear-gradient(135deg, #6e8efb, blue);color: white;}
+.dynamic-content button:hover {transform: scale(1.05);transition: 0.2s;color: white;}
+
+/* Button de Atualização*/
+
+.dynamic-content-edit button {text-align: right;}
+.dynamic-content-edit button:hover {transform: scale(1.05);transition: 0.2s;color: white;}
+
+/* Button Novo*/
+
+.button-new button {
+    background: linear-gradient(135deg, #6e8efb, blue); margin-right: 0.5%; margin-top: 0.5%; color: white;}

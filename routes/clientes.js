@@ -3,56 +3,24 @@ const express = require ("express")
 const router = express.Router()
 const mongoose = require ("mongoose")
 require ("../models/Cliente")
+require ("../models/Triagem")
+require ("../models/Processo")
 const Cliente = mongoose.model("clientes")
+const Triagem = mongoose.model("triagens")
+const Processo = mongoose.model("processos")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 
-// Paginação:
+//Visualizar os Clientes:
 
-
-/*router.get("/teste", eAdmin, paginatedResults(Cliente), (req, res) => {
-    res.json(res.paginatedResults)
+router.get("/view", eAdmin, (req, res) => {
+    Cliente.find({}, 'Codigo Nome Cpf_Cnpj Celular').sort({Codigo:1}).populate('triagens').then((clientes) => {
+    res.render("admin/clientes/view", {clientes: clientes})
+  }).catch((err) => {
+    req.flash("error_msg", "houve um erro ao listar os clientes")
+    res.redirect("/cliente/view")
+  })
 })
-
-function paginatedResults(model) {
-    return async (req, res, next) => {
-      const page = parseInt(req.query.page)
-      const limit = parseInt(req.query.limit)
-  
-      const startIndex = (page - 1) * limit
-      const endIndex = page * limit
-  
-      const results = {}
-  
-      if (endIndex < await model.countDocuments().exec()) {
-        results.next = {
-          page: page + 1,
-          limit: limit
-        }
-      }
-      
-      if (startIndex > 0) {
-        results.previous = {
-          page: page - 1,
-          limit: limit
-        }
-      }
-      try {
-        results.results = await model.find({}, 'Codigo Nome Cpf_Cnpj Celular').limit(limit).skip(startIndex).exec()
-        res.paginatedResults = results
-        next()
-  
-      } catch (e) {
-        res.status(500).json({ message: e.message })
-      }
-    }
-  }*/
-  
- // Visualizar os Clientes:
-
-  router.get("/view", eAdmin, (req, res) => {Cliente.find({}, 'Codigo Nome Cpf_Cnpj Celular').sort({Codigo:1}).then((clientes) => {
-    res.render("admin/clientes/view", {clientes: clientes})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os clientes")
-    res.redirect("/cliente/view")})})
 
 
 // Deletar Clientes
@@ -94,9 +62,7 @@ if(erros.length > 0) {res.render("admin/clientes/view", {erros: erros})}else {
     CEP: req.body.cep,
     UF: req.body.uf,
     Celular: req.body.celular,
-    Email: req.body.email
-    
-}                 
+    Email: req.body.email}                 
 
     new Cliente(novoCliente).save().then(() => {
     req.flash("success_msg", "Cliente criado com sucesso!")
@@ -104,11 +70,38 @@ if(erros.length > 0) {res.render("admin/clientes/view", {erros: erros})}else {
     req.flash("error_msg", "Houve um erro ao cadastrar o Cliente, tente novamente ou Verique se não existe cadastro com esse CPF/CNPJ!")
     res.redirect("/cliente/add")})}})
 
+// Route for creating a new Triagem and updating Cliente "triagem" field with it
+router.post("/:id", function(req, res) {
+  Triagem.create(req.body)
+    .then(function(dbTriagem) {
+      return Cliente.findOneAndUpdate({ _id: req.params.id }, {$push: {Triagens: dbTriagem._id}}, { new: true });
+    })
+    .then(function(dbCliente) {
+      res.json(dbCliente);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+
+// Rota Json- Teste
+
+router.get("/detail/blackbird/:id", eAdmin, async (req, res) => {
+  res.json({
+    cliente: await Cliente.findOne({_id:req.params.id}),
+    triagens: await Triagem.find({Cliente:req.params.id}),
+    triagensWithClient: await Triagem.find({Cliente:req.params.id}).populate('Cliente')
+  })})
+
 // Editar Clientes
 
-router.get("/detail/:id", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id}).then((cliente) => {res.render("admin/clientes/detail", {cliente: cliente})}).catch((err) => {
-    req.flash("error_msg", "Este cliente não está cadastrado")
-    res.redirect("/cliente/view/")})})
+router.get("/detail/:id", eAdmin, async (req, res) => {
+  await Cliente.findOne({_id:req.params.id}).populate("Triagens").then((cliente) => {
+    //res.json(cliente)
+    res.render("admin/clientes/detail", {cliente: cliente})
+  })
+
+})
     router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
     
         cliente.Codigo = req.body.codigo

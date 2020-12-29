@@ -19,7 +19,7 @@
             <ul>
                 <li>
                     <i class="fas fa-home"></i>
-                    <a href="/admin/dashboard">  Dashboard</a>
+                    <a href="/admin/dashboard">  ashboard</a>
             
                 </li>
                 <li>
@@ -115,15 +115,12 @@
                     };
 
                     const getReport = async function () {
-                        const jsonUrl = 'https://rodrigueslaw.herokuapp.com/prazo/view'
+                        const jsonUrl = 'http://localhost:8089/cliente/view'
                         const res = await fetch(jsonUrl);
                         const json = await res.json();
                         const data = json.map(row => ({
                             
-                            age: row.age,
-                            email: row.email,
-                            firstName: row.name.first,
-                            lastName: row.name.last
+                            Celular: row.Celular
 
                         }));
                         

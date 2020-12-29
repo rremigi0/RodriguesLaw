@@ -86,77 +86,19 @@ div#ajax-content {
     padding: 0px;
 }
 
-.dynamic-content button {
-    background: linear-gradient(135deg, #6e8efb, blue);
-    color: white;
-}
+
 
 .dynamic-content-edit {
     padding: 0px;
     background-color:  #eceef3;
 }
-.dynamic-content-edit button:hover {
-    transform: scale(1.05);
-    transition: 0.2s;
-    color: white;
-}
 
-.dynamic-content button:hover {
-    transform: scale(1.05);
-    transition: 0.2s;
-    color: white;
-}
+
+
 
 .dynamic-content label {
     font-size: 14px;
     color: #72777a;
-}
-
-.table-striped {
-    padding: 0px;
-    width: 100%;
-    font-size: 12px;
-    margin: 0px;
-    align-items: center;
-    justify-content: center;
-}
-
-.table-striped th {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-       
-}
-
-.table-striped td {
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    
-}
-
-.table-striped svg {
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;      
-}
-
-th.table-search {
-    background-color: #F7F7F7;
-    border-top-color:  #F7F7F7 !important;
-    border-left-color:  #F7F7F7 !important;
-    border-right-color:  #F7F7F7 !important;
-
-}
-
-th.table-search1 {
-    background-color: #F7F7F7 !important;
-    border-top-color:  #F7F7F7 !important;
-    border-left-color:  #F7F7F7 !important;
-    border-right-color:  #F7F7F7 !important;
-    margin: 19px !important;
-    padding: 19px !important;
-
 }
 
 #paginate .pagination {

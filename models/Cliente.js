@@ -38,7 +38,15 @@ const Cliente = new Schema ({
 // Contatos:
 
     Celular: { type: String, default: null },
-    Email: { type: String, default: null }
+    Email: { type: String, default: null },
+
+// Triagens:
+
+    Triagens: [{ type: Schema.Types.ObjectId, ref: "triagens" }]
 })
+
+
+
+
 
 mongoose.model("clientes", Cliente)

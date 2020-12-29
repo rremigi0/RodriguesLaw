@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const Triagem = new Schema ({
 
-    Cliente: {
-        type: Schema.Types.ObjectId,
-        ref: "clientes",
-        required: true
-    },
+     Cliente: {
+         type: mongoose.Types.ObjectId,
+         ref: "clientes",
+         required: true
+     },
 
     Autor: {
         type: String,
