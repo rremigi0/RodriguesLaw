@@ -89,7 +89,9 @@ res.redirect("/processo/triagem")})})
 
 // Editar Processos
 
-router.get("/edit/:id", eAdmin2, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("processos/editprocessos", {processo: processo})}).catch((err) => {
+router.get("/edit/:id", eAdmin2, (req, res) => {
+    Processo.findOne({_id:req.params.id}).then((processo) => {
+        res.render("processos/editprocessos", {processo: processo})}).catch((err) => {
     req.flash("error_msg", "Este processo não está cadastrado")
     res.redirect("/processo/view_ativos/")})})
     router.post("/edit", eAdmin2, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {

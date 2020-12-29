@@ -14,7 +14,7 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 //Visualizar os Clientes:
 
 router.get("/view", eAdmin, (req, res) => {
-    Cliente.find({}, 'Codigo Nome Cpf_Cnpj Celular').sort({Codigo:1}).populate('triagens').then((clientes) => {
+    Cliente.find({}, 'Codigo Nome Cpf_Cnpj Celular').sort({Codigo:1}).then((clientes) => {
     res.render("admin/clientes/view", {clientes: clientes})
   }).catch((err) => {
     req.flash("error_msg", "houve um erro ao listar os clientes")
@@ -70,38 +70,12 @@ if(erros.length > 0) {res.render("admin/clientes/view", {erros: erros})}else {
     req.flash("error_msg", "Houve um erro ao cadastrar o Cliente, tente novamente ou Verique se não existe cadastro com esse CPF/CNPJ!")
     res.redirect("/cliente/add")})}})
 
-// Route for creating a new Triagem and updating Cliente "triagem" field with it
-router.post("/:id", function(req, res) {
-  Triagem.create(req.body)
-    .then(function(dbTriagem) {
-      return Cliente.findOneAndUpdate({ _id: req.params.id }, {$push: {Triagens: dbTriagem._id}}, { new: true });
-    })
-    .then(function(dbCliente) {
-      res.json(dbCliente);
-    })
-    .catch(function(err) {
-      res.json(err);
-    });
-});
-
-// Rota Json- Teste
-
-router.get("/detail/blackbird/:id", eAdmin, async (req, res) => {
-  res.json({
-    cliente: await Cliente.findOne({_id:req.params.id}),
-    triagens: await Triagem.find({Cliente:req.params.id}),
-    triagensWithClient: await Triagem.find({Cliente:req.params.id}).populate('Cliente')
-  })})
-
 // Editar Clientes
 
-router.get("/detail/:id", eAdmin, async (req, res) => {
-  await Cliente.findOne({_id:req.params.id}).populate("Triagens").then((cliente) => {
-    //res.json(cliente)
+router.get("/detail/:id", eAdmin, (req, res) => {
+  Cliente.findOne({_id:req.params.id}).populate("Triagens").then((cliente) => {
     res.render("admin/clientes/detail", {cliente: cliente})
-  })
-
-})
+  })})
     router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
     
         cliente.Codigo = req.body.codigo
@@ -135,5 +109,6 @@ router.get("/detail/:id", eAdmin, async (req, res) => {
     res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do cliente")
     res.redirect("/cliente/view")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o cliente")
     res.redirect("/cliente/view")})})
+
 
 module.exports = router

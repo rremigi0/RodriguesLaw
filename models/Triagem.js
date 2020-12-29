@@ -4,24 +4,20 @@ const Schema = mongoose.Schema;
 const Triagem = new Schema ({
 
      Cliente: {
-         type: mongoose.Types.ObjectId,
-         ref: "clientes",
-         required: true
+         type: Schema.Types.ObjectId,
+         ref: "clientes"
      },
 
     Autor: {
-        type: String,
-        required: true
+        type: String
     }, 
 
     Reu: {
-        type: String,
-        required: true
+        type: String
     },
 
     Tutela: {
-        type: String,
-        required: true
+        type: String
     },
 
     Entrada: {
@@ -30,8 +26,7 @@ const Triagem = new Schema ({
     },
 
     Prioridade: {
-        type: String,
-        required: true
+        type: String
     } 
 
 })
