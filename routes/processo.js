@@ -161,12 +161,14 @@ router.post("/add/addTriagem", eAdmin, (req, res) => {var erros = []
         Reu: req.body.reu,
         Tutela: req.body.tutela,
         Entrada: req.body.entrada,
-        Prioridade: req.body.prioridade}                   
+        Prioridade: req.body.prioridade,
+        Tipo: req.body.tipo,
+        Status: req.body.status}                   
     
     new Triagem(novoTriagem).save().then(async (dbTriagem) => {
      await Cliente.findOneAndUpdate({ _id: req.body.cliente }, {$push: {Triagens: dbTriagem._id}}, { new: true });
-        req.flash("success_msg", "Processo criado com sucesso!")
-    res.redirect("/processo/view_ativos")}).catch((err) => {
+        req.flash("success_msg", "Novo Ticket cadastrado com sucesso!")
+    res.redirect("/cliente/view")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
     res.redirect("/processo/add")})}})
 
