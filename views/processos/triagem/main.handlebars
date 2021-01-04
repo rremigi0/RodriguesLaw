@@ -23,7 +23,7 @@
                 </li>
                 <li>
                     <i class="fas fa-plus"></i>
-                    <a href="/processo/addtriagem"data-toggle="modal" data-target="#processoModal">  Novo</a>
+                    <a href="/processo/addTicket"data-toggle="modal" data-target="#processoModal">  Novo</a>
                 </li>
 
                 <li>
@@ -60,7 +60,7 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                        <form action="/processo/add/addTriagem" method="POST">
+                        <form action="/processo/add/addTicket" method="POST">
                     <div class="form-group">
                       <label for="cliente">Cliente</label>
                             <select name="cliente" class="custom-select">

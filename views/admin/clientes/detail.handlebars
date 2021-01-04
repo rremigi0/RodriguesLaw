@@ -198,6 +198,7 @@
                             <th scope="col">Prioridade</th>
                             <th scope="col">Status</th>
                             <th scope="col">Detalhes</th>
+                            <th scope="col">Excluir</th>
                         </tr>        
                     </thead>
                     <tbody>
@@ -208,6 +209,7 @@
                             <td>{{Prioridade}}</td>
                             <td>{{Status}}</td>
                             <td onclick0="window.location='/cliente/detail/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px; " ></i></td>
+                            <td onclick="window.location='/processo/deletartriagem/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 18px; "></i></td>
                         </tr>
                     {{/each}}
                     </tbody>
@@ -215,18 +217,6 @@
                     <div class="button-new" style="text-align: right">
                         <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#pedidoModal"><i class="fas fa-plus"></i><a href="/processo/triagem"></a></button>
                     </div>
-                </div>
-            </div>
-
-        <div class="main-content-title">
-            <br><h2>Processos Associados</h2>
-        </div>
-            <div class="dynamic-content-edit">
-                <div class="card-body">
-                    {{#each erros}}
-                        <div class="alert alert-danger">{{texto}}</div>
-                    {{else}}
-                    {{/each}}
                 </div>
             </div>
 
@@ -254,14 +244,7 @@
                                     <div class="card-body">
                                         <div class="form-row">
                                             <div class="col-md-6 mb-6">
-                                                <label for="cliente">Cliente</label>
-                                                    <select name="cliente" class="custom-select">
-                                                        {{#each cliente}}
-                                                            <option value="{{_id}}">{{Nome}}</option>
-                                                        {{else}}
-                                                            <option value="">Nenhum Cliente Registrado</option>
-                                                        {{/each}}
-                                                    </select>
+                                                <label for="cliente">Código do Cliente (Não alterar)</label><input type="text" class="form-control" id="cliente" name="cliente" value="{{cliente.id}}">
                                             </div>
                                             <div class="col-md-6 mb-6">
                                                 <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" placeholder="Digite o Nome Completo">
@@ -308,10 +291,106 @@
                             </div>
                         </div>   
                     </form>
-    
-       </main>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- HISTÓRICO DE PROCESSOS -->
+
+
+        <div class="main-content-title">
+            <br><h2>Processos Associados</h2>
+        </div>
+            <div class="dynamic-content-edit">
+                <div class="card-body">
+                    {{#each erros}}
+                        <div class="alert alert-danger">{{texto}}</div>
+                    {{else}}
+                    {{/each}}
+                <table id="tabela" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>                            
+                            <th scope="col">Processo</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Réu</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Detalhes</th>
+                            <th scope="col">Excluir</th>
+                        </tr>        
+                    </thead>
+                    <tbody>
+                        {{#each cliente.Processos}}
+                        <tr>  
+                            <td>{{Processo}}</td>
+                            <td>{{Autor}}</td>
+                            <td>{{Reu}}</td>
+                            <td>{{Status}}</td>
+                            <td onclick0="window.location='/processo/edit/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px;"></i></td>
+                            <td onclick="window.location='/processo/deletar/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 18px; "></i></td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+                    <div class="button-new" style="text-align: right">
+                        <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#processoModal"><i class="fas fa-plus"></i><a href="/processo/triagem"></a></button>
+                    </div>
+                </div>
+            </div>
+
+<!-- Cadastro de Novo Processo (Modal Novo Processo) -->
+
+    <div class="modal fade" id="processoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Novo Processo</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+
+<!-- Aba Navegação Geral do Novo Processo -->
+
+                        <form action="/processo/add/addProcessos" method="POST">
+                            <div class="form-group">
+                                <label for="cliente">Código do Cliente (Não alterar)</label><input type="text" class="form-control" id="cliente" name="cliente" value="{{cliente.id}}">
+                                <label for="processo">Processo</label><input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo">
+                                <label for="procedimento">Procedimento</label><input type="text" class="form-control" id="procedimento" aria-describedby="emailHelp" name="procedimento">
+                                <label for="categoria">Categoria</label><input type="text" class="form-control" id="categoria" aria-describedby="emailHelp" name="categoria">
+                                <label for="tutela">Tutela</label><input type="text" class="form-control" id="tutela" aria-describedby="emailHelp" name="tutela">
+                                <label for="classe">Classe</label><input type="text" class="form-control" id="classe" aria-describedby="emailHelp" name="classe">
+                                <label for="assunto">Assunto</label><input type="text" class="form-control" id="assunto" aria-describedby="emailHelp" name="assunto">
+                                <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor">
+                                <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu">
+                                <label for="secao">Seção</label><input type="text" class="form-control" id="secao" name="secao">
+                                <label for="vara">Vara</label><input type="text" class="form-control" id="vara" name="vara">
+                                <label for="comarca">Comarca</label><input type="text" class="form-control" id="comarca" aria-describedby="emailHelp" name="comarca">
+                                <label for="uf">UF</label><input type="text" class="form-control" id="uf" aria-describedby="emailHelp" name="uf">
+                                <label for="audiencia">Audiencia</label><input type="datetime-local" class="form-control" id="audiencia" name="audiencia">
+                                <label for="atuacao">Atuacao</label><input type="date" class="form-control" id="atuacao" name="atuacao">
+                                <label for="distribuicao">Distribuição</label><input type="date" class="form-control" id="distribuicao" name="distribuicao">
+                                <label for="status">Status</label>
+                                    <select class="form-control" id="status" name="status">
+                                        <option>Ativo</option>
+                                        <option>Arquivado</option>
+                                    </select><br>
+                            <button type="submit" class="btn">Salvar</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+       </main>
    </div>
+
     <script src="/js/menu.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>

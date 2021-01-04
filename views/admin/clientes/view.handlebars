@@ -45,8 +45,8 @@
                                     <th scope="col">Código</th>
                                     <th scope="col">Nome</th>
                                     <th scope="col">CPF/CNPJ</th>
-                                    <th scope="col">Celular</th>
                                     <th scope="col">Detalhes</th>
+                                    <th scope="col">Excluir</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,9 +55,8 @@
                                     <td>{{Codigo}}</td>
                                     <td>{{Nome}}</td>
                                     <td>{{Cpf_Cnpj}}</td>
-                                    <td>{{Celular}}</td>
                                     <td onclick="window.location='/cliente/detail/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px; " ></i></td>
-                                   <!-- <td onclick="window.location='/cliente/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td> -->
+                                    <td onclick="window.location='/cliente/deletar/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 18px; "></i></td>
                                 </tr>
                                 {{/each}}
                             </tbody>

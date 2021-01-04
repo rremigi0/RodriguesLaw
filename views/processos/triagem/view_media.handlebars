@@ -19,7 +19,7 @@
             <ul>
                 <li>
                     <i class="fa fa-reply"></i>
-                    <a href="/processo/triagem">  Retornar</a>
+                    <a href="/processo/Ticket">  Retornar</a>
                 </li>
                 <li class="selected">
                     <i class="fa fa-folder"></i>
@@ -74,7 +74,7 @@
                             </tr>
                     </thead>
                     <tbody>
-                    {{#each triagens}}
+                    {{#each Tickets}}
 
                             <tr>  
                                 <td>{{Autor}}</td>
@@ -82,8 +82,8 @@
                                 <td>{{Tutela}}</td>
                                 <td>{{#formatDate Entrada}}{{/formatDate}}</td>
                                 <td>{{Prioridade}}</td>
-                                <td onclick="window.location='/processo/edittriagem/{{_id}}'"><i class="fas fa-edit"></i></td>
-                                <td onclick="window.location='/processo/deletartriagem/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                                <td onclick="window.location='/processo/editTicket/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/processo/deletarTicket/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
                             </tr>
                     {{/each}}
                     </tbody>

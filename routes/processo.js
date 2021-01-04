@@ -144,7 +144,9 @@ if(erros.length > 0) {res.render("processos/addprocessos", {erros: erros})}else 
     Distribuicao: req.body.distribuicao,
     Status: req.body.status}                   
 
-new Processo(novoProcesso).save().then(() => {req.flash("success_msg", "Processo criado com sucesso!")
+new Processo(novoProcesso).save().then(async (dbProcesso) => {
+    await Cliente.findOneAndUpdate({ _id: req.body.cliente }, {$push: {Processos: dbProcesso._id}}, { new: true });
+    req.flash("success_msg", "Processo criado com sucesso!")
 res.redirect("/processo/view_ativos")}).catch((err) => {
 req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
 res.redirect("/processo/add")})}})

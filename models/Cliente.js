@@ -42,7 +42,12 @@ const Cliente = new Schema ({
 
 // Triagens:
 
-    Triagens: [{ type: Schema.Types.ObjectId, ref: "triagens" }]
+    Triagens: [{ type: Schema.Types.ObjectId, ref: "triagens" }],
+
+// Processos:
+
+    Processos: [{ type: Schema.Types.ObjectId, ref: "processos" }]
+
 })
 
 
