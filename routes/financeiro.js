@@ -2,7 +2,9 @@ const express = require ("express")
 const router = express.Router()
 const mongoose = require ("mongoose")
 require ("../models/Financeiro")
+require ("../models/Processo")
 const Financeiro = mongoose.model("financeiro")
+const Processo = mongoose.model("processos")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 
@@ -10,7 +12,7 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 
 router.get("/main", eAdmin2, (req, res) => {res.render("financeiro/main")})
         
-//Adicionar Novo Honorário:
+//Adicionar Novo Honorário (C):
         
 router.get('/add', eAdmin2, (req, res) => {res.render("financeiro/addfinanceiro")})
         
@@ -27,7 +29,7 @@ res.redirect("/financeiro/view")})})
         
 //Rota para Cadastrar novo Honorário no Banco de Dados:
         
-router.post("/add/addFinanceiro", eAdmin2, (req, res) => {var erros = []
+router.post("/add/addFinanceiro", eAdmin, (req, res) => {var erros = []
 if(!req.body.processo || typeof req.body.processo == undefined || req.body.processo == null){erros.push({texto: "Número do Processo Inválido"})}
 if(!req.body.autor || typeof req.body.autor == undefined || req.body.autor == null) {erros.push({texto: "Autor Inválido"})}
 if(req.body.autor.length < 8) {erros.push({texto: "Digite o nome completo do autor"})}
@@ -47,7 +49,8 @@ if(erros.length > 0) {res.render("financeiro/addfinanceiro", {erros: erros})}els
     Honorarios: req.body.honorarios,
     Status: req.body.status}                   
         
-    new Financeiro(novoFinanceiro).save().then(() => {
+    new Financeiro(novoFinanceiro).save().then(async (dbFinanceiro) => {
+        await Processo.findOneAndUpdate({ _id: req.body.processo }, {$push: {Financeiro: dbFinanceiro._id}}, { new: true });
     req.flash("success_msg", "Honorários criado com sucesso!")
     res.redirect("/financeiro/view")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar os Honorários, tente novamente!")

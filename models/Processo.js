@@ -1,93 +1,32 @@
 const mongoose = require ("mongoose")
 const Schema = mongoose.Schema;
-
 const Processo = new Schema ({
 
-    Cliente: {
-        type: Schema.Types.ObjectId,
-        ref: "clientes",
-        required: true
-    }, 
+    Cliente: { type: Schema.Types.ObjectId, ref: "clientes", required: true }, 
+    Processo: { type: String, required: true },
+    Procedimento: { type: String },
+    Categoria: { type: String },
+    Tutela: { type: String },
+    Classe: { type: String },
+    Assunto: { type: String },
+    Autor: { type: String },
+    Reu: { type: String },
+    Secao: { type: String },
+    Vara: { type: String },
+    Comarca: { type: String },
+    UF: { type: String },
+    Audiencia: { type: Date, default: null },
+    Atuacao: { type: Date },
+    Distribuicao: { type: Date },
+    Status: { type: String }, 
 
-    Processo: {
-        type: String,
-        required: true
-    },
-    Procedimento: {
-        type: String,
-        required: true
-    },
+// Financeiro:
 
-    Categoria: {
-        type: String,
-        required: true
-    },
+Financeiro: [{ type: Schema.Types.ObjectId, ref: "financeiro" }],
 
-    Tutela: {
-        type: String,
-        required: true
-    },
+// Prazos:
 
-    Classe: {
-        type: String,
-        required: true
-    },
-
-    Assunto: {
-        type: String,
-        required: true
-    },
-
-    Autor: {
-        type: String,
-        required: true
-    },
-
-    Reu: {
-        type: String,
-        required: true
-    },
-
-    Secao: {
-        type: String,
-        required: true
-    },
-
-    Vara: {
-        type: String,
-        required: true
-    },
-
-    Comarca: {
-        type: String,
-        required: true
-    },
-
-    UF: {
-        type: String,
-        required: true
-    },
-
-    Audiencia: {
-        type: Date,
-        default: null
-    },
-
-    Atuacao: {
-        type: Date,
-        required: true
-    },
-    
-
-    Distribuicao: {
-        type: Date,
-        required: true
-    },
-
-    Status: {
-        type: String,
-        required: true
-    } 
+Prazos: [{ type: Schema.Types.ObjectId, ref: "prazos" }]
 
 })
 

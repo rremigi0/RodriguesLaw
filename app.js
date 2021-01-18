@@ -58,7 +58,13 @@ const db = require("./config/db")
                 },
                 formatTime: (date) => {
                     return moment(date).format('HH:mm')
-                }
+                },
+                formatDateTime: (date) => {
+                    return moment(date).format('YYYY-MM-DDTHH:mm')
+                },
+                formatDateUS: (date) => {
+                    return moment(date).format('YYYY-MM-DD')
+                },
             }
         }))
         app.set('view engine', 'handlebars');
