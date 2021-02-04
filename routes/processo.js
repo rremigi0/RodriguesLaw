@@ -54,7 +54,7 @@ router.post("/add/addProcessos", eAdmin, (req, res) => {var erros = []
     req.flash("success_msg", "Processo criado com sucesso!")
     res.redirect("/processo/view_ativos")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
-    res.redirect("/processo/add")})}})
+    res.redirect("/processo/view_ativos")})}})
 
 //Rota de Processos (R):
 

@@ -16,15 +16,32 @@
             <h2>Rodrigues Advocacia</h2>
            </div>
            <div class="menu">
-            <ul>
+             <ul>
                 <li>
-                    <i class="fa fa-reply"></i>
-                    <a href="/prazo/main">  Retornar</a>
+                    <i class="fas fa-home"></i>
+                    <a href="/admin/home">  Home</a>
             
                 </li>
+                <li>
+                    <i class="fa fa-signal"></i>
+                    <a href="/admin/dashboard">  Dashboard</a>
+            
+                </li>
+                <li>
+                    <i class="fas fa-users"></i>
+                    <a href="/cliente/view">  Clientes</a>
+                </li>
+                <li>
+                    <i class="fas fa-layer-group"></i>
+                    <a href="/processo/main">  Processos</a>
+                </li>
                 <li class="selected">
-                    <i class="fa fa-folder"></i>
-                    <a href="/prazo/view_erros">  Retornado com Erros</a>
+                    <i class="far fa-newspaper"></i>
+                    <a href="/prazo/pending">  Prazos</a>
+                </li>
+                <li>
+                    <i class="fas fa-money-check-alt"></i>
+                    <a href="/financeiro/view">  Financeiro</a>
                 </li>
             </ul>
 
@@ -45,23 +62,23 @@
                         <ul>
                             <li>
                                 <input type="radio" name="tabs" class="rd_tabs" id="pendentes" >
-                                <label onclick="window.location='/prazo/view_pendentes/'" for ="pendentes">Prazos Pendentes</label>
+                                <label onclick="window.location='/prazo/pending/'" for ="pendentes">Pendentes</label>
 
                             </li>
 
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="validacao" >
-                                <label onclick="window.location='/prazo/view_validacao/'" for ="controle">Aguardando Validação</label>
+                                <input type="radio" name="tabs" class="rd_tabs" id="validacao" checked>
+                                <label onclick="window.location='/prazo/validation/'" for ="controle">Validação</label>
                             </li>
 
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="erros" checked>
-                                <label onclick="window.location='/prazo/view_erros/'" for ="erros">Retornado com Erros</label>
+                                <input type="radio" name="tabs" class="rd_tabs" id="erros">
+                                <label onclick="window.location='/prazo/errors/'" for ="erros">Erros</label>
                             </li>
 
                             <li>
                                 <input type="radio" name="tabs" class="rd_tabs" id="protocolado">
-                                <label onclick="window.location='/prazo/view_protocolado/'" for ="protocolados">Prazos Protocolados</label>
+                                <label onclick="window.location='/prazo/protocoled/'" for ="protocolados">Protocolados</label>
                             </li>
                         </ul>
                     </nav>
@@ -73,6 +90,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">Processo</th>
+                                <th scope="col">Número</th>
                                 <th scope="col">Autor</th>
                                 <th scope="col">Réu</th>
                                 <th scope="col">Petição</th>
@@ -87,13 +105,14 @@
 
                             <tr>    
                                 <td>{{Processo}}</td>
+                                <td>{{Numero}}</td>
                                 <td>{{Autor}}</td>
                                 <td>{{Reu}}</td>
                                 <td>{{Peticao}}</td>
                                 <td>{{#formatDate Prazo}}{{/formatDate}}</td>
-                                <td onclick="window.location='/prazo/edit/{{_id}}'"><i class="fas fa-edit"></i></td>
-                                <td onclick="window.location='/prazo/atualizar/{{_id}}'"><i class="fas fa-sync-alt"></i></td>
-                                <td onclick="window.location='/prazo/deletar/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                                <td onclick="window.location='/prazo/edit/{{_id}}'"><i class="fas fa-edit" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/prazo/atualizar/{{_id}}'"><i class="fas fa-sync-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/prazo/deletar/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
                             </tr>
                         {{/each}}
                     </tbody>

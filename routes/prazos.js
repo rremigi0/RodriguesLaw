@@ -22,6 +22,7 @@ router.post("/add/addPrazos", eAdmin, (req, res) => {var erros = []
         
         const novoPrazo = {
         Processo: req.body.processo,
+        Numero: req.body.numero,
         Autor: req.body.autor,
         Reu: req.body.reu,
         Procedimento: req.body.procedimento,
@@ -33,65 +34,56 @@ router.post("/add/addPrazos", eAdmin, (req, res) => {var erros = []
         new Prazo(novoPrazo).save().then(async (dbPrazo) => {
             await Processo.findOneAndUpdate({ _id: req.body.processo }, {$push: {Prazos: dbPrazo._id}}, { new: true });
         req.flash("success_msg", "Prazo criado com sucesso!")
-        res.redirect("/prazo/view_pendentes")}).catch((err) => {
+        res.redirect("/prazo/pending")}).catch((err) => {
         req.flash("error_msg", "Houve um erro ao cadastrar o Prazo, tente novamente!")
         res.redirect("prazo/main")})}})
 
-//Rota Prazos:
+//Rota Para Visualizar Prazos (R):
 
-router.get('/main', eAdmin, (req, res) => {res.render("prazos/main")})                  
+    // Rota Principal:
+        router.get('/main', eAdmin, (req, res) => {res.render("admin/prazos/main")})                  
 
-// Rota Adicionar Novo Prazo:
+    // Rota de Pendentes:       
 
-router.get('/add', eAdmin, (req, res) => { res.render("prazos/addprazos")})
+        router.get("/pending", eAdmin, async (req, res) => {
+            await Prazo.find( { Status:'Pendente' } ).sort({Prazo:1}).then((prazos) => {
+            res.render("admin/prazos/view/pending", {prazos: prazos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+        //res.json(prazos)
+            res.redirect("/main")})})
+    
+    // Rota de Validação: 
 
-// Visualizar os Prazos
+        router.get("/validation", eAdmin, (req, res) => {Prazo.find( { Status:'Validacao' } ).sort({Prazo:1}).then((prazos) => {res.render("admin/prazos/view/validation", {prazos: prazos})    
+        }).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+        res.redirect("/main")})})
 
-router.get("/view", eAdmin, (req, res) => {Prazo.find().sort({Prazo:1}).then((prazos) => {res.render("prazos/view_pendentes", {prazos: prazos})    
-}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
-res.redirect("/main")})})
+    // Rota de Erros:
 
-// Visualizar os Prazos (Pendentes)
+        router.get("/errors", eAdmin, (req, res) => {Prazo.find( { Status:'Error' } ).sort({Prazo:1}).then((prazos) => {res.render("admin/prazos/view/errors", {prazos: prazos})    
+        }).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+        res.redirect("/main")})})
 
-router.get("/view_pendentes", eAdmin, (req, res) => {Prazo.find( { Status:'Pendente' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_pendentes", {prazos: prazos})    
-}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
-res.redirect("/main")})})
+    // Rota de Protocolados:
 
-// Visualizar os Prazos (Pendentes de Validação)
-
-router.get("/view_validacao", eAdmin, (req, res) => {Prazo.find( { Status:'Validacao' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_validacao", {prazos: prazos})    
-}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
-res.redirect("/main")})})
-
-// Visualizar os Prazos (Retornado com Erros)
-
-router.get("/view_erros", eAdmin, (req, res) => {Prazo.find( { Status:'Error' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_erros", {prazos: prazos})    
-}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
-res.redirect("/main")})})
-
-// Visualizar os Prazos (Protocolados)
-
-router.get("/view_protocolado", eAdmin, (req, res) => {Prazo.find( { Status:'Protocolado' } ).sort({Prazo:1}).then((prazos) => {res.render("prazos/view_protocolado", {prazos: prazos})    
-}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
-res.redirect("/main")})})
+        router.get("/protocoled", eAdmin, (req, res) => {Prazo.find( { Status:'Protocolado' } ).sort({Prazo:1}).then((prazos) => {res.render("admin/prazos/view/protocoled", {prazos: prazos})    
+        }).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+        res.redirect("/main")})})
 
 // Deletar Prazos
 
 router.get("/deletar/:id", eAdmin2, (req, res) => {Prazo.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Prazo deletado com sucesso")
-res.redirect("/prazo/view_pendentes")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
-res.redirect("/prazo/view_pendentes")})})
-
-
-
+res.redirect("/prazo/pending")}).catch((err) => {req.flash("error_msg", "Houve um erro ao deletar")
+res.redirect("/prazo/pending")})})
                 
 // Editar Prazos
 
-router.get("/edit/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("prazos/editprazos", {prazo: prazo})}).catch((err) => {
+router.get("/edit/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("admin/prazos/CRUD/edit", {prazo: prazo})}).catch((err) => {
 req.flash("error_msg", "Este prazo não está cadastrado")
-res.redirect("prazo/view_pendentes")})})
+res.redirect("prazo/pending")})})
 router.post("/edit", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).then((prazo) => {
 
     prazo.Processo = req.body.processo
+    prazo.Numero = req.body.numero
     prazo.Autor = req.body.autor
     prazo.Reu = req.body.reu
     prazo.Procedimento = req.body.procedimento
@@ -101,23 +93,36 @@ router.post("/edit", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).th
     prazo.Status = req.body.status
 
 prazo.save().then(() => {req.flash("success_msg", "Prazo editado com sucesso!")
-res.redirect("/prazo/view_pendentes")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
-res.redirect("/prazo/view_pendentes")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
-res.redirect("/prazo/view_pendentes")})})
+res.redirect("/prazo/pending")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
+res.redirect("/prazo/pending")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
+res.redirect("/prazo/pending")})})
 
 // Atualizar Status:
 
-router.get("/atualizar/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("prazos/atualizar", {prazo: prazo})}).catch((err) => {
+router.get("/atualizar/:id", eAdmin, (req, res) => {Prazo.findOne({_id:req.params.id}).then((prazo) => {res.render("admin/prazos/CRUD/update", {prazo: prazo})}).catch((err) => {
     req.flash("error_msg", "Este prazo não está cadastrado")
-    res.redirect("/prazo/view_pendentes")})})
+    res.redirect("/prazo/pending")})})
     router.post("/atualizar", eAdmin, (req, res) => {Prazo.findOne({_id: req.body.id}).then((prazo) => {
     
         prazo.Processo = req.body.processo
         prazo.Status = req.body.status
     
     prazo.save().then(() => {req.flash("success_msg", "Prazo editado com sucesso!")
-    res.redirect("/prazo/view_pendentes")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
-    res.redirect("/prazo/view_pendentes")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
-    res.redirect("/prazo/view_pendentes")})})
+    res.redirect("/prazo/pending")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do prazo")
+    res.redirect("/prazo/pending")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o prazo")
+    res.redirect("/prazo/pending")})})
+
+
+// Rotas para excluir após testes:
+
+    // Rota de Pendentes:
+
+   // router.get("/view", eAdmin, (req, res) => {Prazo.find().sort({Prazo:1}).populate('Processo').then((prazos) => {
+     //   res.render("admin/prazos/pendentes", {prazos: prazos})    
+ //   }).catch((err) => {req.flash("error_msg", "houve um erro ao listar os prazos")
+ //   res.redirect("/main")})})
+
+//router.get('/add', eAdmin, (req, res) => { res.render("prazos/addprazos")})
+
 
 module.exports = router

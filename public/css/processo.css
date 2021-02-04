@@ -14,17 +14,28 @@
 }
 
 .nav_tabs label{
-    width: 150px;
-    padding: 25px;
-    background-color: #363b48;
+    width: 100%;
+    padding: 20px;
+    background-color:#0089F3;
     display: block;
     color: #fff;
     cursor: pointer;
     text-align: center;
+    
+    margin: 0;
+}
+
+.nav_tabs label:hover{
+    border: none;
+    color: #fff;
+    transform: scale(1.05);
+    transition: .2s;
 }
 
 .rd_tabs:checked ~ label{
-    background-color: #e54e43;
+    background-color:#C1E7FC;
+    color: black;
+    border: 0.5px solid #F7F7F7;
 }
 
 .rd_tabs{

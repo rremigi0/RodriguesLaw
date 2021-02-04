@@ -292,9 +292,10 @@
                     <form action="/prazo/add/addPrazos" method="POST">
                         <div class="form-group">
                             <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{processo.id}}">
-                            <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor">
-                            <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu">
-                            <label for="procedimento">Procedimento</label><input type="text" class="form-control" id="procedimento" name="procedimento">
+                            <label for="numero">Número do Processo</label><input type="text" class="form-control" id="numero" name="numero" value="{{processo.Processo}}">
+                            <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" value="{{processo.Autor}}">
+                            <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu" value="{{processo.Reu}}">
+                            <label for="procedimento">Procedimento</label><input type="text" class="form-control" id="procedimento" name="procedimento" value="{{processo.Procedimento}}">
                             <label for="peticao">Petição Processual</label><input type="text" class="form-control" id="peticao" name="peticao">
                             <label for="publicacao">Publicação</label><input type="date" class="form-control" id="publicacao" name="publicacao">
                             <label for="prazo">Prazo</label><input type="date" class="form-control" id="prazo" name="prazo">
