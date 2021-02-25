@@ -10,7 +10,9 @@ const Processo = mongoose.model("processos")
 const Prazo = mongoose.model("prazos")
 const Financeiro = mongoose.model("financeiro")
 const {eAdmin} = require("../helpers/eAdmin")
+const {eAdmin2} = require("../helpers/eAdmin2")
 const {eAdmin3} = require("../helpers/eAdmin3")
+const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Rota de Login:
 
