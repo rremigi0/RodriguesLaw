@@ -10,10 +10,12 @@ const Triagem = mongoose.model("triagens")
 const Processo = mongoose.model("processos")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
+const {eAdmin3} = require("../helpers/eAdmin3")
+const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Rota para Cadastrar novo Cliente (C):
         
-router.post("/add/addClientes", eAdmin, (req, res) => {var erros = []
+router.post("/add/addClientes", eAdmin2, (req, res) => {var erros = []
   if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){erros.push({texto: "Nome do Cliente Inválido"})}
   if(req.body.nome.length < 8) {erros.push({texto: "Digite o nome completo do cliente"})}
   if(erros.length > 0) {res.render("admin/clientes/view", {erros: erros})}else {
@@ -69,7 +71,7 @@ router.get("/detail/:id", eAdmin, async (req, res) => {
   await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos').then((cliente) => {
     res.render("admin/clientes/detail", {cliente: cliente})
   })})
-    router.post("/edit", eAdmin, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
+    router.post("/edit", eAdmin2, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {
     
         cliente.Codigo = req.body.codigo
         cliente.Nome = req.body.nome
@@ -105,7 +107,7 @@ router.get("/detail/:id", eAdmin, async (req, res) => {
 
 // Deletar Clientes (D)
 
-router.get("/deletar/:id", eAdmin2, (req, res) => {Cliente.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Cliente deletado com sucesso")
+router.get("/deletar/:id", eAdmin4, (req, res) => {Cliente.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Cliente deletado com sucesso")
 res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/cliente/view")})})        
 

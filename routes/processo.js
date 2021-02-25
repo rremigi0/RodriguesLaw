@@ -9,10 +9,12 @@ const Processo = mongoose.model("processos")
 const Triagem = mongoose.model("triagens")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
+const {eAdmin3} = require("../helpers/eAdmin3")
+const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Rota para Cadastrar novo Processo no Banco de Dados (C):
         
-router.post("/add/addProcessos", eAdmin, (req, res) => {var erros = []
+router.post("/add/addProcessos", eAdmin2, (req, res) => {var erros = []
     if(!req.body.processo || typeof req.body.processo == undefined || req.body.processo == null){erros.push({texto: "Número do Processo Inválido"})}
     if(!req.body.procedimento || typeof req.body.procedimento == undefined || req.body.procedimento == null){erros.push({texto: "Procedimento Inválido"})}
     if(!req.body.categoria || typeof req.body.categoria == undefined || req.body.categoria == null){erros.push({texto: "Categoria Inválida"})}
@@ -68,12 +70,12 @@ router.get('/main', eAdmin, (req, res) => {
 
 // Editar Processos
 
-router.get("/detail/:id", eAdmin2, async (req, res) => {
+router.get("/detail/:id", eAdmin, async (req, res) => {
     await Processo.findOne({_id:req.params.id}).populate('Financeiro Prazos').then((processo) => {
         res.render("admin/processos/detail", {processo: processo})}).catch((err) => {
     req.flash("error_msg", "Este processo não está cadastrado")
     res.redirect("/processo/view_ativos/")})})
-    router.post("/edit", eAdmin2, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
+    router.post("/edit", eAdmin3, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
     
         // Aba Geral:
 
@@ -110,7 +112,7 @@ router.get("/detail/:id", eAdmin2, async (req, res) => {
 
 // Deletar Processos (D)
 
-router.get("/deletar/:id", eAdmin2, (req, res) => {
+router.get("/deletar/:id", eAdmin4, (req, res) => {
     Processo.remove({_id: req.params.id}).then(() => {
         req.flash("success_msg", "Processo deletado com sucesso")
 res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
@@ -131,7 +133,7 @@ router.get('/triagem', eAdmin, (req, res) => {
 
 // Rota Adicionar Triagem Inicial:
 
-router.get('/addtriagem', eAdmin, (req, res) => {
+router.get('/addtriagem', eAdmin2, (req, res) => {
     Cliente.find().then((clientes) => {
         res.render("processos/triagem/add", {clientes: clientes})
     }).catch((err) => {
@@ -176,7 +178,7 @@ router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'A
 
 // Deletar Triagem
 
-router.get("/deletartriagem/:id", eAdmin2, (req, res) => {Triagem.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
+router.get("/deletartriagem/:id", eAdmin4, (req, res) => {Triagem.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
 res.redirect("/processo/view_alta")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/processo/triagem")})})
 
@@ -186,7 +188,7 @@ res.redirect("/processo/triagem")})})
 
 // Rota para Cadastrar nova Triagem no Banco de Dados:
         
-router.post("/add/addTriagem", eAdmin, (req, res) => {var erros = []
+router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
 
     if(erros.length > 0) {res.render("processos/addprocessos", {erros: erros})}else {
         

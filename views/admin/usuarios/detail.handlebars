@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    <title>Sistema Jurídico</title>
+</head>
+<body>
+   <div class="flex-dashboard">
+       <sidebar id="sidebar">
+           <div class="sidebar-title">
+            <img src="/Images/Cor Azul.png" alt="">
+            <h2>Rodrigues Advocacia</h2>
+           </div>
+           <div class="menu">
+            <ul>
+                <li><i class="fas fa-home"></i><a href="/admin/home">  Home</a></li>
+                <li><i class="fa fa-reply"></i><a href="/usuarios/main">  Retornar</a></li>
+                <li class="selected"><i class="fa fa-plus"></i><a href="/usuarios/detail/{{_id}}">  Detalhes</a></li>
+            </ul>
+           </div>
+       </sidebar>
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i><a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>DADOS CADASTRAIS:</h2>
+               </div>
+               <div class="dynamic-content-edit">
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+
+<!-- Menu de Navegação de Cadastro de Usuarios -->
+                 <form action="/usuarios/edit" method="POST">
+                      <input type="hidden" name="id" value="{{usuario._id}}">
+                            <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-geral-tab" data-toggle="tab" href="#nav-geral" role="tab" aria-controls="nav-geral" aria-selected="true">Geral</a>
+                                <a class="nav-item nav-link" id="nav-nivel-tab" data-toggle="tab" href="#nav-nivel" role="tab" aria-controls="nav-nivel" aria-selected="false">Nível</a>
+                            </div>
+                            </nav>
+
+<!-- Aba Navegação Geral do Cadastro de Usuarios -->
+
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-6">
+                                            <label for="nome">Nome</label><input type="text" class="form-control" id="nome" name="nome" value="{{usuario.nome}}">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="Cpf_Cnpj">CPF</label><input type="text" class="form-control" id="Cpf_Cnpj"  name="Cpf_Cnpj" value="{{usuario.Cpf_Cnpj}}">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="genero">Gênero</label><input type="text" class="form-control" id="genero"  name="genero" value="{{usuario.genero}}">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-6">
+                                            <label for="email">Email</label><input type="email" class="form-control" id="email"  name="email" value="{{usuario.email}}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!-- Aba Navegação Nível do Cadastro de Usuarios -->
+
+                            <div class="tab-pane fade" id="nav-nivel" role="tabpanel" aria-labelledby="nav-nivel-tab">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                       <div class="col-md-6 mb-6">
+                                            <label for="eAdmin">Nível</label><input type="text" class="form-control" id="eAdmin" name="eAdmin" value="{{usuario.eAdmin}}">
+                                        </div><br> 
+                                        <div class="col-lg-12" style="text-align: right">
+                                            <button type="submit" class="btn btn-success">Atualizar</button>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+    <script src="/js/menu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script type="text/javascript" src="/js/filter.js"></script>   
+</body>
+</html>
+

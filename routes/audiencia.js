@@ -20,7 +20,7 @@ res.redirect("/audiencia/main")})})
 
 // Editar Audiencias
 
-router.get("/edit/:id", eAdmin2, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("Audiencias/editaudiencias", {processo: processo})}).catch((err) => {
+router.get("/edit/:id", eAdmin, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("Audiencias/editaudiencias", {processo: processo})}).catch((err) => {
     req.flash("error_msg", "Este processo não está cadastrado")
     res.redirect("/audiencia/main/")})})
     router.post("/edit", eAdmin2, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {

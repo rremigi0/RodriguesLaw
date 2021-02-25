@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    <title>Sistema Jurídico</title>
+</head>
+<body>
+   <div class="flex-dashboard">
+       <sidebar id="sidebar">
+           <div class="sidebar-title">
+            <img src="/Images/Cor Azul.png" alt="">
+            <h2>Rodrigues Advocacia</h2>
+           </div>
+           <div class="menu">
+            <ul>
+                <li><i class="fa fa-reply"></i><a href="/admin/administrativo">  Retornar</a></li>
+                <li><i class="fas fa-money-check-alt"></i><a href="/financeiro/view">  Financeiro</a></li>
+                <li><i class="fas fa-key"></i><a href="/users/main">  Usuarios</a></li>
+            </ul>
+           </div>
+       </sidebar>
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i><a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Gerenciar Acesso de Usuários</h2>
+               </div>
+               <div class="dynamic-content">
+                        <table id="tabela" class="table table-striped table-bordered" style="width:100%">             
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">CPF</th>
+                                    <th scope="col">Gênero</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Deletar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each usuarios}}
+                                <tr >  
+                                    <td>{{nome}}</td>
+                                    <td>{{Cpf_Cnpj}}</td>
+                                    <td>{{genero}}</td>
+                                    <td onclick="window.location='/usuarios/edit/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px; " ></i></td>
+                                    <td onclick="window.location='/usuarios/deletar/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+       </main>
+
+   </div>
+    <script src="/js/menu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script type="text/javascript" src="/js/filter.js"></script> 
+    <script type="text/javascript" src="/js/hbs.js"></script>       
+</body>
+</html>
+
+
+

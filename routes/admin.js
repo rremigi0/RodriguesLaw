@@ -10,11 +10,11 @@ const Processo = mongoose.model("processos")
 const Prazo = mongoose.model("prazos")
 const Financeiro = mongoose.model("financeiro")
 const {eAdmin} = require("../helpers/eAdmin")
-const {eAdmin2} = require("../helpers/eAdmin2")
+const {eAdmin3} = require("../helpers/eAdmin3")
 
 // Rota de Login:
 
-router.get('/', (req, res) => {res.render("usuarios/login")})
+router.get('/', (req, res) => {res.render("admin/usuarios/login")})
 
 // Rota Principal:
 
@@ -38,12 +38,18 @@ router.get('/cadastro', eAdmin, (req, res) => {
         res.redirect("/cadastro/main")
     })
 })  
+
+// Página Principal do Administrativo:
+
+router.get("/administrativo", eAdmin3, (req, res) => {res.render("admin/administrativo/view")})
+
+
 // Rota Configurações:
 
-router.get('/configuracoes', eAdmin, (req, res) => {res.render("admin/configuracoes")})
+router.get('/configuracoes', eAdmin3, (req, res) => {res.render("admin/configuracoes")})
 
 // Rota Backup:
 
-router.get('/backup', eAdmin, (req, res) => {res.render("admin/backup")})
+router.get('/backup', eAdmin3, (req, res) => {res.render("admin/backup")})
 
 module.exports = router

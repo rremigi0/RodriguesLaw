@@ -1,6 +1,5 @@
 const mongoose = require ("mongoose")
 const Schema = mongoose.Schema;
-
 const Triagem = new Schema ({
 
     Cliente: { type: Schema.Types.ObjectId, ref: "clientes", required: true },

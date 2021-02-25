@@ -1,14 +1,12 @@
 module.exports = {
 
-// Perfil de Cliente:
+// Perfil de Estagiário (Read):
 
     eAdmin: function(req, res, next){
         if(req.isAuthenticated() && req.user.eAdmin >= 1){
             return next ();
         }
-        req.flash("error_msg", "Você precisa ser um administrador")
+        req.flash("error_msg", "Você não tem autorização")
         res.redirect("/admin")
     }
-
-
 }
