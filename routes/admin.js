@@ -43,7 +43,7 @@ router.get('/cadastro', eAdmin, (req, res) => {
 
 // Página Principal do Administrativo:
 
-router.get("/administrativo", eAdmin3, (req, res) => {res.render("admin/administrativo/view")})
+router.get("/administrativo", eAdmin3, (req, res) => {res.render("admin/administrativo/main")})
 
 
 // Rota Configurações:
