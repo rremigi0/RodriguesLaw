@@ -16,26 +16,36 @@
 .nav_tabs label{
     width: 100%;
     padding: 20px;
-    background-color:#0089F3;
+    background-color:#ECEEF3;
     display: block;
-    color: #fff;
+    color: #0056B3;
     cursor: pointer;
     text-align: center;
+    border: 0.5px solid #b8b6b686;
+    border-top: none;
+    border-left: none;
+    border-right: none;
     
     margin: 0;
 }
 
 .nav_tabs label:hover{
     border: none;
-    color: #fff;
+    color: #044891;
     transform: scale(1.05);
     transition: .2s;
 }
 
 .rd_tabs:checked ~ label{
-    background-color:#C1E7FC;
-    color: black;
-    border: 0.5px solid #F7F7F7;
+    background-color:#FFFFFF;
+    color: #495057;
+    border: none;
+    border-top: 0.5px solid #b8b6b686;
+    border-left: 0.5px solid #b8b6b686;
+    border-right: 0.5px solid #b8b6b686;
+    border-radius: 5px;
+    
+
 }
 
 .rd_tabs{

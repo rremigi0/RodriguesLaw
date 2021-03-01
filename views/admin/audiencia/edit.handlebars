@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    <title>Sistema Jurídico</title>
+</head>
+<body>
+   <div class="flex-dashboard">
+       <sidebar id="sidebar">
+           <div class="sidebar-title">
+            <img src="/Images/Cor Azul.png" alt="">
+            <h2>Rodrigues Advocacia</h2>
+           </div>
+    <!-- MENU -->
+
+            <div class="menu">
+                <ul>
+                    <li><i class="fa fa-reply"></i><a href="/admin/home">  Retornar</a></li>
+                    <li><i class="fas fa-plus"></i><a href="/processo/add"data-toggle="modal" data-target="#processoModal">  Novo</a></li>
+                    <li><i class="fa fa-search"></i><a href="/processo/view_ativos">  Consultar</a></li>
+                    <li><i class="fa fa-gavel"></i><a href="/processo/Triagem">  Petição Inicial</a></li>
+                    <li><i class="far fa-calendar-alt"></i><a href="/audiencia/view">  Audiências</a></li>
+                </ul>
+            </div>
+
+       </sidebar>
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Gerenciar Audiências</h2>
+               </div>
+               <div class="dynamic-content">
+                   <div class="card-body"></div>
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+                  <form action="/audiencia/edit" method="POST">
+                      <input type="hidden" name="id" value="{{processo._id}}">
+                    <div class="form-group-min">
+                      <label for="processo">Processo</label>
+                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{processo.Processo}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="audiencia">Audiencia</label>
+                        <input type="datetime-local" class="form-control" id="audiencia" name="audiencia" value="{{#formatDateTime processo.Audiencia}}{{/formatDateTime}}">
+                    </div>
+                    <button type="submit" class="btn">Salvar</button>
+                  </form>
+       </main>
+   </div>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>
+
