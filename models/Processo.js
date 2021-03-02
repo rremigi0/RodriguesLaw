@@ -26,7 +26,15 @@ Financeiro: [{ type: Schema.Types.ObjectId, ref: "financeiro" }],
 
 // Prazos:
 
-Prazos: [{ type: Schema.Types.ObjectId, ref: "prazos" }]
+Prazos: [{ type: Schema.Types.ObjectId, ref: "prazos" }],
+
+// Diligencias:
+
+Diligencias: [{ type: Schema.Types.ObjectId, ref: "diligencias" }],
+
+// Movimentacoes:
+
+Movimentacao: [{ type: Schema.Types.ObjectId, ref: "movimentacoes" }]
 
 })
 

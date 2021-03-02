@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    <title>Sistema Jurídico</title>
+</head>
+<body>
+   <div class="flex-dashboard">
+       <sidebar id="sidebar">
+           <div class="sidebar-title">
+            <img src="/Images/Cor Azul.png" alt="">
+            <h2>Rodrigues Advocacia</h2>
+           </div>
+           <div class="menu">
+            <ul>
+                <li>
+                    <i class="fas fa-home"></i>
+                    <a href="/admin/home">  Home</a>
+            
+                </li>
+                <li>
+                    <i class="fa fa-signal"></i>
+                    <a href="/admin/dashboard">  Dashboard</a>
+            
+                </li>
+                <li>
+                    <i class="fas fa-users"></i>
+                    <a href="/cliente/view">  Clientes</a>
+                </li>
+                <li>
+                    <i class="fas fa-layer-group"></i>
+                    <a href="/processo/main">  Processos</a>
+                </li>
+                <li class="selected">
+                    <i class="far fa-newspaper"></i>
+                    <a href="/prazo/pending">  Prazos</a>
+                </li>
+                <li><i class="fas fa-cogs"></i><a href="/admin/administrativo">  Administrativo</a></li>
+            </ul>
+
+           </div>
+       </sidebar>
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Gerenciar Diligências</h2>
+               </div>
+               <div class="panel-row">
+                   
+                    <nav class ="nav_tabs">
+                        <ul>
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="pendentes" checked>
+                                <label onclick="window.location='/diligencia/pending/'" for ="pendentes">Pendentes</label>
+
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="validacao" >
+                                <label onclick="window.location='/diligencia/validation/'" for ="controle">Validação</label>
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="erros">
+                                <label onclick="window.location='/diligencia/errors/'" for ="erros">Erros</label>
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="protocolado">
+                                <label onclick="window.location='/diligencia/protocoled/'" for ="protocolados">Protocolados</label>
+                            </li>
+                        </ul>
+                    </nav>
+
+               </div>
+               <div class="dynamic-content">
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Réu</th>
+                                <th scope="col">Petição</th>
+                                <th scope="col">Prazo</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Concluir</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each prazos}}
+
+                            <tr>    
+                                <td>{{Numero}}</td>
+                                <td>{{Autor}}</td>
+                                <td>{{Reu}}</td>
+                                <td>{{Peticao}}</td>
+                                <td>{{#formatDate Prazo}}{{/formatDate}}</td>
+                                <td onclick="window.location='/diligencia/edit/{{_id}}'"><i class="fas fa-edit" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/diligencia/atualizar/{{_id}}'"><i class="fas fa-sync-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/diligencia/deletar/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                        
+                    </table>
+
+<!-- Cadastro de Novo Pedido (Modal Novo Pedido) -->
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Novo Ticket</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+
+<!-- Aba Navegação Geral do Novo Ticket -->
+
+                        <form action="/processo/add/addTriagem" method="POST">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab">
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-6">
+                                                <label for="cliente">Código do Cliente (Não alterar)</label><input type="text" class="form-control" id="cliente" name="cliente" value="{{cliente.id}}">
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" placeholder="Digite o Nome Completo">
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-md-6 mb-6">
+                                                <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu" placeholder="Digite o Nome Completo">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="tutela">Tutela</label>
+                                                    <select class="form-control" id="tutela" name="tutela">
+                                                        <option>Sim</option>
+                                                        <option>Não</option>
+                                                    </select>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="entrada">Data de Entrada</label><input type="date" class="form-control" id="entrada" name="entrada">
+                                            </div>
+                                        </div>    
+                                        <div class="form-row">
+                                            <div class="col-md-3 mb-3">
+                                                <label for="prioridade">Prioridade</label>
+                                                    <select class="form-control" id="prioridade" name="prioridade">
+                                                        <option>Verde</option>
+                                                        <option>Amarelo</option>
+                                                        <option>Vermelho</option>
+                                                    </select>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label for="status">Status</label>
+                                                    <select class="form-control" id="status" name="status">
+                                                        <option>Pendente</option>
+                                                        <option>Em Andamento</option>
+                                                        <option>Concluído</option>
+                                                    </select>
+                                            </div>
+                                            <div class="col-md-6 mb-6">
+                                                <label for="tipo">Tipo de Ação</label><input type="text" class="form-control" id="tipo" name="tipo" placeholder="Ex.: Reclamação Trabalhista">
+                                            </div>
+                                        </div>
+                                    <button type="submit" class="btn">Cadastrar</button>                                                               
+                                </div>
+                            </div>
+                        </div>   
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+       </main>
+   </div>
+                
+
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>
+
+
+

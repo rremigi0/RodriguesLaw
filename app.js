@@ -13,9 +13,11 @@ const admin = require ('./routes/admin')
 const usuarios = require("./routes/usuario")
 const processo = require("./routes/processo")
 const prazo = require("./routes/prazos")
+const diligencia = require("./routes/diligencias")
 const financeiro = require("./routes/financeiro")
 const audiencia = require("./routes/audiencia")
 const cliente = require("./routes/cliente")
+const movimentacao = require("./routes/movimentacao")
 const passport = require("passport")
 require("./config/auth")(passport)
 const db = require("./config/db")
@@ -87,10 +89,12 @@ const db = require("./config/db")
     app.use("/usuarios", usuarios)
     app.use("/processo", processo)
     app.use("/prazo", prazo)
+    app.use("/diligencia", diligencia)
     app.use("/financeiro", financeiro)
     app.use("/audiencia", audiencia)
     app.use("/cliente", cliente)
-
+    app.use("/movimentacao", movimentacao)
+    
 // Outros
 
 const PORT = process.env.PORT || 8089

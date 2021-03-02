@@ -71,7 +71,7 @@ router.get('/main', eAdmin, (req, res) => {
 // Editar Processos
 
 router.get("/detail/:id", eAdmin, async (req, res) => {
-    await Processo.findOne({_id:req.params.id}).populate('Financeiro Prazos').then((processo) => {
+    await Processo.findOne({_id:req.params.id}).populate({path:'Financeiro Prazos Movimentacao', options: {sort: { 'Data': -1}}}).then((processo) => {
         res.render("admin/processos/detail", {processo: processo})}).catch((err) => {
     req.flash("error_msg", "Este processo não está cadastrado")
     res.redirect("/processo/view_ativos/")})})

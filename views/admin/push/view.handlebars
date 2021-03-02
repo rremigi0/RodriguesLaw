@@ -1,0 +1,81 @@
+<!-- Type Language -->
+<!DOCTYPE html>
+
+<!-- Language -->
+
+<html lang="pt-br">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
+    <title>Sistema Jurídico</title>
+</head>
+
+<body>
+   <div class="flex-dashboard">
+       
+    <!-- Logomarca Menu --> 
+
+       <sidebar id="sidebar">
+           <div class="sidebar-title">
+            <img src="/Images/Cor Azul.png" alt="">            
+            <h2>Rodrigues Advocacia</h2>
+           </div>
+           
+    <!-- MENU -->
+
+            <div class="menu">
+                <ul>
+                    <li><i class="fa fa-reply"></i><a href="/admin/home">  Retornar</a></li>
+                    <li><i class="fa fa-gavel"></i><a href="/processo/Triagem">  Petição Inicial</a></li>
+                    <li><i class="far fa-calendar-alt"></i><a href="/audiencia/view">  Audiências</a></li>
+                    <li class="selected"><i class="fas fa-bell"></i><a href="/movimentacao/view">  Push</a></li>
+                </ul>
+            </div>
+       </sidebar>
+
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Controle Push | Movimentações</h2>
+               </div>
+               <div class="dynamic-content">
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Data</th>
+                                <th scope="col">Movimento</th>
+                                <th scope="col">Push</th>
+                                <th scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each movimentacao}}
+
+                            <tr>  
+                                <td>{{#formatDate Data}}{{/formatDate}}</td>
+                                <td>{{Movimento}}</td>
+                                <td>{{Push}}</td>
+                                <td onclick="window.location='/movimentacao/edit/{{_id}}'"><i class="fas fa-edit" style="color: #6e8efb; font-size: 16px; "></i></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                        
+                    </table>
+                </div>
+       </main>
+   </div>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>

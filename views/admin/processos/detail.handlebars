@@ -21,7 +21,8 @@
             <ul>
                 <li><i class="fas fa-home"></i><a href="/admin/home">  Home</a></li>
                 <li><i class="fa fa-reply"></i><a href="/cliente/view">  Retornar</a></li>
-                <li class="selected"><i class="fa fa-plus"></i><a href="/cliente/detail">  Detalhes</a></li>
+                <li class="selected"><i class="fa fa-search"></i><a href="/cliente/detail">  Detalhes</a></li>
+                <li><i class="fa fa-plus"></i><a href="/movimentacao/add" data-toggle="modal" data-target="#movimentacaoModal">  Movimentações</a></li>
             </ul>
            </div>
        </sidebar>
@@ -49,6 +50,7 @@
                                 <a class="nav-item nav-link" id="nav-dados-tab" data-toggle="tab" href="#nav-dados" role="tab" aria-controls="nav-dados" aria-selected="false">Dados</a>
                                 <a class="nav-item nav-link" id="nav-audiencia-tab" data-toggle="tab" href="#nav-audiencia" role="tab" aria-controls="nav-audiencia" aria-selected="false">Audiência</a>
                                 <a class="nav-item nav-link" id="nav-julgador-tab" data-toggle="tab" href="#nav-julgador" role="tab" aria-controls="nav-julgador" aria-selected="false">Órgão Julgador</a>
+                                <a class="nav-item nav-link" id="nav-movimentacoes-tab" data-toggle="tab" href="#nav-movimentacoes" role="tab" aria-controls="nav-movimentacoes" aria-selected="false">Movimentações</a>
                                 <a class="nav-item nav-link" id="nav-status-tab" data-toggle="tab" href="#nav-status" role="tab" aria-controls="nav-status" aria-selected="false">Status</a>
                             </div>
                             </nav>
@@ -129,6 +131,33 @@
                                 </div>
                             </div>
 
+<!-- Aba Navegação Movimentação -->
+
+            <div class="tab-pane fade" id="nav-movimentacoes" role="tabpanel" aria-labelledby="nav-movimentacoes">
+                {{#each erros}}
+                <div class="alert alert-danger">{{texto}}</div>
+                {{else}}
+                {{/each}}
+                    <table id="tabela" class="table table-striped table-bordered" style="width:100%; margin-top: 15px">
+                        <thead>
+                            <tr>                            
+                                <th scope="col">Data</th>
+                                <th scope="col">Movimento</th>
+                                <th scope="col">Enviado Push?</th>
+                            </tr>        
+                        </thead>
+                        <tbody>
+                        {{#each processo.Movimentacao}}
+                            <tr>  
+                                <td>{{#formatDate Data}}{{/formatDate}}</td>
+                                <td>{{Movimento}}</td>
+                                <td>{{Push}}</td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+            </div>
+
 <!-- Aba Navegação Status -->
 
                             <div class="tab-pane fade" id="nav-status" role="tabpanel" aria-labelledby="nav-status">
@@ -149,7 +178,7 @@
                                     </div>
                                 </div>                     
                             </div>
-                        </form>
+                        </form>                        
                     </div>
                 </div>
             </div>
@@ -273,6 +302,8 @@
                 </div>
             </div>
 
+ <!-- Modal para Cadastrar Novo Prazo -->
+
     <div class="modal fade" id="prazoModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -281,14 +312,11 @@
                         <h5 class="modal-title">Cadastrar Prazo</h5>
                         <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
                     </div>        
-                   <div class="card-body">
+                    <div class="card-body">
                         {{#each erros}}
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-
- <!-- Aba Navegação Geral do Novo Prazo -->
-
                     <form action="/prazo/add/addPrazos" method="POST">
                         <div class="form-group">
                             <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{processo.id}}">
@@ -305,8 +333,45 @@
                             </select>
                         </div>
                             <button type="submit" class="btn">Salvar</button>
-                        </div>
                     </form>         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Modal Cadastrar Nova Movimentação -->
+
+    <div class="modal fade" id="movimentacaoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Movimentação</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+
+ <!-- Aba Navegação Geral do Nova Movimentacao -->
+
+                    <form action="/movimentacao/add" method="POST">
+                        <div class="form-group">
+                            <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{processo.id}}">
+                            <label for="data">Data</label><input type="date" class="form-control" id="data" name="data">
+                            <label for="movimento">Movimentação</label><input type="text" class="form-control" id="movimento" name="movimento">
+                            <label for="push">Enviado Push?</label>
+                                <select class="form-control" id="push" name="push">
+                                    <option>Sim</option>
+                                    <option>Não</option>
+                                </select>
+                        </div>
+                            <button type="submit" class="btn">Salvar</button>
+                    </form>         
+                    </div>
                 </div>
             </div>
         </div>
