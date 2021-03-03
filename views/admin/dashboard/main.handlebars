@@ -1,0 +1,72 @@
+   <div class="flex-dashboard">
+       {{> menu/dashboard}}
+       </sidebar>
+       <main id="mainContent">
+           <header>
+               <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                    <h2>teste</h2> 
+                </div> 
+                <div class="dashboard-content">
+                    <div class="dashboard-flex-parent">
+                        <div class="dashboard-box">
+                            <div class="dashboard-box-wrapper">  
+                                <div class="box-icon box-prazos">
+                                    <i class="far fa-newspaper"></i>
+                                </div>
+                                <div class="value">0005</div>
+                                <div class="type">PRAZOS</div>
+                                <div class="box-value-percentual box-value-prazos">
+                                    <i class="fas fa-sort-up"></i>   
+                                    10% 
+                                </div>
+                            </div>               
+                        </div>
+                        <div class="dashboard-box">
+                            <div class="dashboard-box-wrapper">
+                                <div class="box-icon box-audiencias">
+                                    <i class="far fa-calendar-alt"></i>
+                                </div>
+                                <div class="value">0009</div>
+                                <div class="type">AUDIÊNCIAS</div>   
+                                <div class="box-value-percentual box-value-audiencias">
+                                    <i class="fas fa-sort-up"></i>   
+                                10% 
+                                </div>                
+                            </div>
+                        </div>
+                        <div class="dashboard-box">
+                            <div class="dashboard-box-wrapper">
+                                <div class="box-icon box-processos">
+                                    <i class="fas fa-layer-group"></i>
+                                </div>
+                                <div class="value">0015</div>
+                                <div class="type">PROCESSOS PENDENTES</div> 
+                                <div class="box-value-percentual box-value-processos">
+                                    <i class="fas fa-sort-up"></i>   
+                                10% 
+                                </div>                  
+                            </div>
+                        </div>
+                        <div class="dashboard-box">
+                            <div class="dashboard-box-wrapper">
+                                <div class="box-icon box-clientes">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="value">0009</div>
+                                <div class="type">NOVOS CLIENTES</div>
+                                <div class="box-value-percentual box-value-clientes">
+                                    <i class="fas fa-sort-up"></i>   
+                                10% 
+                                </div>                   
+                            </div>
+                        </div>
+                    </div>         
+                </div>
+           </div>
+       </main>
+   </div>
+</html>

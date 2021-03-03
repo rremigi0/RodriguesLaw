@@ -1,0 +1,85 @@
+   <div class="flex-dashboard">
+        {{> menu/processo/diligencias/main}}
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Gerenciar Prazos</h2>
+               </div>
+               <div class="panel-row">
+                   
+                    <nav class ="nav_tabs">
+                        <ul>
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="pendentes" >
+                                <label onclick="window.location='/diligencia/pending/'" for ="pendentes">Pendentes</label>
+
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="validacao" >
+                                <label onclick="window.location='/diligencia/validation/'" for ="controle">Validação</label>
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="erros" >
+                                <label onclick="window.location='/diligencia/errors/'" for ="erros">Erros</label>
+                            </li>
+
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="protocolado" checked>
+                                <label onclick="window.location='/diligencia/protocoled/'" for ="protocolados">Protocolados</label>
+                            </li>
+                        </ul>
+                    </nav>
+
+               </div>
+               <div class="dynamic-content">
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Réu</th>
+                                <th scope="col">Petição</th>
+                                <th scope="col">Prazo</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Concluir</th>
+                                <th scope="col">Excluir</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each prazos}}
+
+                            <tr>    
+                                <td>{{Numero}}</td>
+                                <td>{{Autor}}</td>
+                                <td>{{Reu}}</td>
+                                <td>{{Peticao}}</td>
+                                <td>{{#formatDate Prazo}}{{/formatDate}}</td>
+                                <td onclick="window.location='/diligencia/edit/{{_id}}'"><i class="fas fa-edit" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/diligencia/atualizar/{{_id}}'"><i class="fas fa-sync-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/diligencia/deletar/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                        
+                    </table>
+                    </form>
+                </div>
+       </main>
+   </div>
+                
+
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>
+
+
+

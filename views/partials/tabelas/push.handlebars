@@ -1,0 +1,31 @@
+<!-- Aba Navegação Push -->
+
+            <div class="tab-pane fade" id="nav-push" role="tabpanel" aria-labelledby="nav-push">
+                <div class="card-body">
+                    {{#each erros}}
+                    <div class="alert alert-danger">{{texto}}</div>
+                    {{else}}
+                    {{/each}}
+                        <table id="tabela" class="table table-striped table-bordered" style="width:100%; margin-top: 5px">
+                            <thead>
+                                <tr>                            
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Movimento</th>
+                                    <th scope="col">Push</th>
+                                </tr>        
+                            </thead>
+                            <tbody>
+                            {{#each processo.Movimentacao}}
+                                <tr>  
+                                    <td>{{#formatDate Data}}{{/formatDate}}</td>
+                                    <td>{{Movimento}}</td>
+                                    <td>{{Push}}</td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                        <div class="button-new" style="text-align: right">
+                            <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#movimentacaoModal"><i class="fas fa-plus"></i></button>
+                        </div>
+                </div>    
+            </div>

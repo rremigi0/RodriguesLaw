@@ -12,15 +12,15 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Página Principal do Financeiro:
 
-router.get("/main", eAdmin2, (req, res) => {res.render("financeiro/main")})
+router.get("/main", eAdmin2, (req, res) => {res.render("admin/administrativo/financeiro/main")})
         
 //Adicionar Novo Honorário (C):
         
-router.get('/add', eAdmin2, (req, res) => {res.render("financeiro/addfinanceiro")})
+router.get('/add', eAdmin2, (req, res) => {res.render("admin/administrativo/financeiro/addfinanceiro")})
         
 // Visualizar os Honorários
         
-router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => {res.render("financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
+router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => {res.render("admin/administrativo/financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
 res.redirect("/financeiro/main")})})
         
 // Deletar Honorários
@@ -39,7 +39,7 @@ if(!req.body.reu || typeof req.body.reu == undefined || req.body.reu == null) {e
 if(!req.body.competencia || typeof req.body.competencia == undefined || req.body.competencia == null) {erros.push({texto: "Competência Inválida"})}
 if(!req.body.tipo || typeof req.body.tipo == undefined || req.body.tipo == null) {erros.push({texto: "Tipo Inválido"})}
 if(!req.body.vencimento || typeof req.body.vencimento == undefined || req.body.vencimento == null) {erros.push({texto: "Data Inválida"})}
-if(erros.length > 0) {res.render("financeiro/addfinanceiro", {erros: erros})}else {
+if(erros.length > 0) {res.render("admin/administrativo/financeiro/addfinanceiro", {erros: erros})}else {
                         
     const novoFinanceiro = {
     Processo: req.body.processo,
@@ -60,7 +60,7 @@ if(erros.length > 0) {res.render("financeiro/addfinanceiro", {erros: erros})}els
     
 // Editar Honorários
     
-router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("financeiro/editfinanceiro", {financeiro: financeiro})}).catch((err) => {
+router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("admin/administrativo/financeiro/editfinanceiro", {financeiro: financeiro})}).catch((err) => {
 req.flash("error_msg", "Este honorário não está cadastrado")
 res.redirect("/financeiro/main")})})
 router.post("/edit", eAdmin3, (req, res) => {Financeiro.findOne({_id: req.body.id}).then((financeiro) => {

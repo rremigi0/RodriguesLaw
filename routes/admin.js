@@ -16,15 +16,15 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Rota de Login:
 
-router.get('/', (req, res) => {res.render("admin/usuarios/login")})
+router.get('/', (req, res) => {res.render("usuarios/login")})
 
 // Rota Principal:
 
-router.get('/home', (req, res) => {res.render("admin/home")})
+router.get('/home', (req, res) => {res.render("admin/home/main")})
 
 //Rota Dashboard:
 
-router.get("/dashboard", eAdmin, (req, res) => {res.render("admin/dashboard")})
+router.get("/dashboard", eAdmin, (req, res) => {res.render("admin/dashboard/main")})
 
 //Rota Perfil:
 
@@ -48,10 +48,10 @@ router.get("/administrativo", eAdmin3, (req, res) => {res.render("admin/administ
 
 // Rota Configurações:
 
-router.get('/configuracoes', eAdmin3, (req, res) => {res.render("admin/configuracoes")})
+router.get('/configuracoes', eAdmin3, (req, res) => {res.render("admin/administrativo/configuracoes/configuracoes")})
 
 // Rota Backup:
 
-router.get('/backup', eAdmin3, (req, res) => {res.render("admin/backup")})
+router.get('/backup', eAdmin3, (req, res) => {res.render("admin/administrativo/configuracoes/backup")})
 
 module.exports = router

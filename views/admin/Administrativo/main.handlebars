@@ -1,28 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
-    <title>Sistema Jurídico</title>
-</head>
-<body>
    <div class="flex-dashboard">
-       <sidebar id="sidebar">
-           <div class="sidebar-title">
-            <img src="/Images/Cor Azul.png" alt="">
-            <h2>Rodrigues Advocacia</h2>
-           </div>
-           <div class="menu">
-            <ul>
-                <li><i class="fa fa-reply"></i><a href="/admin/home">  Retornar</a></li>
-                <li><i class="fas fa-money-check-alt"></i><a href="/financeiro/view">  Financeiro</a></li>
-                <li><i class="fas fa-key"></i><a href="/usuarios/main">  Usuarios</a></li>
-            </ul>
-           </div>
-       </sidebar>
+       {{> menu/administrativo}}
        <main id="mainContent">
            <header>
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i><a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>

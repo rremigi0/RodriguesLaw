@@ -1,0 +1,36 @@
+<!-- Cadastro de Novo Honorário (Modal Novo Honorários) -->
+
+    <div class="modal fade" id="financeiroModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Honorários</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+
+    <!-- Aba Navegação Geral do Novo Honorário -->
+
+                        <form action="/financeiro/add/addFinanceiro" method="POST">
+                            <div class="form-group">
+                                <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{processo.id}}">
+                                <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor">
+                                <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu">
+                                <label for="competencia">Competencia</label><input type="text" class="form-control" id="competencia" name="competencia">
+                                <label for="tipo">Tipo</label><input type="text" class="form-control" id="tipo" name="tipo">
+                                <label for="vencimento">Vencimento</label><input type="date" class="form-control" id="vencimento" name="vencimento">
+                                <label for="honorarios">Honorario</label><input type="text" class="form-control" id="honorarios" name="honorarios">
+                                <label for="status">Status</label><input type="text" class="form-control" id="status" name="status">
+                            </div>
+                                <button type="submit" class="btn">Salvar</button>
+                        </form>         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

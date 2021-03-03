@@ -14,13 +14,13 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 // Página Principal dos Usuarios [ GESTÃO DE ACESSOS] (R):
 
 router.get("/main", eAdmin4, (req, res) => {Usuario.find().sort({nome:1}).then((usuarios) => {
-    res.render("admin/usuarios/users", {usuarios: usuarios})}).catch((err) => {
+    res.render("usuarios/users", {usuarios: usuarios})}).catch((err) => {
     req.flash("error_msg", "houve um erro ao listar os clientes")
     res.redirect("/administrativo/main")})})
 
 // Página Principal dos Usuarios (C):
 
-router.get("/registro", (req, res) => {res.render("admin/usuarios/registro")})
+router.get("/registro", (req, res) => {res.render("usuarios/registro")})
 router.post("/registro", (req, res) => {var erros = [] 
 
     if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){erros.push({texto: "Nome Inválido"})}
@@ -28,7 +28,7 @@ router.post("/registro", (req, res) => {var erros = []
     if(!req.body.senha || typeof req.body.senha == undefined || req.body.senha == null){erros.push({texto: "Senha Inválida"})}
     if(req.body.senha.length < 4){erros.push({texto: "Senha muito curta"})}
     if(req.body.senha != req.body.senha2){erros.push({texto: "As senhas são diferentes, tente novamente!"})}
-    if(erros.length > 0) {res.render("admin/usuarios/registro", {erros: erros})}else{
+    if(erros.length > 0) {res.render("usuarios/registro", {erros: erros})}else{
         Usuario.findOne({email: req.body.email}).then((usuario) => {
             if(usuario){req.flash("error_msg", "Já existe uma conta com este e-mail no nosso sistema")
                 res.redirect("/usuarios/registro")}else {
@@ -51,7 +51,7 @@ router.post("/registro", (req, res) => {var erros = []
  
 // Editar Usuarios (U)
 
-router.get("/edit/:id", eAdmin4, (req, res) => {Usuario.findOne({_id:req.params.id}).then((usuario) => {res.render("admin/usuarios/detail", {usuario: usuario})}).catch((err) => {
+router.get("/edit/:id", eAdmin4, (req, res) => {Usuario.findOne({_id:req.params.id}).then((usuario) => {res.render("usuarios/detail", {usuario: usuario})}).catch((err) => {
     req.flash("error_msg", "Este Usuário não está cadastrado")
     res.redirect("usuarios/main")})})
     router.post("/edit", eAdmin4, (req, res) => {Usuario.findOne({_id: req.body.id}).then((usuario) => {
@@ -74,7 +74,7 @@ res.redirect("/usuarios/main")}).catch((err) => {req.flash("error_msg", "Houve u
 res.redirect("/usuario/main")})})
                             
 // Rota Principal para Login (R):
-router.get("/login", (req,res) => {res.render("admin/usuarios/login")})
+router.get("/login", (req,res) => {res.render("usuarios/login")})
 router.post("/login", (req, res, next) => {passport.authenticate("local", {
         successRedirect: "../admin/home",
         failureRedirect: "/usuarios/login",

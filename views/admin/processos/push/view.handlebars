@@ -1,0 +1,44 @@
+   <div class="flex-dashboard">
+       {{> menu/processo/push/main}}
+
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Controle Push | Movimentações</h2>
+               </div>
+               <div class="dynamic-content">
+
+                   <table class="table table-striped">                  
+                            <thead>
+                            <tr>
+                                <th scope="col">Data</th>
+                                <th scope="col">Movimento</th>
+                                <th scope="col">Push</th>
+                                <th scope="col">Editar</th>
+                            </tr>
+                        </thead>
+                    <tbody>
+                       {{#each movimentacao}}
+
+                            <tr>  
+                                <td>{{#formatDate Data}}{{/formatDate}}</td>
+                                <td>{{Movimento}}</td>
+                                <td>{{Push}}</td>
+                                <td onclick="window.location='/movimentacao/edit/{{_id}}'"><i class="fas fa-edit" style="color: #6e8efb; font-size: 16px; "></i></td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                        
+                    </table>
+                </div>
+       </main>
+   </div>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>

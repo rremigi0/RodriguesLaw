@@ -14,13 +14,13 @@ router.get('/main', eAdmin, (req, res) => {res.render("audiencias/main")})
 // Visualizar as Audiências
 
 router.get("/view", eAdmin, (req, res) => {Processo.find({Audiencia:{$ne:null}}).sort({Audiencia:1}).then((processos) => {
-res.render("admin/audiencia/main", {processos: processos})}).catch((err) => {
+res.render("admin/processos/audiencia/main", {processos: processos})}).catch((err) => {
 req.flash("error_msg", "houve um erro ao listar as audiencias")
 res.redirect("/audiencia/main")})})
 
 // Editar Audiencias
 
-router.get("/edit/:id", eAdmin, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("admin/audiencia/edit", {processo: processo})}).catch((err) => {
+router.get("/edit/:id", eAdmin, (req, res) => {Processo.findOne({_id:req.params.id}).then((processo) => {res.render("admin/processos/audiencia/edit", {processo: processo})}).catch((err) => {
     req.flash("error_msg", "Este processo não está cadastrado")
     res.redirect("/audiencia/main/")})})
     router.post("/edit", eAdmin2, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {

@@ -1,0 +1,36 @@
+<!-- Modal Cadastrar Nova Movimentação -->
+
+    <div class="modal fade" id="movimentacaoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar Movimentação</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+
+ <!-- Aba Navegação Geral do Nova Movimentacao -->
+
+                    <form action="/movimentacao/add" method="POST">
+                        <div class="form-group">
+                            <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{processo.id}}">
+                            <label for="data">Data</label><input type="date" class="form-control" id="data" name="data">
+                            <label for="movimento">Movimentação</label><input type="text" class="form-control" id="movimento" name="movimento">
+                            <label for="push">Enviado Push?</label>
+                                <select class="form-control" id="push" name="push">
+                                    <option>Sim</option>
+                                    <option>Não</option>
+                                </select>
+                        </div>
+                            <button type="submit" class="btn">Salvar</button>
+                    </form>         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

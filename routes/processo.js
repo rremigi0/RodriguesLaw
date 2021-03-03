@@ -54,61 +54,64 @@ router.post("/add/addProcessos", eAdmin2, (req, res) => {var erros = []
     new Processo(novoProcesso).save().then(async (dbProcesso) => {
         await Cliente.findOneAndUpdate({ _id: req.body.cliente }, {$push: {Processos: dbProcesso._id}}, { new: true });
     req.flash("success_msg", "Processo criado com sucesso!")
-    res.redirect("/processo/view_ativos")}).catch((err) => {
+    res.redirect("/admin/home")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
-    res.redirect("/processo/view_ativos")})}})
+    res.redirect("/admin/processo/view_ativos")})}})
 
 //Rota de Processos (R):
 
 router.get('/main', eAdmin, (req, res) => {
     Cliente.find().then((clientes) => {
-        res.render("admin/processos/view", {clientes: clientes})
+        res.render("admin/processos/main", {clientes: clientes})
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
         res.redirect("/processo/main")
     })})   
 
-// Editar Processos
+// Editar Processos:
 
-router.get("/detail/:id", eAdmin, async (req, res) => {
-    await Processo.findOne({_id:req.params.id}).populate({path:'Financeiro Prazos Movimentacao', options: {sort: { 'Data': -1}}}).then((processo) => {
-        res.render("admin/processos/detail", {processo: processo})}).catch((err) => {
-    req.flash("error_msg", "Este processo não está cadastrado")
-    res.redirect("/processo/view_ativos/")})})
-    router.post("/edit", eAdmin3, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
-    
-        // Aba Geral:
+    // Aba de Prazos
 
-        processo.Processo = req.body.processo
-        processo.Autor = req.body.autor
-        processo.Reu = req.body.reu
-        
-        // Aba Dados:
-        processo.Procedimento = req.body.procedimento
-        processo.Tutela = req.body.tutela
-        processo.Categoria = req.body.categoria
-        processo.Classe = req.body.classe
-        processo.Assunto = req.body.assunto
-        
-        // Aba Audiência:
-        processo.Audiencia = req.body.audiencia
-        
-        // Aba órgão Julgador:
-        processo.Secao = req.body.secao
-        processo.Vara = req.body.vara
-        processo.Comarca = req.body.comarca
-        processo.UF = req.body.uf
+        router.get("/detail/:id", eAdmin, async (req, res) => {
+            await Processo.findOne({_id:req.params.id}).populate({path:'Financeiro Prazos Movimentacao Diligencias', options: {sort: { 'Data': -1}}}).then((processo) => {
+                res.render("admin/processos/detail/1", {processo: processo})}).catch((err) => {
+            req.flash("error_msg", "Este processo não está cadastrado")
+            res.redirect("/processo/view_ativos/")})})
+            router.post("/edit", eAdmin3, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
+            
+                // Aba Geral:
 
-        // Aba Status:
+                processo.Processo = req.body.processo
+                processo.Autor = req.body.autor
+                processo.Reu = req.body.reu
+                
+                // Aba Dados:
+                processo.Procedimento = req.body.procedimento
+                processo.Tutela = req.body.tutela
+                processo.Categoria = req.body.categoria
+                processo.Classe = req.body.classe
+                processo.Assunto = req.body.assunto
+                
+                // Aba Audiência:
+                processo.Audiencia = req.body.audiencia
+                
+                // Aba órgão Julgador:
+                processo.Secao = req.body.secao
+                processo.Vara = req.body.vara
+                processo.Comarca = req.body.comarca
+                processo.UF = req.body.uf
 
-        processo.Atuacao = req.body.atuacao
-        processo.Distribuicao = req.body.distribuicao
-        processo.Status = req.body.status
-    
-    processo.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
-    res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
-    res.redirect("/processo/view_ativos")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
-    res.redirect("/processo/view_ativos")})})
+                // Aba Status:
+
+                processo.Atuacao = req.body.atuacao
+                processo.Distribuicao = req.body.distribuicao
+                processo.Status = req.body.status
+            
+            processo.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
+            res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
+            res.redirect("/processo/view_ativos")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
+            res.redirect("/processo/view_ativos")})})
+
 
 // Deletar Processos (D)
 
@@ -124,7 +127,7 @@ res.redirect("/processo/main")})})
 
 router.get('/triagem', eAdmin, (req, res) => {
     Cliente.find().then((clientes) => {
-        res.render("processos/triagem/main", {clientes: clientes})
+        res.render("admin/processos/triagem/main", {clientes: clientes})
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
         res.redirect("/processo/main")
@@ -135,7 +138,7 @@ router.get('/triagem', eAdmin, (req, res) => {
 
 router.get('/addtriagem', eAdmin2, (req, res) => {
     Cliente.find().then((clientes) => {
-        res.render("processos/triagem/add", {clientes: clientes})
+        res.render("admin/processos/triagem/add", {clientes: clientes})
     }).catch((err) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
         res.redirect("/processo/main")
@@ -145,32 +148,32 @@ router.get('/addtriagem', eAdmin2, (req, res) => {
 // Visualizar Triagem Baixa:
 
 router.get("/view_baixa", eAdmin, (req, res) => {Triagem.find( { Prioridade:'Verde' } ).sort({Entrada:1}).then((triagens) => {
-    res.render("processos/triagem/view_baixa", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.render("admin/processos/triagem/view_baixa", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 // Visualizar Triagem Média:
 
 router.get("/view_media", eAdmin, (req, res) => {Triagem.find( { Prioridade:'Amarelo' } ).sort({Entrada:1}).then((triagens) => {
-    res.render("processos/triagem/view_media", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.render("admin/processos/triagem/view_media", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 // Visualizar Triagem Alta:
 
 router.get("/view_alta", eAdmin, (req, res) => {Triagem.find( { Prioridade:'Vermelho' } ).sort({Entrada:1}).then((triagens) => {
-    res.render("processos/triagem/view_alta", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.render("admin/processos/triagem/view_alta", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 
 // Visualizar os Processos Ativos:
 
 router.get("/view_ativos", eAdmin, (req, res) => {Processo.find( { Status:'Ativo' } ).sort({Atuacao:1}).then((processos) => {
-    res.render("processos/view_ativos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.render("admin/processos/triagem/view_ativos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/main")})})
 
 // Visualizar os Processos Arquivados:
 
 router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'Arquivado' } ).sort({Atuacao:1}).then((processos) => {
-    res.render("processos/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.render("admin/processos/triagem/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/main")})})
 
 
@@ -190,7 +193,7 @@ res.redirect("/processo/triagem")})})
         
 router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
 
-    if(erros.length > 0) {res.render("processos/addprocessos", {erros: erros})}else {
+    if(erros.length > 0) {res.render("admin/processos/addprocessos", {erros: erros})}else {
         
         const novoTriagem = {
         Cliente: req.body.cliente,

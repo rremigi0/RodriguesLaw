@@ -57,7 +57,7 @@ router.post("/add/addClientes", eAdmin2, (req, res) => {var erros = []
 //Visualizar os Clientes (R):
 
 router.get("/view", eAdmin, (req, res) => {
-    Cliente.find({}, 'Codigo Nome Cpf_Cnpj Celular').sort({Codigo:1}).then((clientes) => {
+    Cliente.find({}, 'Codigo Nome Cpf_Cnpj Celular').sort({Codigo:-1}).then((clientes) => {
     res.render("admin/clientes/view", {clientes: clientes})
   }).catch((err) => {
     req.flash("error_msg", "houve um erro ao listar os clientes")
