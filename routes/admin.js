@@ -43,15 +43,15 @@ router.get('/cadastro', eAdmin, (req, res) => {
 
 // Página Principal do Administrativo:
 
-router.get("/administrativo", eAdmin3, (req, res) => {res.render("admin/administrativo/main")})
+router.get("/administrativo", eAdmin3, (req, res) => {res.render("admin/adm/main")})
 
 
 // Rota Configurações:
 
-router.get('/configuracoes', eAdmin3, (req, res) => {res.render("admin/administrativo/configuracoes/configuracoes")})
+router.get('/configuracoes', eAdmin3, (req, res) => {res.render("admin/adm/configuracoes/configuracoes")})
 
 // Rota Backup:
 
-router.get('/backup', eAdmin3, (req, res) => {res.render("admin/administrativo/configuracoes/backup")})
+router.get('/backup', eAdmin3, (req, res) => {res.render("admin/adm/configuracoes/backup")})
 
 module.exports = router

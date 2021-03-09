@@ -12,15 +12,15 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Página Principal do Financeiro:
 
-router.get("/main", eAdmin2, (req, res) => {res.render("admin/administrativo/financeiro/main")})
+router.get("/main", eAdmin2, (req, res) => {res.render("admin/adm/financeiro/main")})
         
 //Adicionar Novo Honorário (C):
         
-router.get('/add', eAdmin2, (req, res) => {res.render("admin/administrativo/financeiro/addfinanceiro")})
+router.get('/add', eAdmin2, (req, res) => {res.render("admin/adm/financeiro/addfinanceiro")})
         
 // Visualizar os Honorários
         
-router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => {res.render("admin/administrativo/financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
+router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => {res.render("admin/adm/financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
 res.redirect("/financeiro/main")})})
         
 // Deletar Honorários
@@ -60,7 +60,7 @@ if(erros.length > 0) {res.render("admin/administrativo/financeiro/addfinanceiro"
     
 // Editar Honorários
     
-router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("admin/administrativo/financeiro/editfinanceiro", {financeiro: financeiro})}).catch((err) => {
+router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("admin/adm/financeiro/editfinanceiro", {financeiro: financeiro})}).catch((err) => {
 req.flash("error_msg", "Este honorário não está cadastrado")
 res.redirect("/financeiro/main")})})
 router.post("/edit", eAdmin3, (req, res) => {Financeiro.findOne({_id: req.body.id}).then((financeiro) => {

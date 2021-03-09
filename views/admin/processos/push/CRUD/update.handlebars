@@ -39,15 +39,22 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/movimentacao/edit" method="POST">
-                      <input type="hidden" name="id" value="{{movimentacao._id}}">
-                        <label for="push">Push</label>
-                            <select class="form-control" type="text" id="push" name="push" value="{{movimentacao.Push}}">
-                                <option>Sim</option>
-                                <option>Não</option>
-                            </select><br>
-                    <button type="submit" class="btn">Salvar</button>
-                     
+                    <form action="/movimentacao/edit" method="POST">
+                        <input type="hidden" name="id" value="{{movimentacao._id}}">
+                            <div class="form-group">
+                                <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{movimentacao.id}}">
+                                <label for="data">Data</label><input type="date" class="form-control" id="data" name="data" value="{{#formatDateUS movimentacao.Data}}{{/formatDateUS}}">
+                                <label for="movimento">Movimentação</label><input type="text" class="form-control" id="movimento" name="movimento" value="{{movimentacao.Movimento}}">
+                                <label for="push">Enviado Push?</label>
+                                    <select class="form-control" id="push" name="push">
+                                        <option>Sim</option>
+                                        <option>Não</option>
+                                    </select>
+                            </div>
+                        <div class="form-group">
+                            <label for="comentario">Comentário</label><textarea class="form-control" id="comentario" name="comentario">{{movimentacao.Comentario}}</textarea>
+                        </div>
+                            <button type="submit" class="btn">Salvar</button>                     
                   </form>
             </div>
        </main>

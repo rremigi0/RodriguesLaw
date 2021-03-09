@@ -16,7 +16,7 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 router.get("/main", eAdmin4, (req, res) => {Usuario.find().sort({nome:1}).then((usuarios) => {
     res.render("usuarios/users", {usuarios: usuarios})}).catch((err) => {
     req.flash("error_msg", "houve um erro ao listar os clientes")
-    res.redirect("/administrativo/main")})})
+    res.redirect("/adm/main")})})
 
 // Página Principal dos Usuarios (C):
 

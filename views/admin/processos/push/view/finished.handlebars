@@ -10,6 +10,22 @@
                <div class="main-content-title">
                    <h2>Controle Push | Movimentações</h2>
                </div>
+               <div class="panel-row">
+                   
+                    <nav class ="nav_tabs">
+                        <ul>
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="pendentes">
+                                <label onclick="window.location='/movimentacao/pending/'" for ="pendentes">Pendentes</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="finalizado" checked>
+                                <label onclick="window.location='/movimentacao/finished/'" for ="controle">Finalizado</label>
+                            </li>
+                        </ul>
+                    </nav>
+
+               </div>
                <div class="dynamic-content">
 
                    <table class="table table-striped">                  
@@ -18,7 +34,8 @@
                                 <th scope="col">Data</th>
                                 <th scope="col">Movimento</th>
                                 <th scope="col">Push</th>
-                                <th scope="col">Editar</th>
+                                <th scope="col">Detalhar</th>
+                                <th scope="col">Deletar</th>
                             </tr>
                         </thead>
                     <tbody>
@@ -28,7 +45,8 @@
                                 <td>{{#formatDate Data}}{{/formatDate}}</td>
                                 <td>{{Movimento}}</td>
                                 <td>{{Push}}</td>
-                                <td onclick="window.location='/movimentacao/edit/{{_id}}'"><i class="fas fa-edit" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/movimentacao/edit/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/movimentacao/delete/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
                             </tr>
                         {{/each}}
                     </tbody>
