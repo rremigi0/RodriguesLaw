@@ -39,18 +39,18 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                  <form action="/prazo/atualizar" method="POST">
-                      <input type="hidden" name="id" value="{{prazo._id}}">
+                  <form action="/diligencia/atualizar" method="POST">
+                      <input type="hidden" name="id" value="{{diligencia._id}}">
                     <div class="form-group">
                       <label for="processo">Código do Cliente (Não alterar)</label>
-                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{prazo.Processo}}">
+                      <input type="text" class="form-control" id="processo" aria-describedby="emailHelp" name="processo" value="{{diligencia.Processo}}">
                     </div>
                         <label for="status">Status</label>
-                            <select class="form-control" type="text" id="status" name="status" value="{{prazo.Status}}">
+                            <select class="form-control" type="text" id="status" name="status" value="{{diligencia.Status}}">
                                 <option>Pendente</option>
                                 <option>Validacao</option>
                                 <option>Error</option>
-                                <option>Protocolado</option>
+                                <option>Finalizado</option>
                             </select><br>
                     <button type="submit" class="btn">Salvar</button>
                      

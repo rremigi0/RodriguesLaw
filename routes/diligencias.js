@@ -65,7 +65,7 @@ router.post("/add", eAdmin2, (req, res) => {var erros = []
 
     // Rota de Protocolados:
 
-        router.get("/protocoled", eAdmin, (req, res) => {Diligencia.find( { Status:'Protocolado' } ).sort({Prazo:-1}).then((diligencias) => {res.render("admin/processos/diligencias/view/protocoled", {diligencias: diligencias})    
+        router.get("/finished", eAdmin, (req, res) => {Diligencia.find( { Status:'Finalizado' } ).sort({Prazo:-1}).then((diligencias) => {res.render("admin/processos/diligencias/view/protocoled", {diligencias: diligencias})    
         }).catch((err) => {req.flash("error_msg", "houve um erro ao listar as diligencias")
         res.redirect("/main")})})
 
@@ -103,8 +103,8 @@ router.get("/atualizar/:id", eAdmin2, (req, res) => {Diligencia.findOne({_id:req
     res.redirect("diligencia/pending")})})
     router.post("/atualizar", eAdmin2, (req, res) => {Diligencia.findOne({_id: req.body.id}).then((diligencia) => {
     
-        prazo.Processo = req.body.processo
-        prazo.Status = req.body.status
+        diligencia.Processo = req.body.processo
+        diligencia.Status = req.body.status
     
     diligencia.save().then(() => {req.flash("success_msg", "Diligencia editada com sucesso!")
     res.redirect("/diligencia/pending")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição da diligencia")
