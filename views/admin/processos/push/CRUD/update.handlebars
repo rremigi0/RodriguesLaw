@@ -1,35 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
-    <title>Sistema Jurídico</title>
-</head>
-<body>
    <div class="flex-dashboard">
-       <sidebar id="sidebar">
-           <div class="sidebar-title">
-            <img src="/Images/Cor Azul.png" alt="">
-            <h2>Rodrigues Advocacia</h2>
-           </div>
-           <div class="menu">
-            <ul>
-                <li><i class="fas fa-home"></i><a href="/admin/home">  Home</a></li>
-                <li><i class="fa fa-reply"></i><a href="/prazo/pending">  Retornar</a></li>
-                <li class="selected"><i class="fas fa-sync-alt"></i><a href="/cliente/detail"></a>  Atualizar</a></li>
-            </ul>
 
-           </div>
-       </sidebar>
+        {{> menu/processo/push/main}}
+       
        <main id="mainContent">
            <header>
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
                <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
-           <div class="main-content">
+        <div class="main-content">
                <div class="main-content-title">
                    <h2>Atualizar Status</h2>
                </div>
@@ -39,29 +17,13 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                    <form action="/movimentacao/edit" method="POST">
-                        <input type="hidden" name="id" value="{{movimentacao._id}}">
-                            <div class="form-group">
-                                <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{movimentacao.id}}">
-                                <label for="data">Data</label><input type="date" class="form-control" id="data" name="data" value="{{#formatDateUS movimentacao.Data}}{{/formatDateUS}}">
-                                <label for="movimento">Movimentação</label><input type="text" class="form-control" id="movimento" name="movimento" value="{{movimentacao.Movimento}}">
-                                <label for="push">Enviado Push?</label>
-                                    <select class="form-control" id="push" name="push">
-                                        <option>Sim</option>
-                                        <option>Não</option>
-                                    </select>
-                            </div>
-                        <div class="form-group">
-                            <label for="comentario">Comentário</label><textarea class="form-control" id="comentario" name="comentario">{{movimentacao.Comentario}}</textarea>
-                        </div>
-                            <button type="submit" class="btn">Salvar</button>                     
-                  </form>
+                    <div class="button-new" style="text-align: right">
+                        <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gerarpush">Gerar Push<a href="#"></a></button>
+                    </div>
+                        {{> formulario/processo/movimentacoes/push}}
             </div>
        </main>
-   </div>
-    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/plugins/fontawesome/js/all.min.js"></script>
-    <script src="/js/menu.js"></script>
-</body>
-</html>
 
+       {{> modal/processo/movimentacoes/push}}
+
+   </div>

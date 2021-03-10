@@ -1,0 +1,54 @@
+   <!-- Gerar Push (HTML) -->
+   
+    <div class="modal fade" id="gerarpush" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="dynamic-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Gerando Push Automático</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>      
+                    </div>        
+                   <div class="card-body">
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+                    
+                        
+                        Pje Push - Serviço de Acompanhamento automático de processo</br></br>
+
+                        Prezado (a) *{{movimentacao.Processo.Cliente.Nome}}*,</br></br>
+
+                        Informamos que o processo a seguir, no qual é parte, sofreu movimentação:</br></br>
+
+                        _Processo nº _{{movimentacao.Processo.Processo}}_</br></br>
+
+                        Polo Ativo: *{{movimentacao.Processo.Autor}}*</br></br>
+
+                        Polo Passivo: *{{movimentacao.Processo.Reu}}*</br>
+
+                        ___________________________________________________________________________________________</br>
+                        🏷️ *{{#formatDate movimentacao.Data}}{{/formatDate}}* - {{movimentacao.Movimento}}</br></br>
+
+                        🗒️ Comentário do Advogado: {{movimentacao.Comentario}}</br></br>
+
+                        Agradecemos a confiança depositada.</br></br>
+
+                        Qualquer novidade comunicaremos, imediatamente.</br></br>
+
+                        Atenciosamente,</br></br>
+
+                        *Rodrigues Advocacia*</br>
+
+                        _Núcleo de Movimentações Processuais_</br>
+
+                        ✉ contato@rodrigueslaw.adv.br</br>
+
+                        ☎️ (81) 3314-9020</br>
+
+                        📱 (81) 9.9176-0398</br>                       
+
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -68,7 +68,7 @@ router.get("/view", eAdmin, (req, res) => {
 // Editar Clientes (U)
 
 router.get("/detail/:id", eAdmin, async (req, res) => {
-  await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimenta').then((cliente) => {
+  await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao').then((cliente) => {
     res.render("admin/clientes/detail", {cliente: cliente})
   })})
     router.post("/edit", eAdmin2, (req, res) => {Cliente.findOne({_id: req.body.id}).then((cliente) => {

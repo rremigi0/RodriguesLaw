@@ -2,8 +2,11 @@ const express = require ("express")
 const router = express.Router()
 const mongoose = require ("mongoose")
 require ("../models/Movimentacao")
+require ("../models/Processo")
+require ("../models/Cliente")
 const Movimentacao = mongoose.model("movimentacoes")
 const Processo = mongoose.model("processos")
+const Cliente = mongoose.model("clientes")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 const {eAdmin3} = require("../helpers/eAdmin3")
@@ -45,7 +48,11 @@ router.get("/finished", eAdmin, (req, res) => {Movimentacao.find({ Push:'Sim' })
 
 // Editar Push:
 
-router.get("/edit/:id", eAdmin2, (req, res) => {Movimentacao.findOne({_id:req.params.id}).then((movimentacao) => {res.render("admin/processos/push/CRUD/update", {movimentacao: movimentacao})}).catch((err) => {
+router.get("/edit/:id", eAdmin2, async (req, res) => {
+    await Movimentacao.findOne({_id:req.params.id}).populate({
+        path: 'Processo',
+        populate: {path: 'Cliente'}}).then((movimentacao) => {
+    res.render("admin/processos/push/CRUD/update", {movimentacao: movimentacao})}).catch((err) => {
     req.flash("error_msg", "Esta movimentação não está cadastrada")
     res.redirect("/movimentacao/pending")})})
     router.post("/edit", eAdmin2, (req, res) => {Movimentacao.findOne({_id: req.body.id}).then((movimentacao) => {
