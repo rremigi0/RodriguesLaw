@@ -85,19 +85,6 @@ const db = require("./config/db")
     // Public
 
         app.use(express.static(path.join(__dirname, "public")))
-
-    // Express
-
-        app.use(express.json());
-        app.use(express.urlencoded({ extended: true}));
-        app.use(
-            "/files", 
-            express.static(path.resolve(__dirname, "..",  "tmp", "uploads"))
-        );
-
-    // Morgan
-
-        app.use(morgan('dev'));
     
 //Rotas
 

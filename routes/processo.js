@@ -269,23 +269,23 @@ router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
     
       // Upload de Arquivos:
     
-    router.post("/posts", multer(multerConfig).single('file'), async (req, res) => {
-        const { originalname: Name, size, filename: Key} = req.file;
+   // router.post("/posts", multer(multerConfig).single('file'), async (req, res) => {
+    //    const { originalname: Name, size, filename: Key} = req.file;
         
-        const post = await Post.create({
-            Name,
-            size,
-            Key,
-            Url: '', 
-        })
-        return res.json({post});
-    });
+     //   const post = await Post.create({
+     //       Name,
+      //      size,
+       //     Key,
+        //    Url: '', 
+      //  })
+     //   return res.json({post});
+ //   });
 
 
-    router.delete('/posts/:id', async (req, res) => {
-        const post = await Post.findById(req.params.id);
-        await post.remove ();
-        return res.send()
-    })
+  //  router.delete('/posts/:id', async (req, res) => {
+     //   const post = await Post.findById(req.params.id);
+        //await post.remove ();
+      //  return res.send()
+  //  })
 
 module.exports = router
