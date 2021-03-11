@@ -1,7 +1,5 @@
 const express = require ("express")
 const router = express.Router()
-const multer = require ('multer')
-const multerConfig = require ('../src/config/multer')
 const mongoose = require ("mongoose")
 require ("../models/Processo")
 require ("../models/Cliente")
