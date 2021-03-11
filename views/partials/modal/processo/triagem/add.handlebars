@@ -17,18 +17,16 @@
 <!-- Aba Navegação Geral do Novo Ticket -->
 
                         <form action="/processo/add/addTriagem" method="POST">
-                            <div class="tab-content" id="nav-tabContent">
-                                <div class="tab-pane fade show active" id="nav-geral" role="tabpanel" aria-labelledby="nav-geral-tab">
-                                    <div class="card-body">
+
                                         <div class="form-row">
                                             <div class="col-md-6 mb-6">
                                                 <label for="cliente">Código do Cliente (Não alterar)</label><input type="text" class="form-control" id="cliente" name="cliente" value="{{cliente.id}}">
                                             </div>
+
                                             <div class="col-md-6 mb-6">
                                                 <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" placeholder="Digite o Nome Completo">
                                             </div>
-                                        </div>
-                                        <div class="form-row">
+
                                             <div class="col-md-6 mb-6">
                                                 <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu" placeholder="Digite o Nome Completo">
                                             </div>
@@ -42,8 +40,8 @@
                                             <div class="col-md-3 mb-3">
                                                 <label for="entrada">Data de Entrada</label><input type="date" class="form-control" id="entrada" name="entrada">
                                             </div>
-                                        </div>    
-                                        <div class="form-row">
+                                          
+                                        
                                             <div class="col-md-3 mb-3">
                                                 <label for="prioridade">Prioridade</label>
                                                     <select class="form-control" id="prioridade" name="prioridade">
@@ -60,14 +58,31 @@
                                                         <option>Concluído</option>
                                                     </select>
                                             </div>
+
+                                            <div class="col-md-3 mb-3">
+                                                <label for="status">Fase</label>
+                                                    <select class="form-control" id="fase" name="fase">
+                                                        <option>Iniciação</option>
+                                                        <option>Redação</option>
+                                                        <option>Validação</option>
+                                                        <option>Protocolo</option>
+                                                    </select>
+                                            </div>
+                                            
+                                        
                                             <div class="col-md-6 mb-6">
                                                 <label for="tipo">Tipo de Ação</label><input type="text" class="form-control" id="tipo" name="tipo" placeholder="Ex.: Reclamação Trabalhista">
                                             </div>
+                                        
+                                            <div class="col-md-12 mb-12">
+                                                <br><label for="fatos">Fatos Jurídicos</label>
+                                                <textarea class="form-control" id="fatos" name="fatos" rows="15"></textarea>
+                                            </div>
+                                            
+
                                         </div>
-                                    <button type="submit" class="btn">Cadastrar</button>                                                               
-                                </div>
-                            </div>
-                        </div>   
+                                                                                            
+                                    <br><button type="submit" class="btn">Cadastrar</button>                                                                 
                     </form>
                 </div>
             </div>

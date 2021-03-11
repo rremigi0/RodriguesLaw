@@ -10,6 +10,7 @@ const Cliente = new Schema ({
     Sexo: { type: String, default: null },
     Estado: { type: String, default: null },
     Nacionalidade: { type: String, default: null },
+    Profissao: { type: String, default: null },
 
 // Documentos: 
 

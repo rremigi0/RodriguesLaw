@@ -1,10 +1,14 @@
 const express = require ("express")
 const router = express.Router()
+const multer = require ('multer')
+const multerConfig = require ('../src/config/multer')
 const mongoose = require ("mongoose")
 require ("../models/Processo")
 require ("../models/Cliente")
 require ("../models/Triagem")
+require ("../models/Post")
 const Cliente = mongoose.model("clientes")
+const Post = mongoose.model("posts")
 const Processo = mongoose.model("processos")
 const Triagem = mongoose.model("triagens")
 const {eAdmin} = require("../helpers/eAdmin")
@@ -67,6 +71,19 @@ router.get('/main', eAdmin, (req, res) => {
         req.flash("error_msg", "Houve um erro ao carregar o formulário")
         res.redirect("/processo/main")
     })})   
+
+
+// Visualizar os Processos Ativos:
+
+router.get("/view_ativos", eAdmin, (req, res) => {Processo.find( { Status:'Ativo' } ).sort({Atuacao:1}).then((processos) => {
+    res.render("admin/processos/triagem/view_ativos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/main")})})
+
+// Visualizar os Processos Arquivados:
+
+router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'Arquivado' } ).sort({Atuacao:1}).then((processos) => {
+    res.render("admin/processos/triagem/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/main")})})
 
 // Editar Processos:
 
@@ -145,36 +162,37 @@ router.get('/addtriagem', eAdmin2, (req, res) => {
     })
 })   
 
-// Visualizar Triagem Baixa:
+// Visualizar Fase 01::
 
-router.get("/view_baixa", eAdmin, (req, res) => {Triagem.find( { Prioridade:'Verde' } ).sort({Entrada:1}).then((triagens) => {
-    res.render("admin/processos/triagem/view_baixa", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+router.get("/triagem/iniciacao", eAdmin, (req, res) => {Triagem.find( { Fase:'Iniciação' } ).sort({Entrada:1}).then((triagens) => {
+    res.render("admin/processos/triagem/view/iniciacao", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
-// Visualizar Triagem Média:
+// Visualizar Fase 02:
 
-router.get("/view_media", eAdmin, (req, res) => {Triagem.find( { Prioridade:'Amarelo' } ).sort({Entrada:1}).then((triagens) => {
-    res.render("admin/processos/triagem/view_media", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+router.get("/triagem/redacao", eAdmin, (req, res) => {Triagem.find( { Fase:'Redação' } ).sort({Entrada:1}).then((triagens) => {
+    res.render("admin/processos/triagem/view/redacao", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
-// Visualizar Triagem Alta:
+// Visualizar Fase 03:
 
-router.get("/view_alta", eAdmin, (req, res) => {Triagem.find( { Prioridade:'Vermelho' } ).sort({Entrada:1}).then((triagens) => {
-    res.render("admin/processos/triagem/view_alta", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+router.get("/triagem/validacao", eAdmin, (req, res) => {Triagem.find({Fase:'Validação'}).sort({Entrada:1}).then((triagens) => {
+    res.render("admin/processos/triagem/view/validacao", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 
-// Visualizar os Processos Ativos:
+// Visualizar Fase 04:
 
-router.get("/view_ativos", eAdmin, (req, res) => {Processo.find( { Status:'Ativo' } ).sort({Atuacao:1}).then((processos) => {
-    res.render("admin/processos/triagem/view_ativos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
-    res.redirect("/processo/main")})})
+router.get("/triagem/protocolados", eAdmin, (req, res) => {Triagem.find({Fase:'Protocolados'}).sort({Entrada:1}).then((triagens) => {
+    res.render("admin/processos/triagem/view/protocolados", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/triagem")})})
 
-// Visualizar os Processos Arquivados:
+// Visualizar Fase 04:
 
-router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'Arquivado' } ).sort({Atuacao:1}).then((processos) => {
-    res.render("admin/processos/triagem/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
-    res.redirect("/processo/main")})})
+router.get("/triagem/all", eAdmin, (req, res) => {Triagem.find({}).sort({Entrada:1}).then((triagens) => {
+    res.render("admin/processos/triagem/view/protocolados", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
+    res.redirect("/processo/triagem")})})
+
 
 
 
@@ -182,7 +200,7 @@ router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'A
 // Deletar Triagem
 
 router.get("/deletartriagem/:id", eAdmin4, (req, res) => {Triagem.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Processo deletado com sucesso")
-res.redirect("/processo/view_alta")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+res.redirect("/processo/triagem/iniciacao")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/processo/triagem")})})
 
 
@@ -203,6 +221,8 @@ router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
         Entrada: req.body.entrada,
         Prioridade: req.body.prioridade,
         Tipo: req.body.tipo,
+        Fase: req.body.fase,
+        Fatos: req.body.fatos,
         Status: req.body.status}                   
     
     new Triagem(novoTriagem).save().then(async (dbTriagem) => {
@@ -212,5 +232,60 @@ router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
     req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
     res.redirect("/processo/add")})}})
 
+
+// Editar Triagens:
+
+    router.get("/triagem/detail/:id", eAdmin, async (req, res) => {
+        await Triagem.findOne({_id:req.params.id}).then((triagem) => {
+            //res.json(triagem)
+            res.render("admin/processos/triagem/CRUD/update", {triagem: triagem})}).catch((err) => {
+        req.flash("error_msg", "Esta Ticket não está cadastrada")
+        res.redirect("/admin/home/")})})
+        router.post("/triagem/edit", eAdmin3, (req, res) => {Triagem.findOne({_id: req.body.id}).then((triagem) => {
+        
+            triagem.Autor = req.body.autor
+            triagem.Reu = req.body.reu
+            triagem.Tutela = req.body.tutela
+            triagem.Entrada = req.body.entrada
+            triagem.Prioridade = req.body.prioridade
+            triagem.Tipo = req.body.tipo
+            triagem.Fase = req.body.fase
+            triagem.Fatos = req.body.fatos
+            triagem.Status = req.body.status
+            
+        
+        triagem.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
+        res.redirect("/processo/triagem/iniciacao")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
+        res.redirect("/processo/triagem/iniciacao")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
+        res.redirect("/processo/triagem/iniciacao")})})
+
+  
+    // Visualizar os Arquivos:
+
+    router.get("/viewposts", async (req, res) => {
+        const posts = await Post.find();
+        return res.json(posts);
+    })
+    
+      // Upload de Arquivos:
+    
+    router.post("/posts", multer(multerConfig).single('file'), async (req, res) => {
+        const { originalname: Name, size, filename: Key} = req.file;
+        
+        const post = await Post.create({
+            Name,
+            size,
+            Key,
+            Url: '', 
+        })
+        return res.json({post});
+    });
+
+
+    router.delete('/posts/:id', async (req, res) => {
+        const post = await Post.findById(req.params.id);
+        await post.remove ();
+        return res.send()
+    })
 
 module.exports = router

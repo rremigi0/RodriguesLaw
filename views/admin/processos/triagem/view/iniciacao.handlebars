@@ -19,11 +19,11 @@
             <ul>
                 <li>
                     <i class="fa fa-reply"></i>
-                    <a href="/processo/Triagem">  Retornar</a>
+                    <a href="/processo/Triagem">  RETORNAR</a>
                 </li>
                 <li class="selected">
                     <i class="fa fa-folder"></i>
-                    <a href="/processo/view_alta">  Baixa Prioridade</a>
+                    <a href="/processo/triagem/iniciacao">  Fase 01</a>
                 </li>
             </ul>
 
@@ -42,19 +42,24 @@
                     <nav class ="nav_tabs">
                         <ul>
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="alta" >
-                                <label onclick="window.location='/processo/view_alta/'" for ="alta">Alta Prioridade</label>
+                                <input type="radio" name="tabs" class="rd_tabs" id="iniciacao" checked>
+                                <label onclick="window.location='/processo/triagem/iniciacao/'" for ="iniciacao">Iniciação</label>
 
                             </li>
 
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="media">
-                                <label onclick="window.location='/processo/view_media/'" for ="media">Média Prioridade</label>
+                                <input type="radio" name="tabs" class="rd_tabs" id="redacao">
+                                <label onclick="window.location='/processo/triagem/redacao/'" for ="redacao">Redação</label>
                                 
                             </li>
                             <li>
-                                <input type="radio" name="tabs" class="rd_tabs" id="baixa" checked>
-                                <label onclick="window.location='/processo/view_baixa/'" for ="baixa">Baixa Prioridade</label>
+                                <input type="radio" name="tabs" class="rd_tabs" id="validacao">
+                                <label onclick="window.location='/processo/triagem/validacao/'" for ="validacao">Validação</label>
+                                
+                            </li>
+                            <li>
+                                <input type="radio" name="tabs" class="rd_tabs" id="protocolados">
+                                <label onclick="window.location='/processo/triagem/protocolados/'" for ="protocolados">Protocolados</label>
                                 
                             </li>
                         </ul>
@@ -82,7 +87,7 @@
                                 <td>{{Tutela}}</td>
                                 <td>{{#formatDate Entrada}}{{/formatDate}}</td>
                                 <td>{{Prioridade}}</td>
-                                <td onclick="window.location='/processo/editTriagem/{{_id}}'"><i class="fas fa-edit"></i></td>
+                                <td onclick="window.location='/processo/triagem/detail/{{_id}}'"><i class="fas fa-edit"></i></td>
                                 <td onclick="window.location='/processo/deletarTriagem/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
                             </tr>
                     {{/each}}

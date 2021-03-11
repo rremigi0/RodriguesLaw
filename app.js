@@ -2,6 +2,7 @@
 
 const express = require ('express')
 const handlebars = require ('express-handlebars')
+const morgan = require ('morgan')
 const bodyParser = require ("body-parser")
 const app = express()
 const path = require ("path")
@@ -9,6 +10,8 @@ const mongoose = require ("mongoose")
 const session = require ("express-session")
 const flash = require ("connect-flash")
 const moment = require('moment')
+const pdf = require('html-pdf')
+const fs = require ('fs')
 const admin = require ('./routes/admin')
 const usuarios = require("./routes/usuario")
 const processo = require("./routes/processo")
@@ -82,6 +85,19 @@ const db = require("./config/db")
     // Public
 
         app.use(express.static(path.join(__dirname, "public")))
+
+    // Express
+
+        app.use(express.json());
+        app.use(express.urlencoded({ extended: true}));
+        app.use(
+            "/files", 
+            express.static(path.resolve(__dirname, "..",  "tmp", "uploads"))
+        );
+
+    // Morgan
+
+        app.use(morgan('dev'));
     
 //Rotas
 

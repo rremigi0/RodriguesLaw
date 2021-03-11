@@ -1,0 +1,39 @@
+    <form action="/processo/triagem/edit" method="POST">
+        <input type="hidden" name="id" value="{{triagem._id}}">
+
+            <div class="form-row">
+                <div class="col-md-6 mb-6">
+                    <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" value="{{triagem.Autor}}">
+                </div>
+                <div class="col-md-6 mb-6">
+                    <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu" value="{{triagem.Reu}}"><br>
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label for="tutela">Tutela</label><input type="text" class="form-control" id="tutela" name="tutela" value="{{triagem.Tutela}}">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="entrada">Data de Entrada</label><input type="date" class="form-control" id="entrada" name="entrada" value="{{#formatDateUS triagem.Entrada}}{{/formatDateUS}}">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label for="prioridade">Prioridade</label><input type="text" class="form-control" id="prioridade" name="prioridade" value="{{triagem.Prioridade}}">
+                </div>
+                <div class="col-md-2 mb-2">
+                    <label for="status">Status</label><input type="text" class="form-control" id="status" name="status" value="{{triagem.Status}}"><br>
+                </div>
+                <div class="col-md-6 mb-6">
+                    <label for="tipo">Tipo de Ação</label><input type="text" class="form-control" id="tipo" name="tipo" value="{{triagem.Tipo}}"><br>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="fase">Fase</label><input type="text" class="form-control" id="fase" name="fase" value="{{triagem.Fase}}"><br>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <label for="fatos">Fatos Jurídico</label><textarea class="form-control" id="fatos" rows="15" name="fatos">{{triagem.Fatos}}</textarea>
+            </div>
+                
+       
+                    <br><button type="submit" class="btn">Cadastrar</button>                                                               
+                     
+    </form>

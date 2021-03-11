@@ -2,6 +2,8 @@ const e = require("express")
 const express = require ("express")
 const router = express.Router()
 const mongoose = require ("mongoose")
+const pdf = require ('html-pdf')
+const fs = require ('fs')
 require ("../models/Cliente")
 require ("../models/Triagem")
 require ("../models/Processo")
@@ -27,6 +29,7 @@ router.post("/add/addClientes", eAdmin2, (req, res) => {var erros = []
       Sexo: req.body.sexo,
       Estado: req.body.estado,
       Nacionalidade: req.body.nacionalidade,
+      Profissao: req.body.profissao,
       Cpf_Cnpj: req.body.cpf_cnpj,
       Identidade: req.body.identidade,
       Expedicao: req.body.expedicao,
@@ -79,6 +82,7 @@ router.get("/detail/:id", eAdmin, async (req, res) => {
         cliente.Sexo = req.body.sexo
         cliente.Estado = req.body.estado
         cliente.Nacionalidade = req.body.nacionalidade
+        cliente.Profissao = req.body.profissao
         cliente.Cpf_Cnpj = req.body.cpf_cnpj
         cliente.Identidade = req.body.identidade
         cliente.Expedicao = req.body.expedicao
@@ -109,6 +113,50 @@ router.get("/detail/:id", eAdmin, async (req, res) => {
 
 router.get("/deletar/:id", eAdmin4, (req, res) => {Cliente.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Cliente deletado com sucesso")
 res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
-res.redirect("/cliente/view")})})        
+res.redirect("/cliente/view")})})  
+
+
+//Download em PDF:
+
+      // Procuração:
+
+      router.get("/procuracaopdf", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id})
+      .populate('Triagens Processos Movimentacao').then((cliente) => {
+        res.render("admin/clientes/pdf/procuracao", {cliente: cliente}     
+        
+        , (err, html) => {
+          if (err) {
+            return res.status(500).json({ message: 'Error in Server!'})
+          }
+
+          const options = {
+            format: 'A4',
+            border: {
+              right: '8'
+            },
+            orientation: "landscape"
+          };
+          res.setHeader('Content-type', 'application/pdf');
+          pdf.create(html, options).toFile('./uploads/Procuracao.pdf', (error, response) => {
+            if (!error) {
+              return res.download('./uploads/Procuracao.pdf')
+
+            } else {
+              return res.json({message: 'Fail in Generated PDF'})
+            }
+          })
+        });
+        
+        
+      })})
+
+
+
+
+      router.get("/viewpdf/:id", eAdmin, async (req, res) => {
+        await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao').then((cliente) => {
+          res.render("admin/clientes/pdf/procuracao", {cliente: cliente})
+        })})
+
 
 module.exports = router
