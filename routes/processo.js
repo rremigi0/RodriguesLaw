@@ -6,9 +6,7 @@ const mongoose = require ("mongoose")
 require ("../models/Processo")
 require ("../models/Cliente")
 require ("../models/Triagem")
-require ("../models/Post")
 const Cliente = mongoose.model("clientes")
-const Post = mongoose.model("posts")
 const Processo = mongoose.model("processos")
 const Triagem = mongoose.model("triagens")
 const {eAdmin} = require("../helpers/eAdmin")
@@ -262,10 +260,10 @@ router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
   
     // Visualizar os Arquivos:
 
-    router.get("/viewposts", async (req, res) => {
-        const posts = await Post.find();
-        return res.json(posts);
-    })
+ //   router.get("/viewposts", async (req, res) => {
+     //   const posts = await Post.find();
+      //  return res.json(posts);
+ //   })
     
       // Upload de Arquivos:
     

@@ -120,43 +120,43 @@ res.redirect("/cliente/view")})})
 
       // Procuração:
 
-      router.get("/procuracaopdf", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id})
-      .populate('Triagens Processos Movimentacao').then((cliente) => {
-        res.render("admin/clientes/pdf/procuracao", {cliente: cliente}     
+  //    router.get("/procuracaopdf", eAdmin, (req, res) => {Cliente.findOne({_id:req.params.id})
+  //    .populate('Triagens Processos Movimentacao').then((cliente) => {
+   //     res.render("admin/clientes/pdf/procuracao", {cliente: cliente}     
         
-        , (err, html) => {
-          if (err) {
-            return res.status(500).json({ message: 'Error in Server!'})
-          }
+    //    , (err, html) => {
+    //      if (err) {
+       //     return res.status(500).json({ message: 'Error in Server!'})
+     //     }
 
-          const options = {
-            format: 'A4',
-            border: {
-              right: '8'
-            },
-            orientation: "landscape"
-          };
-          res.setHeader('Content-type', 'application/pdf');
-          pdf.create(html, options).toFile('./uploads/Procuracao.pdf', (error, response) => {
-            if (!error) {
-              return res.download('./uploads/Procuracao.pdf')
+    //      const options = {
+      //      format: 'A4',
+        //    border: {
+       //       right: '8'
+        //    },
+         //   orientation: "landscape"
+       //   };
+      //    res.setHeader('Content-type', 'application/pdf');
+      //    pdf.create(html, options).toFile('./uploads/Procuracao.pdf', (error, response) => {
+      //      if (!error) {
+        //      return res.download('./uploads/Procuracao.pdf')
 
-            } else {
-              return res.json({message: 'Fail in Generated PDF'})
-            }
-          })
-        });
+       //     } else {
+        //      return res.json({message: 'Fail in Generated PDF'})
+         //   }
+        //  })
+       // });
         
         
-      })})
+     // })})
 
 
 
 
-      router.get("/viewpdf/:id", eAdmin, async (req, res) => {
-        await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao').then((cliente) => {
-          res.render("admin/clientes/pdf/procuracao", {cliente: cliente})
-        })})
+    //  router.get("/viewpdf/:id", eAdmin, async (req, res) => {
+    //    await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao').then((cliente) => {
+        //  res.render("admin/clientes/pdf/procuracao", {cliente: cliente})
+     //   })})
 
 
 module.exports = router
