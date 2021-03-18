@@ -1,0 +1,54 @@
+<div class="flex-dashboard">
+    {{> menu/processo/main}}
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+           </header>
+
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Gerenciar Processos</h2>
+               </div>
+                <div class="panel-row">
+                    <nav class ="nav_tabs">
+                        <ul>
+                            <li><input type="radio" name="tabs" class="rd_tabs" id="ativos" ><label onclick="window.location='/processo/ativos/'" for ="ativos">Ativos</label></li>
+                            <li><input type="radio" name="tabs" class="rd_tabs" id="arquivados" checked><label onclick="window.location='/processo/arquivados/'" for ="arquivados">Arquivados</label></li>
+                        </ul>
+                    </nav>
+                </div>
+               <div class="dynamic-content">
+                    <table class="table table-striped">                  
+                        <thead>
+                            <tr>
+                                <th scope="col">Processo</th>
+                                <th scope="col">Autor</th>
+                                <th scope="col">Réu</th>
+                                <th scope="col">Data de Entrada</th>
+                                <th scope="col">Detalhar</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                    {{#each processos}}
+
+                            <tr>  
+                                <td>{{Processo}}</td>
+                                <td>{{Autor}}</td>
+                                <td>{{Reu}}</td>
+                                <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
+                                <td onclick="window.location='/processo/detail/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px;"></i></td>
+                            </tr>
+                    {{/each}}
+                    </tbody>
+                        
+                    </table>
+
+                </div>
+       </main>
+   </div>
+    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/fontawesome/js/all.min.js"></script>
+    <script src="/js/menu.js"></script>
+</body>
+</html>

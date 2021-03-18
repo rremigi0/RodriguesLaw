@@ -4,9 +4,11 @@ const mongoose = require ("mongoose")
 require ("../models/Processo")
 require ("../models/Cliente")
 require ("../models/Triagem")
+require ("../models/Movimentacao")
 const Cliente = mongoose.model("clientes")
 const Processo = mongoose.model("processos")
 const Triagem = mongoose.model("triagens")
+const Movimentacao = mongoose.model("movimentacoes")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 const {eAdmin3} = require("../helpers/eAdmin3")
@@ -56,7 +58,7 @@ router.post("/add/addProcessos", eAdmin2, (req, res) => {var erros = []
     req.flash("success_msg", "Processo criado com sucesso!")
     res.redirect("/admin/home")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar o Processo, tente novamente!")
-    res.redirect("/admin/processo/view_ativos")})}})
+    res.redirect("/admin/processo/ativos")})}})
 
 //Rota de Processos (R):
 
@@ -69,17 +71,45 @@ router.get('/main', eAdmin, (req, res) => {
     })})   
 
 
+
 // Visualizar os Processos Ativos:
 
-router.get("/view_ativos", eAdmin, (req, res) => {Processo.find( { Status:'Ativo' } ).sort({Atuacao:1}).then((processos) => {
-    res.render("admin/processos/triagem/view_ativos", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
-    res.redirect("/processo/main")})})
+router.get("/ativos", eAdmin, async (req, res) => {
+    await Processo.find({Status: 'Ativo'}, 'Processo Autor Reu Atuacao').sort({Atuacao: 1}).populate({ 
+        path: 'Movimentacao',options: {
+            sort: { 'Data': -1}, 
+            limit: (1)
+              
+        }}).then((processos) => {
+            
+    res.render("admin/processos/view/ativos", {processos: processos})}).catch((err) => {
+    req.flash("error_msg", "Esta movimentação não está cadastrada")
+    res.redirect("/movimentacao/pending")})})
 
 // Visualizar os Processos Arquivados:
 
-router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'Arquivado' } ).sort({Atuacao:1}).then((processos) => {
-    res.render("admin/processos/triagem/view_arquivados", {processos: processos})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
-    res.redirect("/processo/main")})})
+router.get("/arquivados", eAdmin, async (req, res) => {
+    await Processo.find({Status: 'Arquivado'}, 'Processo Autor Reu Atuacao').sort({Atuacao: 1}).populate({ 
+        path: 'Movimentacao',options: {
+            sort: { 'Data': -1}, 
+            limit: (1)
+              
+        }}).then((processos) => {
+            
+    res.render("admin/processos/view/arquivados", {processos: processos})}).catch((err) => {
+    req.flash("error_msg", "Esta movimentação não está cadastrada")
+    res.redirect("/movimentacao/pending")})})
+
+// Visualizar Todos os Processos:
+
+router.get("/all", eAdmin, async (req, res) => {
+    await Processo.find().populate({path:' Movimentacao ', options: {limit: (1), sort:{ 'Data': -1}}}).then((processo) => {
+        //res.json(processo)
+        res.render("admin/processos/view/arquivados", {processo: processo})}).catch((err) => {
+    req.flash("error_msg", "Este processo não está cadastrado")
+    res.redirect("/processo/main/")})})
+
+
 
 // Editar Processos:
 
@@ -89,7 +119,7 @@ router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'A
             await Processo.findOne({_id:req.params.id}).populate({path:'Financeiro Prazos Movimentacao Diligencias', options: {sort: { 'Data': -1}}}).then((processo) => {
                 res.render("admin/processos/detail/1", {processo: processo})}).catch((err) => {
             req.flash("error_msg", "Este processo não está cadastrado")
-            res.redirect("/processo/view_ativos/")})})
+            res.redirect("/processo/ativos/")})})
             router.post("/edit", eAdmin3, (req, res) => {Processo.findOne({_id: req.body.id}).then((processo) => {
             
                 // Aba Geral:
@@ -121,9 +151,9 @@ router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'A
                 processo.Status = req.body.status
             
             processo.save().then(() => {req.flash("success_msg", "Processo editado com sucesso!")
-            res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
-            res.redirect("/processo/view_ativos")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
-            res.redirect("/processo/view_ativos")})})
+            res.redirect("/processo/ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição do processo")
+            res.redirect("/processo/ativos")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
+            res.redirect("/processo/ativos")})})
 
 
 // Deletar Processos (D)
@@ -131,7 +161,7 @@ router.get("/view_arquivados", eAdmin, (req, res) => {Processo.find( { Status:'A
 router.get("/deletar/:id", eAdmin4, (req, res) => {
     Processo.remove({_id: req.params.id}).then(() => {
         req.flash("success_msg", "Processo deletado com sucesso")
-res.redirect("/processo/view_ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+res.redirect("/processo/ativos")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/processo/main")})})
 
 // ------------------------------------------------------------------------------------------------------------

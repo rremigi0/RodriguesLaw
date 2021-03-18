@@ -46,7 +46,7 @@ router.get("/finished", eAdmin, (req, res) => {Movimentacao.find({ Push:'Sim' })
     req.flash("error_msg", "houve um erro ao listar as movimentações")
     res.redirect("/admin/home")})})
 
-// Editar Push:
+    // Editar Push:
 
 router.get("/edit/:id", eAdmin2, async (req, res) => {
     await Movimentacao.findOne({_id:req.params.id}).populate({
