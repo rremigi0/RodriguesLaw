@@ -74,8 +74,9 @@
                                 <th scope="col">Tutela</th>
                                 <th scope="col">Data de Entrada</th>
                                 <th scope="col">Prioridade</th>
-                                <th scope="col">Editar</th>
+                                <th scope="col">Detalhes</th>
                                 <th scope="col">Excluir</th>
+                                <th scope="col">Drive</th>
                             </tr>
                     </thead>
                     <tbody>
@@ -87,8 +88,9 @@
                                 <td>{{Tutela}}</td>
                                 <td>{{#formatDate Entrada}}{{/formatDate}}</td>
                                 <td>{{Prioridade}}</td>
-                                <td onclick="window.location='/processo/triagem/detail/{{_id}}'"><i class="fas fa-edit"></i></td>
-                                <td onclick="window.location='/processo/deletarTriagem/{{_id}}'"><i class="fas fa-trash-alt"></i></td>
+                                <td onclick="window.location='/processo/triagem/detail/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td onclick="window.location='/processo/deletarTriagem/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 16px; "></i></td>
+                                <td><a href="{{Drive}}"><i class="fab fa-google-drive" style="color: #6e8efb; font-size: 16px; "></i></a></td>
                             </tr>
                     {{/each}}
                     </tbody>

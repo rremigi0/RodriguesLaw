@@ -13,6 +13,7 @@ const Triagem = new Schema ({
     Status: { type: String },
     Fase: { type: String },
     Fatos: { type: String },
+    Drive: { type: String },
     Tipo: { type: String }
     
     
