@@ -190,32 +190,32 @@ router.get('/addtriagem', eAdmin2, (req, res) => {
 
 // Visualizar Fase 01::
 
-router.get("/triagem/iniciacao", eAdmin2, (req, res) => {Triagem.find( { Fase:'Iniciação' } ).sort({Entrada:1}).then((triagens) => {
+router.get("/triagem/iniciacao", eAdmin, (req, res) => {Triagem.find( { Fase:'Iniciação' } ).sort({Entrada:1}).then((triagens) => {
     res.render("admin/processos/triagem/view/iniciacao", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 // Visualizar Fase 02:
 
-router.get("/triagem/redacao", eAdmin2, (req, res) => {Triagem.find( { Fase:'Redação' } ).sort({Entrada:1}).then((triagens) => {
+router.get("/triagem/redacao", eAdmin, (req, res) => {Triagem.find( { Fase:'Redação' } ).sort({Entrada:1}).then((triagens) => {
     res.render("admin/processos/triagem/view/redacao", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 // Visualizar Fase 03:
 
-router.get("/triagem/validacao", eAdmin2, (req, res) => {Triagem.find({Fase:'Validação'}).sort({Entrada:1}).then((triagens) => {
+router.get("/triagem/validacao", eAdmin, (req, res) => {Triagem.find({Fase:'Validação'}).sort({Entrada:1}).then((triagens) => {
     res.render("admin/processos/triagem/view/validacao", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
 
 // Visualizar Fase 04:
 
-router.get("/triagem/protocolados", eAdmin2, (req, res) => {Triagem.find({Fase:'Protocolados'}).sort({Entrada:1}).then((triagens) => {
+router.get("/triagem/protocolados", eAdmin, (req, res) => {Triagem.find({Fase:'Protocolados'}).sort({Entrada:1}).then((triagens) => {
     res.render("admin/processos/triagem/view/protocolados", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
-// Visualizar Fase 04:
+// Visualizar Todas as Fases:
 
-router.get("/triagem/all", eAdmin2, (req, res) => {Triagem.find({}).sort({Entrada:1}).then((triagens) => {
+router.get("/triagem/all", eAdmin, (req, res) => {Triagem.find({}).sort({Entrada:1}).then((triagens) => {
     res.render("admin/processos/triagem/view/protocolados", {triagens: triagens})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os processos")
     res.redirect("/processo/triagem")})})
 
@@ -268,7 +268,7 @@ router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
             res.render("admin/processos/triagem/CRUD/update", {triagem: triagem})}).catch((err) => {
         req.flash("error_msg", "Esta Ticket não está cadastrada")
         res.redirect("/admin/home/")})})
-        router.post("/triagem/edit", eAdmin3, (req, res) => {Triagem.findOne({_id: req.body.id}).then((triagem) => {
+        router.post("/triagem/edit", eAdmin2, (req, res) => {Triagem.findOne({_id: req.body.id}).then((triagem) => {
         
             triagem.Autor = req.body.autor
             triagem.Reu = req.body.reu
