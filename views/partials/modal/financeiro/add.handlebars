@@ -19,9 +19,9 @@
                         <form action="/financeiro/add/addFinanceiro" method="POST">
                             <div class="form-group">
                                 <label for="processo">Código do Processo (Não alterar)</label><input type="text" class="form-control" id="processo" name="processo" value="{{processo.id}}">
-                                <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor">
-                                <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu">
-                                <label for="competencia">Competencia</label><input type="text" class="form-control" id="competencia" name="competencia">
+                                <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" value="{{processo.Autor}}">
+                                <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu" value="{{processo.Reu}}">
+                                <label for="competencia">Competencia</label><input type="text" class="form-control" id="competencia" name="competencia" value="{{processo.Categoria}}">
                                 <label for="tipo">Tipo</label><input type="text" class="form-control" id="tipo" name="tipo">
                                 <label for="vencimento">Vencimento</label><input type="date" class="form-control" id="vencimento" name="vencimento">
                                 <label for="honorarios">Honorario</label><input type="text" class="form-control" id="honorarios" name="honorarios">
