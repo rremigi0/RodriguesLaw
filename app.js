@@ -160,6 +160,13 @@ const db = require("./config/db")
                 formatDateUS: (date) => {
                     return moment(date).format('YYYY-MM-DD')
                 },
+                isMale: (gender) => {
+                    return gender == "Masculino"
+                },
+                isCorporate: (corporate) => {
+                    return corporate == "Outros"
+                },
+
             }
         }))
         app.set('view engine', 'handlebars');

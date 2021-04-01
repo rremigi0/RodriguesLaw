@@ -1,5 +1,5 @@
    <div class="flex-dashboard">
-
+      
        {{> menu/clientes/detail}}
        
        <main id="mainContent">          
@@ -7,18 +7,17 @@
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i><a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
            <div class="main-content">
-               <div class="main-content-title">
+                <div class="main-content-title">
                    <h2>DADOS CADASTRAIS:</h2>
-               </div>
+                </div>
+               
                <div class="dynamic-content-edit">
                    <div class="card-body">
                         {{#each erros}}
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
-                    <!--<div class="button-new" style="text-align: right">
-                        <a href="/cliente/procuracaopdf"><button type="submit" class="btn">Gerar Push</a></button>
-                    </div>-->          
+                     
                     {{> formulario/edit}}
                     
                     {{> tabelas/triagens}}
@@ -30,4 +29,6 @@
                     {{> tabelas/processos}}
        </main>
    </div>
+
+   
 

@@ -1,11 +1,6 @@
-const e = require("express")
 const express = require ("express")
-const multer = require('multer')
-const multerConfig = require ('../src/config/multer')
 const router = express.Router()
 const mongoose = require ("mongoose")
-const pdf = require ('html-pdf')
-const fs = require ('fs')
 require ("../models/Cliente")
 require ("../models/Triagem")
 require ("../models/Processo")
@@ -19,7 +14,7 @@ const {eAdmin2} = require("../helpers/eAdmin2")
 const {eAdmin3} = require("../helpers/eAdmin3")
 const {eAdmin4} = require("../helpers/eAdmin4")
 
-// Rota para Cadastrar novo Cliente (C):
+// Rota para Cadastrar novo Cliente (CREATE):
         
 router.post("/add/addClientes", eAdmin2, (req, res) => {var erros = []
   if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){erros.push({texto: "Nome do Cliente Inválido"})}
@@ -119,19 +114,13 @@ router.get("/deletar/:id", eAdmin4, (req, res) => {Cliente.remove({_id: req.para
 res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/cliente/view")})})  
 
-// Upload de Arquivos:
+// Procuração em PDF:
 
-    router.post("/posts", multer (multerConfig).single("file"), async (req, res) => {
-      const { originalname: name, size, key, url = "" } = req.file;
-      
-      const post = await Post.create ({
-        name,
-        size,
-        key,
-        url
-      });
-      return res.json( {post});
-    })
+router.get("/viewpdf/:id", async (req, res) => {
+        await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao').then((cliente) => {
+          res.render("admin/clientes/pdf/procuracao", {cliente: cliente})
+             
+})})
 
 
 module.exports = router
