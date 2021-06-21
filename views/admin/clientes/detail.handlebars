@@ -17,6 +17,11 @@
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
+
+                    <div class="button-pdf">
+                        <i class="fa fa-file-pdf" data-toggle="modal" data-target="#pdfModal"></i><a href="/processo/triagem"></a>
+                    </div> 
+
                      
                     {{> formulario/edit}}
                     
@@ -25,6 +30,7 @@
 
                     {{> modal/processo/triagem/add}}
                     {{> modal/processo/add}}
+                    {{> modal/cliente/pdf}}
 
                     {{> tabelas/processos}}
        </main>

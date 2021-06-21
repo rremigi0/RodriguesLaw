@@ -12,3 +12,21 @@
 
 .button-new button {
     background: linear-gradient(135deg, #6e8efb, blue); margin-right: 0.5%; margin-top: 0.5%; color: white;}
+
+/* Button PDF*/
+
+div.button-pdf svg {
+    color:rgb(187, 20, 20); 
+    margin-left: 98%;
+    font-size: 25px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    text-align: right;
+
+
+}
+
+div.button-pdf svg:hover {transform: scale(1.05);transition: 0.2s;color: red;}
+
+    

@@ -27,38 +27,23 @@
 
 
     {{> header/cabeçalho}}    
-    {{> title/procuracao}}
+    {{> title/hipossuficiencia}}
 
 <div class="pdf-content-outorgante" style=" height: 50mm; margin-left: 5%; margin-right: 5%; text-align:justify; color: black ; font-family: 'cambria' !important; font-size: 24px">
-    <b style="font-family: 'cambria';">OUTORGANTE: </b>
 
-    {{#if (isMale cliente.Sexo) }}        
+    {{#if (isMale cliente.Sexo) }}
         {{> body/html-pdf/procuracao/outorgante/masculino}}
-   
-    {{else if (isCorporate cliente.Sexo)}}  
-           {{> body/html-pdf/procuracao/outorgante/PJ}}
-   
+
+    {{else if (isCorporate cliente.Sexo)}}
+        {{> body/html-pdf/procuracao/outorgante/PJ}}
 
     {{else}}
         {{> body/html-pdf/procuracao/outorgante/feminino}}
-   
     {{/if}}
     
 </div>
 
-    <div class="pdf-content-outorgado" style=" height: 70mm; margin-left: 5%; margin-right: 5%; text-align:justify; color: black ; font-family: 'cambria' !important; font-size: 24px">
-        <b style="font-family: 'cambria';"> OUTORGADO:</b> {{> body/html-pdf/procuracao/outorgado}}      
-    </div>
-    
-    {{> body/html-pdf/procuracao/poderes}}        
+    {{> body/html-pdf/hipossuficiencia/main}}    
     {{> footer/sign}}
 
 </div>
-
-
-
-
-
-
-
-

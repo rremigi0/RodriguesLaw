@@ -27,10 +27,10 @@
 
 
     {{> header/cabeçalho}}    
-    {{> title/procuracao}}
+    {{> title/contrato}}
 
 <div class="pdf-content-outorgante" style=" height: 50mm; margin-left: 5%; margin-right: 5%; text-align:justify; color: black ; font-family: 'cambria' !important; font-size: 24px">
-    <b style="font-family: 'cambria';">OUTORGANTE: </b>
+    <b style="font-family: 'cambria';">CONTRATANTE: </b>
 
     {{#if (isMale cliente.Sexo) }}        
         {{> body/html-pdf/procuracao/outorgante/masculino}}
@@ -45,20 +45,22 @@
     {{/if}}
     
 </div>
-
-    <div class="pdf-content-outorgado" style=" height: 70mm; margin-left: 5%; margin-right: 5%; text-align:justify; color: black ; font-family: 'cambria' !important; font-size: 24px">
-        <b style="font-family: 'cambria';"> OUTORGADO:</b> {{> body/html-pdf/procuracao/outorgado}}      
-    </div>
-    
-    {{> body/html-pdf/procuracao/poderes}}        
-    {{> footer/sign}}
+    {{> body/html-pdf/contrato/contratado}}      
+    {{> body/html-pdf/contrato/clausulas/page01}}   
+    {{> footer/rodape}}     
 
 </div>
 
+<div class="page-pdf" style="height: 420.5mm; width: 297.3mm ">
+    {{> header/cabeçalho}}
+    {{> body/html-pdf/contrato/clausulas/page02}}
+    {{> footer/rodape}}       
+</div>
 
 
-
-
-
-
+<div class="page-pdf" style="height: 420.5mm; width: 297.3mm ">
+    {{> header/cabeçalho}}
+    {{> body/html-pdf/contrato/clausulas/page03}}
+    {{> footer/contrato}}       
+</div>
 

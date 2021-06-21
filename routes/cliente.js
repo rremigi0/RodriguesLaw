@@ -114,13 +114,22 @@ router.get("/deletar/:id", eAdmin4, (req, res) => {Cliente.remove({_id: req.para
 res.redirect("/cliente/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
 res.redirect("/cliente/view")})})  
 
-// Procuração em PDF:
+// Geração de Arquivos em PDF:
 
-router.get("/viewpdf/:id", async (req, res) => {
-        await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao').then((cliente) => {
-          res.render("admin/clientes/pdf/procuracao", {cliente: cliente})
-             
-})})
+        // Procuração:
+
+        router.get("/procuracao/:id", async (req, res) => {await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao')
+        .then((cliente) => {res.render("admin/clientes/pdf/procuracao", {cliente: cliente})})})
+
+        // Declaração Hipossuficiência:
+
+        router.get("/hipossuficiencia/:id", async (req, res) => {await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao')
+        .then((cliente) => {res.render("admin/clientes/pdf/hipossuficiencia", {cliente: cliente})})})
+       
+        // Contrato de Honorários:
+
+          router.get("/contrato/:id", async (req, res) => {await Cliente.findOne({_id:req.params.id}).populate('Triagens Processos Movimentacao')
+          .then((cliente) => {res.render("admin/clientes/pdf/contrato", {cliente: cliente})})})
 
 
 module.exports = router
