@@ -19,6 +19,8 @@ const Processo = new Schema ({
     Atuacao: { type: Date },
     Distribuicao: { type: Date },
     Status: { type: String }, 
+    UltimaMov: { type: Date, default: null},
+    Movimento: { type: String }, 
 
 // Financeiro:
 

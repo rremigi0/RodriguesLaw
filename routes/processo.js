@@ -75,7 +75,7 @@ router.get('/main', eAdmin, (req, res) => {
 // Visualizar os Processos Ativos:
 
 router.get("/ativos", eAdmin, async (req, res) => {
-    await Processo.find({Status: 'Ativo'}, 'Processo Autor Reu Atuacao').sort({Atuacao: 1}).populate({ 
+    await Processo.find({Status: 'Ativo'}, 'Processo Autor Reu UltimaMov Movimento').sort({Atuacao: 1}).populate({ 
         path: 'Movimentacao',options: {
             sort: { 'Data': -1}, 
             limit: (1)
@@ -89,7 +89,7 @@ router.get("/ativos", eAdmin, async (req, res) => {
 // Visualizar os Processos Arquivados:
 
 router.get("/arquivados", eAdmin, async (req, res) => {
-    await Processo.find({Status: 'Arquivado'}, 'Processo Autor Reu Atuacao').sort({Atuacao: 1}).populate({ 
+    await Processo.find({Status: 'Arquivado'}, 'Processo Autor Reu UltimaMov Movimento').sort({Atuacao: 1}).populate({ 
         path: 'Movimentacao',options: {
             sort: { 'Data': -1}, 
             limit: (1)
@@ -113,7 +113,7 @@ router.get("/all", eAdmin, async (req, res) => {
 
 // Editar Processos:
 
-    // Aba de Prazos
+    // Aba de Processos
 
         router.get("/detail/:id", eAdmin, async (req, res) => {
             await Processo.findOne({_id:req.params.id}).populate({path:'Financeiro Prazos Movimentacao Diligencias', options: {sort: { 'Data': -1}}}).then((processo) => {
@@ -143,6 +143,10 @@ router.get("/all", eAdmin, async (req, res) => {
                 processo.Vara = req.body.vara
                 processo.Comarca = req.body.comarca
                 processo.UF = req.body.uf
+
+                // Aba Movimentações:
+                processo.UltimaMov = req.body.UltimaMov
+                processo.Movimento = req.body.movimento
 
                 // Aba Status:
 

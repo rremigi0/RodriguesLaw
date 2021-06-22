@@ -25,7 +25,8 @@
                                 <th scope="col">Processo</th>
                                 <th scope="col">Autor</th>
                                 <th scope="col">Réu</th>
-                                <th scope="col">Data de Entrada</th>
+                                <th scope="col">Última Movimentação</th>
+                                <th scope="col">Movimento</th>
                                 <th scope="col">Detalhar</th>
                             </tr>
                     </thead>
@@ -36,7 +37,8 @@
                                 <td>{{Processo}}</td>
                                 <td>{{Autor}}</td>
                                 <td>{{Reu}}</td>
-                                <td>{{#formatDate Atuacao}}{{/formatDate}}</td>
+                                <td>{{#formatDate UltimaMov}}{{/formatDate}}</td>
+                                <td>{{Movimento}}</td>
                                 <td onclick="window.location='/processo/detail/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px;"></i></td>
                             </tr>
                     {{/each}}
