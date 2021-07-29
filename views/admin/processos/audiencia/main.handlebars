@@ -33,8 +33,6 @@
                     <li><i class="fa fa-reply"></i><a href="/admin/home">  Retornar</a></li>
                     <li><i class="fas fa-plus"></i><a href="/processo/add"data-toggle="modal" data-target="#processoModal">  Novo</a></li>
                     <li><i class="fa fa-search"></i><a href="/processo/ativos">  Consultar</a></li>
-                    <li><i class="fa fa-gavel"></i><a href="/processo/Triagem">  Petição Inicial</a></li>
-                    <li><i class="far fa-calendar-alt"></i><a href="/audiencia/view">  Audiências</a></li>
                 </ul>
             </div>
        </sidebar>
@@ -44,6 +42,11 @@
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
                <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
+           <div class="sub-menu">
+
+                {{> menu/processo/submenu}}
+
+            </div>
            <div class="main-content">
                <div class="main-content-title">
                    <h2>Controle de Audiência</h2>

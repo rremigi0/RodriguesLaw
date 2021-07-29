@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
     <title>Sistema Jurídico</title>
 </head>
+
 <body>
    <div class="flex-dashboard">
        <sidebar id="sidebar">
@@ -17,7 +18,7 @@
            </div>
            <div class="menu">
             <ul>
-                <li><i class="fa fa-reply"></i><a href="/processo/main">  Retornar</a></li>
+                <li><i class="fa fa-reply"></i><a href="/processo/ativos">  Retornar</a></li>
                 <li><i class="fas fa-plus"></i><a href="/processo/addTriagem"data-toggle="modal" data-target="#processoModal">  Novo</a></li>
                 <li><i class="fa fa-search"></i><a href="/processo/triagem/iniciacao">  Consultar</a></li>
             </ul>
@@ -28,6 +29,11 @@
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
                <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
+           <div class="sub-menu">
+
+                {{> menu/processo/submenu}}
+
+            </div>
            <div class="main-content">
                <div class="main-content-title">
                    <h2>Petição Inicial</h2>
