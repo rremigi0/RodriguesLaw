@@ -24,10 +24,22 @@ main .nav-submenu {
     font-size: 12px;
 }
 
+.nav-submenu nav {
+    margin: 0px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    height: 100%;
+
+}
+
+
+
 .nav-submenu ul{
     list-style: none;
     padding: 0px;
     margin: 0px;
+    height: 100%;
 }
 
 .nav-submenu ul li{
@@ -49,7 +61,7 @@ main .nav-submenu {
     text-align: center;
     margin: 0px;
     margin-left: 15px;
-    height: 93px;
+    height: 100%;
     
 }
 
