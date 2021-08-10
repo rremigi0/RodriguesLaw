@@ -25,7 +25,7 @@
                             <td>{{Tipo}}</td>
                             <td>{{Prioridade}}</td>
                             <td>{{Status}}</td>
-                            <td data-toggle0="modal" data-target="#pedidoModal"><i class="fa fa-search" style="color: grey; font-size: 20px; " ></i></td>
+                            <td onclick="window.location='/processo/triagem/detail/{{_id}}'"><i class="fa fa-search" style="color: #6e8efb; font-size: 20px; " ></i></td>
                             <td onclick="window.location='/processo/deletartriagem/{{_id}}'"><i class="fas fa-trash-alt" style="color: #6e8efb; font-size: 18px; "></i></td>
                         </tr>
                     {{/each}}
