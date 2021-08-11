@@ -1,41 +1,18 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
-    <title>Sistema Jurídico</title>
-</head>
-<body>
-   <div class="flex-dashboard">
-       <sidebar id="sidebar">
-           <div class="sidebar-title">
-            <img src="/Images/Cor Azul.png" alt="">
-            <h2>Rodrigues Advocacia</h2>
-           </div>
-    <!-- MENU -->
-
-            <div class="menu">
-                <ul>
-                    <li><i class="fa fa-reply"></i><a href="/admin/home">  Retornar</a></li>
-                    <li><i class="fas fa-plus"></i><a href="/processo/add"data-toggle="modal" data-target="#processoModal">  Novo</a></li>
-                    <li><i class="fa fa-search"></i><a href="/processo/ativos">  Consultar</a></li>
-                    <li><i class="fa fa-gavel"></i><a href="/processo/Triagem">  Petição Inicial</a></li>
-                    <li><i class="far fa-calendar-alt"></i><a href="/audiencia/view">  Audiências</a></li>
-                </ul>
-            </div>
-
-       </sidebar>
+ <div class="flex-dashboard">
+    {{> menu/processo/main}}
+       
        <main id="mainContent">
            <header>
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
-               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
+           <div class="sub-menu">
+
+               {{> menu/processo/submenu}}
+
+           </div>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>Gerenciar Audiências</h2>
+                   <h2>Controle de Audiência</h2>
                </div>
                <div class="dynamic-content">
                    <div class="card-body"></div>

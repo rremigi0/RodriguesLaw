@@ -14,7 +14,7 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 // Página Principal dos Usuarios [ GESTÃO DE ACESSOS] (R):
 
 router.get("/main", eAdmin4, (req, res) => {Usuario.find().sort({nome:1}).then((usuarios) => {
-    res.render("usuarios/users", {usuarios: usuarios})}).catch((err) => {
+    res.render("admin/adm/usuarios/main", {usuarios: usuarios})}).catch((err) => {
     req.flash("error_msg", "houve um erro ao listar os clientes")
     res.redirect("/adm/main")})})
 
@@ -51,7 +51,7 @@ router.post("/registro", (req, res) => {var erros = []
  
 // Editar Usuarios (U)
 
-router.get("/edit/:id", eAdmin4, (req, res) => {Usuario.findOne({_id:req.params.id}).then((usuario) => {res.render("usuarios/detail", {usuario: usuario})}).catch((err) => {
+router.get("/edit/:id", eAdmin4, (req, res) => {Usuario.findOne({_id:req.params.id}).then((usuario) => {res.render("admin/adm/usuarios/detail", {usuario: usuario})}).catch((err) => {
     req.flash("error_msg", "Este Usuário não está cadastrado")
     res.redirect("usuarios/main")})})
     router.post("/edit", eAdmin4, (req, res) => {Usuario.findOne({_id: req.body.id}).then((usuario) => {

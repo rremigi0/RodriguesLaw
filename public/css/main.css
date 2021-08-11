@@ -8,7 +8,7 @@ main{
 main .main-content {
     padding: 30px;
     width: 100%;
-    height: calc(100% - 90px);
+    height: calc(100% - 180px);
     overflow-y: auto;
 
 }

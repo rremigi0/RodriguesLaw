@@ -1,0 +1,53 @@
+ <div class="flex-dashboard">
+     {{> menu/administrativo/main}}
+       <main id="mainContent">
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+           </header>
+           <div class="sub-menu">
+
+               {{> menu/administrativo/submenu}}
+
+           </div>
+           <div class="main-content">
+               <div class="main-content-title">
+                   <h2>Gerenciar Financeiro</h2>
+               </div>
+               <div class="dynamic-content">
+                   <div class="card-body"></div>
+                        {{#each erros}}
+                            <div class="alert alert-danger">{{texto}}</div>
+                        {{else}}
+                        {{/each}}
+                  <form action="/financeiro/edit" method="POST">
+                      <input type="hidden" name="id" value="{{financeiro._id}}">
+                    <div class="form-group">
+                        <label for="autor">Autor</label><input type="text" class="form-control" id="autor" name="autor" value="{{financeiro.Autor}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="reu">Réu</label><input type="text" class="form-control" id="reu" name="reu" value="{{financeiro.Reu}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="competencia">Competência</label><input type="text" class="form-control" id="competencia" name="competencia" value="{{financeiro.Competencia}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label><input type="text" class="form-control" id="tipo" name="tipo" value="{{financeiro.Tipo}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="vencimento">Vencimento</label><input type="date" class="form-control" id="vencimento" name="vencimento" value="{{#formatDateUS financeiro.Vencimento}}{{/formatDateUS}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="honorarios">Honorários</label><input type="text" class="form-control" id="honorarios" name="honorarios" value="{{financeiro.Honorarios}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status</label><input type="text" class="form-control" id="status" name="status" value="{{financeiro.Status}}">
+                    </div>
+                    <button type="submit" class="btn">Salvar</button>
+                     
+                  </form>
+            </div>
+       </main>
+   </div>
+</body>
+</html>
+

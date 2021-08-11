@@ -1,8 +1,14 @@
-   <div class="flex-dashboard">
-       {{> menu/processo/triagem/main}}
-       
+ <div class="flex-dashboard">
+    {{> menu/processo/main}}
        <main id="mainContent">
-            {{> header/logout}}
+           <header>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
+           </header>
+           <div class="sub-menu">
+
+               {{> menu/processo/submenu}}
+
+           </div>
 
            <div class="main-content">
 

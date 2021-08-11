@@ -3,8 +3,10 @@ const router = express.Router()
 const mongoose = require ("mongoose")
 require ("../models/Financeiro")
 require ("../models/Processo")
+require ("../models/Cliente")
 const Financeiro = mongoose.model("financeiro")
 const Processo = mongoose.model("processos")
+const Cliente = mongoose.model("clientes")
 const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 const {eAdmin3} = require("../helpers/eAdmin3")
@@ -12,7 +14,10 @@ const {eAdmin4} = require("../helpers/eAdmin4")
 
 // Página Principal do Financeiro:
 
-router.get("/main", eAdmin2, (req, res) => {res.render("admin/adm/financeiro/main")})
+router.get("/main", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).populate(' Processo ').then((financeiro) => {
+    res.render("admin/adm/financeiro/main", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
+//res.json(financeiro)
+res.redirect("/financeiro/main")})})
         
 //Adicionar Novo Honorário (C):
         
@@ -20,14 +25,15 @@ router.get('/add', eAdmin2, (req, res) => {res.render("admin/adm/financeiro/addf
         
 // Visualizar os Honorários
         
-router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => {res.render("admin/adm/financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
+router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => 
+{res.render("admin/adm/financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
 res.redirect("/financeiro/main")})})
         
 // Deletar Honorários
         
 router.get("/deletar/:id", eAdmin4, (req, res) => {Financeiro.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Financeiro deletado com sucesso")
-res.redirect("/financeiro/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
-res.redirect("/financeiro/view")})})
+res.redirect("/financeiro/main")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+res.redirect("/financeiro/main")})})
         
 //Rota para Cadastrar novo Honorário no Banco de Dados:
         
@@ -54,18 +60,18 @@ if(erros.length > 0) {res.render("admin/administrativo/financeiro/addfinanceiro"
     new Financeiro(novoFinanceiro).save().then(async (dbFinanceiro) => {
         await Processo.findOneAndUpdate({ _id: req.body.processo }, {$push: {Financeiro: dbFinanceiro._id}}, { new: true });
     req.flash("success_msg", "Honorários criado com sucesso!")
-    res.redirect("/financeiro/view")}).catch((err) => {
+    res.redirect("/financeiro/main")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar os Honorários, tente novamente!")
     res.redirect("/financeiro/main")})}})
     
 // Editar Honorários
     
-router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("admin/adm/financeiro/editfinanceiro", {financeiro: financeiro})}).catch((err) => {
+router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("admin/adm/financeiro/detail", {financeiro: financeiro})}).catch((err) => {
 req.flash("error_msg", "Este honorário não está cadastrado")
 res.redirect("/financeiro/main")})})
 router.post("/edit", eAdmin3, (req, res) => {Financeiro.findOne({_id: req.body.id}).then((financeiro) => {
     
-    financeiro.Processo = req.body.processo
+
     financeiro.Autor = req.body.autor
     financeiro.Reu = req.body.reu
     financeiro.Competencia = req.body.competencia
@@ -73,6 +79,7 @@ router.post("/edit", eAdmin3, (req, res) => {Financeiro.findOne({_id: req.body.i
     financeiro.Vencimento = req.body.vencimento
     financeiro.Honorarios = req.body.honorarios
     financeiro.Status = req.body.status
+
     
 financeiro.save().then(() => {req.flash("success_msg", "honorários editado com sucesso!")
 res.redirect("/financeiro/main")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição dos honorários")

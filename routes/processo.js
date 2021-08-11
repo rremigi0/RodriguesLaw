@@ -291,33 +291,5 @@ router.post("/add/addTriagem", eAdmin2, (req, res) => {var erros = []
         res.redirect("/processo/triagem/iniciacao")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar o processo")
         res.redirect("/processo/triagem/iniciacao")})})
 
-  
-    // Visualizar os Arquivos:
-
- //   router.get("/viewposts", async (req, res) => {
-     //   const posts = await Post.find();
-      //  return res.json(posts);
- //   })
-    
-      // Upload de Arquivos:
-    
-   // router.post("/posts", multer(multerConfig).single('file'), async (req, res) => {
-    //    const { originalname: Name, size, filename: Key} = req.file;
-        
-     //   const post = await Post.create({
-     //       Name,
-      //      size,
-       //     Key,
-        //    Url: '', 
-      //  })
-     //   return res.json({post});
- //   });
-
-
-  //  router.delete('/posts/:id', async (req, res) => {
-     //   const post = await Post.findById(req.params.id);
-        //await post.remove ();
-      //  return res.send()
-  //  })
 
 module.exports = router

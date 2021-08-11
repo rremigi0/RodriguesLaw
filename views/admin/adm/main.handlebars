@@ -1,9 +1,14 @@
-   <div class="flex-dashboard">
-       {{> menu/administrativo}}
+ <div class="flex-dashboard">
+     {{> menu/administrativo/main}}
        <main id="mainContent">
            <header>
-                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i><a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
            </header>
+           <div class="sub-menu">
+
+               {{> menu/administrativo/submenu}}
+
+           </div>
            <div class="main-content">
                
             </div>

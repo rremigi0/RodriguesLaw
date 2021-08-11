@@ -1,24 +1,28 @@
    <div class="flex-dashboard">
+       {{> menu/processo/main}}
 
-        {{> menu/processo/push/main}}
-       
        <main id="mainContent">
            <header>
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
-               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
-        <div class="main-content">
+           <div class="sub-menu">
+
+                {{> menu/processo/submenu}}
+
+            </div>
+           <div class="main-content">
                <div class="main-content-title">
-                   <h2>Atualizar Status</h2>
+                   <h2>Controle Push | Movimentações</h2>
                </div>
                <div class="dynamic-content">
-                   <div class="card-body"></div>
+                   <div class="card-body">
                         {{#each erros}}
                             <div class="alert alert-danger">{{texto}}</div>
                         {{else}}
                         {{/each}}
                     <div class="button-new" style="text-align: right">
                         <button type="submit" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#gerarpush">Gerar Push<a href="#"></a></button>
+                    </div>
                     </div>
                         {{> formulario/processo/movimentacoes/push}}
             </div>

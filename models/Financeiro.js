@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 const Financeiro = new Schema ({
 
     Processo: { type: Schema.Types.ObjectId, ref: "processos", required: true }, 
-    Autor: { type: String, required: true },
-    Reu: { type: String, required: true },
-    Competencia: { type: String, required: true },
-    Tipo: { type: String, required: true },
+    Autor: { type: String },
+    Reu: { type: String },
+    Competencia: { type: String },
+    Tipo: { type: String },
     Vencimento: { type: Date, required: true },
     Honorarios: { type: String, required: true },
     Status: { type: String, required: true }

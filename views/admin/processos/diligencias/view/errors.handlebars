@@ -1,10 +1,15 @@
-   <div class="flex-dashboard">
-        {{> menu/processo/diligencias/main}}
+ <div class="flex-dashboard">
+    {{> menu/processo/main}}
+       
        <main id="mainContent">
            <header>
                 <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
-               <a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
            </header>
+           <div class="sub-menu">
+
+               {{> menu/processo/submenu}}
+
+           </div>
            <div class="main-content">
                <div class="main-content-title">
                    <h2>Gerenciar Diligências</h2>

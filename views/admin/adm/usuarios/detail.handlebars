@@ -1,35 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/plugins/fontawesome/css/all.min.css">
-    <title>Sistema Jurídico</title>
-</head>
-<body>
-   <div class="flex-dashboard">
-       <sidebar id="sidebar">
-           <div class="sidebar-title">
-            <img src="/Images/Cor Azul.png" alt="">
-            <h2>Rodrigues Advocacia</h2>
-           </div>
-           <div class="menu">
-            <ul>
-                <li><i class="fas fa-home"></i><a href="/admin/home">  Home</a></li>
-                <li><i class="fa fa-reply"></i><a href="/usuarios/main">  Retornar</a></li>
-                <li class="selected"><i class="fa fa-plus"></i><a href="/usuarios/detail/{{_id}}">  Detalhes</a></li>
-            </ul>
-           </div>
-       </sidebar>
+ <div class="flex-dashboard">
+     {{> menu/administrativo/main}}
        <main id="mainContent">
            <header>
-                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i><a href="/usuarios/logout"> <i class="fas fa-sign-out-alt"></i> Logout</a>
+                <i id="iconMenu" onclick="responsiveSidebar()" class="fas fa-bars"></i>
            </header>
+           <div class="sub-menu">
+
+               {{> menu/administrativo/submenu}}
+
+           </div>
            <div class="main-content">
                <div class="main-content-title">
-                   <h2>DADOS CADASTRAIS:</h2>
+                   <h2>Gerenciar Acesso de Usuários</h2>
                </div>
                <div class="dynamic-content-edit">
                    <div class="card-body">
@@ -92,13 +74,7 @@
             </div>
         </div>
     </main>
-</div>
-
-    <script src="/js/menu.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/plugins/fontawesome/js/all.min.js"></script>
-    <script type="text/javascript" src="/js/filter.js"></script>   
+</div> 
 </body>
 </html>
 

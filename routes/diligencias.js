@@ -82,14 +82,15 @@ req.flash("error_msg", "Esta diligencia não está cadastrada")
 res.redirect("/diligencia/pending")})})
 router.post("/edit", eAdmin3, (req, res) => {Diligencia.findOne({_id: req.body.id}).then((diligencia) => {
 
-    prazo.Processo = req.body.processo
-    prazo.Numero = req.body.numero
-    prazo.Autor = req.body.autor
-    prazo.Reu = req.body.reu
-    prazo.Procedimento = req.body.procedimento
-    prazo.Peticao = req.body.peticao
-    prazo.Prazo = req.body.prazo
-    prazo.Status = req.body.status
+    diligencia.Processo = req.body.processo
+    diligencia.Numero = req.body.numero
+    diligencia.Autor = req.body.autor
+    diligencia.Reu = req.body.reu
+    diligencia.Procedimento = req.body.procedimento
+    diligencia.Peticao = req.body.peticao
+    diligencia.Publicacao = req.body.publicacao
+    diligencia.Prazo = req.body.prazo
+    diligencia.Status = req.body.status
 
 diligencia.save().then(() => {req.flash("success_msg", "Diligência editada com sucesso!")
 res.redirect("/diligencia/pending")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição da diligência")
