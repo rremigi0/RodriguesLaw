@@ -11,23 +11,17 @@ const {eAdmin} = require("../helpers/eAdmin")
 const {eAdmin2} = require("../helpers/eAdmin2")
 const {eAdmin3} = require("../helpers/eAdmin3")
 const {eAdmin4} = require("../helpers/eAdmin4")
-
-// Página Principal do Financeiro:
-
-router.get("/main", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).populate(' Processo ').then((financeiro) => {
-    res.render("admin/adm/financeiro/main", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
-//res.json(financeiro)
-res.redirect("/financeiro/main")})})
-        
+      
 //Adicionar Novo Honorário (C):
         
 router.get('/add', eAdmin2, (req, res) => {res.render("admin/adm/financeiro/addfinanceiro")})
         
-// Visualizar os Honorários
-        
-router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).then((financeiro) => 
-{res.render("admin/adm/financeiro/viewfinanceiro", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
-res.redirect("/financeiro/main")})})
+// Visualizar Financeiro (R):
+
+router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).populate(' Processo ').then((financeiro) => {
+    res.render("admin/adm/financeiro/view", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
+//res.json(financeiro)
+res.redirect("/admin/home")})})
         
 // Deletar Honorários
         
