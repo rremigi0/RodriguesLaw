@@ -18,7 +18,7 @@ router.get('/add', eAdmin2, (req, res) => {res.render("admin/adm/financeiro/addf
         
 // Visualizar Financeiro (R):
 
-router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Financeiro:1}).populate(' Processo ').then((financeiro) => {
+router.get("/view", eAdmin2, (req, res) => {Financeiro.find().sort({Vencimento:-1}).populate(' Processo ').then((financeiro) => {
     res.render("admin/adm/financeiro/view", {financeiro: financeiro})}).catch((err) => {req.flash("error_msg", "houve um erro ao listar os honorários")
 //res.json(financeiro)
 res.redirect("/admin/home")})})
@@ -26,8 +26,8 @@ res.redirect("/admin/home")})})
 // Deletar Honorários
         
 router.get("/deletar/:id", eAdmin4, (req, res) => {Financeiro.remove({_id: req.params.id}).then(() => {req.flash("success_msg", "Financeiro deletado com sucesso")
-res.redirect("/financeiro/main")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
-res.redirect("/financeiro/main")})})
+res.redirect("/financeiro/view")}).catch((err) => {req.flash("error_msg", "Houve um erro interno")
+res.redirect("/financeiro/view")})})
         
 //Rota para Cadastrar novo Honorário no Banco de Dados:
         
@@ -54,15 +54,15 @@ if(erros.length > 0) {res.render("admin/administrativo/financeiro/addfinanceiro"
     new Financeiro(novoFinanceiro).save().then(async (dbFinanceiro) => {
         await Processo.findOneAndUpdate({ _id: req.body.processo }, {$push: {Financeiro: dbFinanceiro._id}}, { new: true });
     req.flash("success_msg", "Honorários criado com sucesso!")
-    res.redirect("/financeiro/main")}).catch((err) => {
+    res.redirect("/financeiro/view")}).catch((err) => {
     req.flash("error_msg", "Houve um erro ao cadastrar os Honorários, tente novamente!")
-    res.redirect("/financeiro/main")})}})
+    res.redirect("/financeiro/view")})}})
     
 // Editar Honorários
     
 router.get("/edit/:id", eAdmin3, (req, res) => {Financeiro.findOne({_id:req.params.id}).then((financeiro) => {res.render("admin/adm/financeiro/detail", {financeiro: financeiro})}).catch((err) => {
 req.flash("error_msg", "Este honorário não está cadastrado")
-res.redirect("/financeiro/main")})})
+res.redirect("/financeiro/view")})})
 router.post("/edit", eAdmin3, (req, res) => {Financeiro.findOne({_id: req.body.id}).then((financeiro) => {
     
 
@@ -76,9 +76,9 @@ router.post("/edit", eAdmin3, (req, res) => {Financeiro.findOne({_id: req.body.i
 
     
 financeiro.save().then(() => {req.flash("success_msg", "honorários editado com sucesso!")
-res.redirect("/financeiro/main")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição dos honorários")
-res.redirect("/financeiro/main")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar os honorários")
-res.redirect("/financeiro/main")})})
+res.redirect("/financeiro/view")}).catch((err) => {req.flash("error_msg", "Houve um erro ao salvar a edição dos honorários")
+res.redirect("/financeiro/view")})}).catch((err) => {req.flash("error_msg", "Houve um erro ao editar os honorários")
+res.redirect("/financeiro/view")})})
     
 
 module.exports = router
